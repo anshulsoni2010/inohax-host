@@ -151,9 +151,10 @@ export default function Component() {
     return (
         <>
             <Head>
+                <link rel="icon" href="/inovact.png" />
                 <title>Inohax 1.0 Registration Form</title>
                 <meta name="description" content="A 24 Hours Open Innovation Hackathon by Inovact for Students & Entrepreneurs" />
-                <meta property="og:image" content="/poster.png" />
+                <meta property="og:image" content="../poster.png" />
                 <meta property="og:url" content="https://inohax.inovact.in" />
                 <meta property="og:type" content="website" />
                 <meta property="og:site_name" content="Inohax 1.0" />
