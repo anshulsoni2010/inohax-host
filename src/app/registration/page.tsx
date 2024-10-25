@@ -151,7 +151,7 @@ export default function Component() {
     return (
         <>
             <Head>
-                <title>Inohax 1.0 Registration Form</title> {/* Page title */}
+                <title>Inohax 1.0 Registration Form</title>
                 <meta name="description" content="A 24 Hours Open Innovation Hackathon by Inovact for Students & Entrepreneurs" />
                 <meta property="og:image" content="/poster.png" />
                 <meta property="og:url" content="https://inohax.inovact.in" />
@@ -166,6 +166,7 @@ export default function Component() {
                 <meta property="og:image:type" content="image/png" />
                 <meta property="og:image:url" content="https://inohax.inovact.in/poster.png" />
                 <meta property="og:image:secure_url" content="https://inohax.inovact.in/poster.png" />
+
             </Head>
             <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black text-white py-12 px-4 sm:px-6 lg:px-8">
                 <div className="max-w-4xl mx-auto">
@@ -397,10 +398,12 @@ export default function Component() {
                                                                     name={`teamMembers.${index}.socialMediaLink` as const}
                                                                     control={control}
                                                                     defaultValue={member.socialMediaLink}
-                                                                    rules={{ required: index < 3, validate: (value) => {
-                                                                        handleValidation('memberLink' + index, validateProfileLink, value);
-                                                                        return true; // Always return true to avoid blocking submission
-                                                                    }}}
+                                                                    rules={{
+                                                                        required: index < 3, validate: (value) => {
+                                                                            handleValidation('memberLink' + index, validateProfileLink, value);
+                                                                            return true; // Always return true to avoid blocking submission
+                                                                        }
+                                                                    }}
                                                                     render={({ field }) => (
                                                                         <Input
                                                                             {...field}
