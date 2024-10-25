@@ -2,41 +2,43 @@ import dbConnect from '@/libs/dbConnect';
 import Registration from '@/model/Registration';
 import nodemailer from 'nodemailer';
 
-export async function POST(req: Request) {
-  await dbConnect();
+export default async function handler(req, res) {
+  if (req.method === 'POST') {
+    await dbConnect();
 
-  try {
-    const body: {
-      teamName: string;
-      teamLeaderName: string;
-      teamLeaderPhone: string;
-      teamLeaderEmail: string;
-      teamMembers: Array<{ name: string; socialMediaLink?: string }>;
-      projectDomain?: string;
-      projectLink?: string;
-    } = await req.json();
+    try {
+      const body: {
+        teamLeaderName: string;
+        teamLeaderPhone: string;
+        teamLeaderEmail: string;
+        projectDomain?: string;
+        projectLink?: string;
+        teamMembers: Array<{ name: string; socialMediaLink?: string }>;
+        communityReferral?: string;
+      } = await req.json();
 
-    console.log("Team ", body);
+      console.log("Team ", body);
 
-    // Create the team entry in the database
-    const team = await Registration.create(body);
-    team.save();
+      // Create the team entry in the database
+      const team = await Registration.create(body);
+      team.save();
 
-    // Send confirmation email to the team leader
-    await sendConfirmationEmail(body.teamLeaderEmail, body.teamLeaderName, body.teamName);
+      // Send confirmation email to the team leader
+      await sendConfirmationEmail(body.teamLeaderEmail, body.teamLeaderName, body.teamName);
 
-    return new Response(JSON.stringify({ success: true, team }), { status: 201 });
-  } catch (error: unknown) {
-    console.log("Error", error);
+      return new Response(JSON.stringify({ success: true, team }), { status: 201 });
+    } catch (error: unknown) {
+      console.log("Error", error);
 
-    let errorMessage = 'An unknown error occurred';
+      let errorMessage = 'An unknown error occurred';
 
-    // Narrow the type of 'error'
-    if (error instanceof Error) {
-      errorMessage = error.message;
+      // Narrow the type of 'error'
+      if (error instanceof Error) {
+        errorMessage = error.message;
+      }
+
+      return new Response(JSON.stringify({ success: false, error: errorMessage }), { status: 400 });
     }
-
-    return new Response(JSON.stringify({ success: false, error: errorMessage }), { status: 400 });
   }
 }
 
