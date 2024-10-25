@@ -4,7 +4,6 @@ import BlockpenLogo from "./partner-logo/2._Blockpen-removebg-preview-modified.p
 import AssamUniversityLogo from "./partner-logo/3._Assam_University_IT_club-removebg-preview-modified.png"
 import CodeClubJULogo from "./partner-logo/4._CodeClub_JU-removebg-preview-modified.png"
 import BTechyLogo from "./partner-logo/5._BTechy-removebg-preview-modified.png"
-import CodeINBlogsLogo from "./partner-logo/6._CodeINBlogs-removebg-preview-modified.png"
 import SOSLogo from "./partner-logo/7._SOS_TECH-removebg-preview-modified.png"
 import BitsOnlineLogo from "./partner-logo/8._BITS_online_Entrepreneurship_Club-removebg-preview-modified.png"
 import DevBoardLogo from "./partner-logo/9.1_DevBoard-removebg-preview-modified.png"
