@@ -6,8 +6,7 @@ import Link from "next/link";
 import { Navbar } from "@/components/sections/navbar";
 import Countdown from "./countdown";
 import PartnersLogo from "./partnerslogo";
-import MoneyBag from "./money-bag-rupee-icon (1).png";
-import Image from "next/image";
+
 export default function Hero() {
     return (
         <div className="relative min-h-screen">
