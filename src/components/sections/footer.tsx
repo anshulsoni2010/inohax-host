@@ -51,7 +51,7 @@ function Footer() {
                 </a>
             </div>
             <p className="mt-2 text-lg text-zinc-400">
-                For any queries, feel free to contact Shubham at <a href="https://wa.me/919818273220" target="_blank" rel="noopener noreferrer" className="text-blue-500">Contact - +91 98182 73220</a>
+                For any queries, feel free to contact Rishab at <a href="https://wa.me/919205541450" target="_blank" rel="noopener noreferrer" className="text-blue-500">Contact - +91 92055 41450</a>
             </p>
         </footer>
     );
