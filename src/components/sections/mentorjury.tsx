@@ -140,7 +140,7 @@ export default function MentorJurySection() {
                                             href="#"
                                             whileHover={{ scale: 1.2 }}
                                             whileTap={{ scale: 0.9 }}
-                                            className="text-purple-400 hover:text-purple-300 transition-colors"
+                                            className="text-blue-400 hover:text-blue-300 transition-colors"
                                         >
                                             <Linkedin className="w-5 h-5" />
                                             <span className="sr-only">LinkedIn profile of {mentor.name}</span>

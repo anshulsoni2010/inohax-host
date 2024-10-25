@@ -99,7 +99,7 @@ const PartnersLogo = () => {
                                             width={50}
                                             height={20}
                                             src={logo.url}
-                                            className="h-full w-full px-2"
+                                            className="h-full aspect-auto px-2"
                                             alt={`${logo.name}`}
                                         />
                                     </div>
