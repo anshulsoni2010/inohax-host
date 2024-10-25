@@ -107,47 +107,89 @@ export default function MentorJurySection() {
                             variants={containerVariants}
                             initial="hidden"
                             animate="visible"
-                            className="grid csscode gap-2 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 justify-center"
-                            >
-                            {mentors.map((mentor, index) => (
-                                <motion.div
-                                    key={index}
-                                    variants={itemVariants}
-                                    className="flex flex-col items-center"
-                                    onMouseEnter={() => setHoveredIndex(index)}
-                                    onMouseLeave={() => setHoveredIndex(null)}
-                                >
-                                    <div className="relative w-48 h-48 mb-6 items-center">
-                                        <Image
-                                            src={mentor.image}
-                                            alt={mentor.name}
-                                            layout="fill"
-                                            className="rounded-full object-cover"
-                                        />
-                                        <motion.div
-                                            initial={false}
-                                            animate={{ scale: hoveredIndex === index ? 1.1 : 1 }}
-                                            transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                                            className="absolute inset-0 bg-gradient-to-br from-purple-400 to-blue-400 opacity-0 hover:opacity-30 rounded-full transition-opacity duration-300"
-                                        />
-                                    </div>
-                                    <h3 className="text-2xl font-semibold mb-2">{mentor.name}</h3>
-                                    <p className="text-blue-300 mb-4">{mentor.designation}</p>
-                                    <motion.a
-                                        href={mentor.linkedin} // Using the LinkedIn URL from the data
-                                        target="_blank" // Opens in a new tab
-                                        rel="noopener noreferrer" // Security attributes
-                                        whileHover={{ scale: 1.2 }}
-                                        whileTap={{ scale: 0.9 }}
-                                        className="text-blue-400 hover:text-blue-300 transition-colors"
+                            className="relative flex flex-wrap justify-center items-center max-w-4xl mx-auto"
+                        >
+                            <div className="w-full flex justify-center mb-4">
+                                {mentors.slice(0, 3).map((mentor, index) => (
+                                    <motion.div
+                                        key={index}
+                                        variants={itemVariants}
+                                        className="flex flex-col items-center w-1/3 max-w-[240px] mb-6 p-8" // Increased width and max-width
+                                        onMouseEnter={() => setHoveredIndex(index)}
+                                        onMouseLeave={() => setHoveredIndex(null)}
                                     >
-                                        <Linkedin className="w-6 h-6" />
-                                        <span className="sr-only">LinkedIn profile of {mentor.name}</span>
-                                    </motion.a>
-                                </motion.div>
-                            ))}
+                                        <div className="relative w-full pb-[100%] mb-4">
+                                            <div className="absolute inset-0">
+                                                <Image
+                                                    src={mentor.image}
+                                                    alt={mentor.name}
+                                                    layout="fill"
+                                                    className="rounded-full object-cover"
+                                                />
+                                                <motion.div
+                                                    initial={false}
+                                                    animate={{ scale: hoveredIndex === index ? 1.1 : 1 }}
+                                                    transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                                                    className="absolute inset-0 bg-gradient-to-br from-purple-400 to-blue-400 opacity-0 hover:opacity-30 rounded-full transition-opacity duration-300"
+                                                />
+                                            </div>
+                                        </div>
+                                        <h3 className="text-lg font-semibold mb-1 text-center">{mentor.name}</h3>
+                                        <p className="text-sm text-blue-300 mb-2 text-center">{mentor.designation}</p>
+                                        <motion.a
+                                            href="#"
+                                            whileHover={{ scale: 1.2 }}
+                                            whileTap={{ scale: 0.9 }}
+                                            className="text-purple-400 hover:text-purple-300 transition-colors"
+                                        >
+                                            <Linkedin className="w-5 h-5" />
+                                            <span className="sr-only">LinkedIn profile of {mentor.name}</span>
+                                        </motion.a>
+                                    </motion.div>
+                                ))}
+                            </div>
+                            <div className="w-full flex justify-center mt-[-40px]">
+                                {mentors.slice(3, 5).map((mentor, index) => (
+                                    <motion.div
+                                        key={index + 3}
+                                        variants={itemVariants}
+                                        className="flex flex-col items-center w-1/3 max-w-[240px] mb-6 p-8" // Increased width and max-width
+                                        onMouseEnter={() => setHoveredIndex(index + 3)}
+                                        onMouseLeave={() => setHoveredIndex(null)}
+                                    >
+                                        <div className="relative w-full pb-[100%] mb-4">
+                                            <div className="absolute inset-0">
+                                                <Image
+                                                    src={mentor.image}
+                                                    alt={mentor.name}
+                                                    layout="fill"
+                                                    className="rounded-full object-cover"
+                                                />
+                                                <motion.div
+                                                    initial={false}
+                                                    animate={{ scale: hoveredIndex === index + 3 ? 1.1 : 1 }}
+                                                    transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                                                    className="absolute inset-0 bg-gradient-to-br from-purple-400 to-blue-400 opacity-0 hover:opacity-30 rounded-full transition-opacity duration-300"
+                                                />
+                                            </div>
+                                        </div>
+                                        <h3 className="text-lg font-semibold mb-1 text-center">{mentor.name}</h3>
+                                        <p className="text-sm text-blue-300 mb-2 text-center">{mentor.designation}</p>
+                                        <motion.a
+                                            href="#"
+                                            whileHover={{ scale: 1.2 }}
+                                            whileTap={{ scale: 0.9 }}
+                                            className="text-purple-400 hover:text-purple-300 transition-colors"
+                                        >
+                                            <Linkedin className="w-5 h-5" />
+                                            <span className="sr-only">LinkedIn profile of {mentor.name}</span>
+                                        </motion.a>
+                                    </motion.div>
+                                ))}
+                            </div>
                         </motion.div>
                     </section>
+
 
                     <section>
                         <motion.h2
@@ -168,7 +210,7 @@ export default function MentorJurySection() {
                                 <motion.div
                                     key={index}
                                     variants={itemVariants}
-                                    className="flex flex-col items-center"
+                                    className="flex flex-col items-center mb-6 p-8" // Consistent spacing
                                     onMouseEnter={() => setHoveredIndex(index + mentors.length)}
                                     onMouseLeave={() => setHoveredIndex(null)}
                                 >
