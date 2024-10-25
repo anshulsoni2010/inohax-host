@@ -26,7 +26,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <link rel="icon" href="/favicon.ico" /> {/* Added favicon link */}
+        <link rel="icon" href="/favicon.ico" />
+        <title>Inohax 1.0</title>
+        <meta name="description" content="Inohax 1.0 - A 24 Hours Open Innovation Hackathon by Inovact for Students & Entrepreneurs" />
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
