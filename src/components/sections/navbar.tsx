@@ -38,7 +38,7 @@ export const Navbar = () => {
                 <header className="shadow-inner backdrop-blur-3xl bg-black/40 w-[90%] md:w-[70%] lg:w-[75%] lg:max-w-screen-xl top-5 mx-auto sticky border border-gray-900/45 z-40 rounded-2xl flex justify-between items-center p-2 bg-card">
                     <Link href="/" className="font-bold text-lg flex items-center text-white space-x-3">
                         {/* <Image src="/inovact.webp" className="rounded-full" alt="Inohax Logo" width={50} height={50} /> */}
-                        <span className="text-2xl">Inohax 1.0</span>
+                        <span className="text-2xl navbar-text">Inohax 1.0</span>
                     </Link>
                     {/* Mobile Menu */}
                     <div className="flex items-center lg:hidden">
