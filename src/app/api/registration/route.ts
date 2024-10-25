@@ -55,7 +55,19 @@ async function sendConfirmationEmail(teamLeaderEmail: string, teamLeaderName: st
     from: 'inovacteam@gmail.com', // Replace with your email
     to: teamLeaderEmail,
     subject: 'Team Registration Confirmation',
-    text: `Hello ${teamLeaderName},\n\nCongratulations! Your team "${teamName}" has been successfully registered.\n\nBest regards,\nYour Team`
+    text: `Dear ${teamLeaderName},
+
+Thank you for submitting your application for Inohax 1.0! We’re excited to review your team’s project and appreciate the effort you’ve put into this stage.
+
+What’s Next?
+Our team will carefully evaluate all submissions, and we will notify you of your selection status before November 10th.
+
+If you have any questions or need assistance in the meantime, feel free to reach out to us at inohax1.0@gmail.com.
+
+Thank you once again for your interest in Inohax 1.0, and best of luck in the selection process!
+
+Warm regards,
+The Inohax Team`
   };
 
   // Send the email
