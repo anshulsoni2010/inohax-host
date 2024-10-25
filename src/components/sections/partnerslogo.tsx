@@ -1,31 +1,70 @@
 import Image from "next/image"
-import CodeINBlogsLogo from "./partner-logo/CodeINBlogs.png"
-import BefikraLogo from "./partner-logo/BL3.png"
-import DevstationLogo from "./partner-logo/DevStation- transparent Logo.png"
-import DevorldLogo from "./partner-logo/Devorld.png"
-import SOSLogo from "./partner-logo/SOS.png"
+import BefikraCommunityLogo from "./partner-logo/1._Befikra_Community-removebg-preview-modified.png"
+import BlockpenLogo from "./partner-logo/2._Blockpen-removebg-preview-modified.png"
+import AssamUniversityLogo from "./partner-logo/3._Assam_University_IT_club-removebg-preview-modified.png"
+import CodeClubJULogo from "./partner-logo/4._CodeClub_JU-removebg-preview-modified.png"
+import BTechyLogo from "./partner-logo/5._BTechy-removebg-preview-modified.png"
+import CodeINBlogsLogo from "./partner-logo/6._CodeINBlogs-removebg-preview-modified.png"
+import SOSLogo from "./partner-logo/7._SOS_TECH-removebg-preview-modified.png"
+import BitsOnlineLogo from "./partner-logo/8._BITS_online_Entrepreneurship_Club-removebg-preview-modified.png"
+import DevBoardLogo from "./partner-logo/9.1_DevBoard-removebg-preview-modified.png"
+import CodingBitsLogo from "./partner-logo/10._Coding_Bits-removebg-preview-modified.png"
+import DevCodeCommunityLogo from "./partner-logo/11._Dev_Code_Community-removebg-preview-modified.png"
+import SerenityLCLogo from "./partner-logo/12._Serenity_LC__Life_Community_for_Wellness-removebg-preview-modified.png"
+import CatsInTechLogo from "./partner-logo/13.1_Cats_In_Tech-removebg-preview-modified.png"
 const logos = [
     {
-      name: 'CodeINBlogs',
-      url: CodeINBlogsLogo,
+        name: 'Befikra Community',
+        url: BefikraCommunityLogo,
     },
     {
-      name: 'Befikra',
-      url: BefikraLogo,
+        name: 'Blockpen',
+        url: BlockpenLogo,
     },
     {
-      name: 'Devorld',
-      url: DevorldLogo,
+        name: 'Assam University IT Club',
+        url: AssamUniversityLogo,
     },
     {
-      name: 'SOS',
-      url: SOSLogo,
+        name: 'CodeClub JU',
+        url: CodeClubJULogo,
     },
     {
-        name: 'Devstation',
-        url: DevstationLogo,
-    }
-
+        name: 'BTechy',
+        url: BTechyLogo,
+    },
+    {
+        name: 'CodeINBlogs',
+        url: CodeINBlogsLogo,
+    },
+    {
+        name: 'SOS TECH',
+        url: SOSLogo,
+    },
+    {
+        name: 'BITS Online Entrepreneurship Club',
+        url: BitsOnlineLogo,
+    },
+    {
+        name: 'DevBoard',
+        url: DevBoardLogo,
+    },
+    {
+        name: 'Coding Bits',
+        url: CodingBitsLogo,
+    },
+    {
+        name: 'Dev Code Community',
+        url: DevCodeCommunityLogo,
+    },
+    {
+        name: 'Serenity LC',
+        url: SerenityLCLogo,
+    },
+    {
+        name: 'Cats In Tech',
+        url: CatsInTechLogo,
+    },
   ]
 
   const PartnersLogo = () => {
@@ -55,7 +94,7 @@ const logos = [
                       width={50}
                       height={20}
                       src={logo.url}
-                      className="h-10 w-auto px-2 brightness-0 invert"
+                      className="h-10 w-auto px-2"
                       alt={`${logo.name}`}
                     />
                   ))}
