@@ -21,6 +21,10 @@ const logos = [
       name: 'SOS',
       url: SOSLogo,
     },
+    {
+        name: 'Devstation',
+        url: DevstationLogo,
+    }
 
   ]
 
