@@ -114,7 +114,7 @@ export default function MentorJurySection() {
                                     <motion.div
                                         key={index}
                                         variants={itemVariants}
-                                        className="flex flex-col items-center  md:w-[800px] mb-6 p-8" // Increased width and max-width
+                                        className="flex flex-col items-center md:w-[800px] mb-8 p-8" // Increased margin-bottom for spacing
                                         onMouseEnter={() => setHoveredIndex(index)}
                                         onMouseLeave={() => setHoveredIndex(null)}
                                     >
@@ -153,7 +153,7 @@ export default function MentorJurySection() {
                                     <motion.div
                                         key={index + 3}
                                         variants={itemVariants}
-                                        className="flex flex-col items-center md:w-[300px] mb-6 p-8" // Increased width and max-width
+                                        className="flex flex-col items-center md:w-[300px] mb-8 p-8" // Increased margin-bottom for spacing
                                         onMouseEnter={() => setHoveredIndex(index + 3)}
                                         onMouseLeave={() => setHoveredIndex(null)}
                                     >
