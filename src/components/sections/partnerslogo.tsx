@@ -17,6 +17,7 @@ const logos = [
         name: 'Befikra Community',
         url: BefikraCommunityLogo,
     },
+
     {
         name: 'Blockpen',
         url: BlockpenLogo,
@@ -33,10 +34,7 @@ const logos = [
         name: 'BTechy',
         url: BTechyLogo,
     },
-    {
-        name: 'CodeINBlogs',
-        url: CodeINBlogsLogo,
-    },
+
     {
         name: 'SOS TECH',
         url: SOSLogo,
@@ -65,47 +63,51 @@ const logos = [
         name: 'Cats In Tech',
         url: CatsInTechLogo,
     },
-  ]
+]
 
-  const PartnersLogo = () => {
+const PartnersLogo = () => {
     return (
         <div className="w-full px-6">
-        <h3 className="text-gray-200 mb-8 text-3xl font-semibold sm:text-4xl font-geist tracking-tighter text-center">
-            Community Partners
-        </h3>
-        <div className="mx-auto w-full mt-12">
-          <div
-            className="group relative flex gap-6 overflow-hidden"
-            style={{
-              maskImage:
-                'linear-gradient(to left, transparent 0%, black 20%, black 80%, transparent 95%)',
-            }}
-          >
-            {Array(5)
-              .fill(null)
-              .map((_, index) => (
+            <h3 className="text-gray-200 mb-8 text-3xl font-semibold sm:text-4xl font-geist tracking-tighter text-center">
+                Community Partners
+            </h3>
+            <div className="mx-auto w-full mt-12">
                 <div
-                  key={index}
-                  className="flex shrink-0 animate-logo-cloud flex-row justify-around gap-6"
+                    className="group relative flex gap-6 overflow-hidden"
+                    style={{
+                        maskImage:
+                            'linear-gradient(to left, transparent 0%, black 20%, black 80%, transparent 95%)',
+                    }}
                 >
-                  {logos.map((logo, key) => (
-                    <Image
-                      key={key}
-                      width={50}
-                      height={20}
-                      src={logo.url}
-                      className="h-10 w-auto px-2"
-                      alt={`${logo.name}`}
-                    />
-                  ))}
+                    {Array(5)
+                        .fill(null)
+                        .map((_, index) => (
+                            <div
+                                key={index}
+                                className="flex shrink-0 animate-logo-cloud flex-row justify-around gap-6"
+                            >
+                                {logos.map((logo, key) => (
+                                    <div
+                                        key={key}
+                                        className="mx-4"
+                                    >
+                                        <Image
+                                            width={50}
+                                            height={20}
+                                            src={logo.url}
+                                            className="h-full w-full px-2"
+                                            alt={`${logo.name}`}
+                                        />
+                                    </div>
+                                ))}
+                            </div>
+                        ))}
                 </div>
-              ))}
-          </div>
+            </div>
         </div>
-      </div>
 
 
     )
-  }
+}
 
-  export default PartnersLogo
+export default PartnersLogo
