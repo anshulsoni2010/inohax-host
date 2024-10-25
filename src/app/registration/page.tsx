@@ -90,7 +90,6 @@ export default function Component() {
         // Removed the test toast notification
         // toast.info("Testing toast notifications!");
 
-        // Check for required fields
         const requiredFields: (keyof FormData)[] = ['teamName', 'teamLeaderName', 'teamLeaderPhone', 'teamLeaderEmail', 'projectLink'];
         let hasError = false; // Flag to track if there are any errors
         const errorShown = new Set<string>(); // Set to track shown errors
