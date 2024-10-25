@@ -57,13 +57,13 @@ export default function MentorJurySection() {
             linkedin: "https://www.linkedin.com/in/tarun--bajaj/"
         },
         {
-            name: "Chandan S Gowda",
+            name: "Chandan Gowda",
             designation: "Software Engineer at Commvault",
             image: ment2,
             linkedin: "https://www.linkedin.com/in/chandan-s-gowda/"
         },
         {
-            name: "Vaishakh Sajeevan",
+            name: "Vaishakh",
             designation: "Founder, Frelo",
             image: ment3,
             linkedin: "https://www.linkedin.com/in/vaishakhsajeevan/"
@@ -109,12 +109,12 @@ export default function MentorJurySection() {
                             animate="visible"
                             className="relative flex flex-wrap justify-center items-center max-w-4xl mx-auto"
                         >
-                            <div className="w-full flex justify-center mb-4">
+                            <div className="w-full flex md:flex-row flex-col justify-center mb-4">
                                 {mentors.slice(0, 3).map((mentor, index) => (
                                     <motion.div
                                         key={index}
                                         variants={itemVariants}
-                                        className="flex flex-col items-center w-1/3 max-w-[240px] mb-6 p-8" // Increased width and max-width
+                                        className="flex flex-col items-center  md:w-[800px] mb-6 p-8" // Increased width and max-width
                                         onMouseEnter={() => setHoveredIndex(index)}
                                         onMouseLeave={() => setHoveredIndex(null)}
                                     >
@@ -123,7 +123,7 @@ export default function MentorJurySection() {
                                                 <Image
                                                     src={mentor.image}
                                                     alt={mentor.name}
-                                                    layout="fill"
+                                                   fill
                                                     className="rounded-full object-cover"
                                                 />
                                                 <motion.div
@@ -148,12 +148,12 @@ export default function MentorJurySection() {
                                     </motion.div>
                                 ))}
                             </div>
-                            <div className="w-full flex justify-center mt-[-40px]">
+                            <div className="w-full flex md:flex-row flex-col justify-center mt-[-40px]">
                                 {mentors.slice(3, 5).map((mentor, index) => (
                                     <motion.div
                                         key={index + 3}
                                         variants={itemVariants}
-                                        className="flex flex-col items-center w-1/3 max-w-[240px] mb-6 p-8" // Increased width and max-width
+                                        className="flex flex-col items-center md:w-[300px] mb-6 p-8" // Increased width and max-width
                                         onMouseEnter={() => setHoveredIndex(index + 3)}
                                         onMouseLeave={() => setHoveredIndex(null)}
                                     >
@@ -162,7 +162,7 @@ export default function MentorJurySection() {
                                                 <Image
                                                     src={mentor.image}
                                                     alt={mentor.name}
-                                                    layout="fill"
+                                                   fill
                                                     className="rounded-full object-cover"
                                                 />
                                                 <motion.div
@@ -218,7 +218,7 @@ export default function MentorJurySection() {
                                         <Image
                                             src={juryMember.image}
                                             alt={juryMember.name}
-                                            layout="fill"
+                                            fill
                                             className="rounded-full object-cover"
                                         />
                                         <motion.div

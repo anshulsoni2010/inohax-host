@@ -33,7 +33,7 @@ function Footer() {
                 <span className="absolute -bottom-0 left-[1.125rem] h-px w-[calc(100%-2.25rem)] bg-gradient-to-r from-purple-300/0 via-purple-300/90 to-purple-300/0 transition-opacity duration-500 group-hover:opacity-40" />
             </button>
             </Link>
-            <div className="flex flex-col gap-3 text-center md:flex-row md:gap-5 justify-center my-2 ">
+            <div className="flex gap-3 text-center flex-row md:gap-5 justify-center my-2 ">
                 <a
                     className="group/mail flex items-center"
                     target="_blank"
@@ -52,7 +52,7 @@ function Footer() {
                 </a>
 
             </div>
-            <p className="mt-2 text-xs text-zinc-400">
+            <p className="mt-2 text-lg text-zinc-400">
                 For any queries, feel free to contact Shubham at <a href="https://wa.me/919818273220" target="_blank" rel="noopener noreferrer" className="text-blue-500">Contact - +91 98182 73220</a>
             </p>
         </footer>
