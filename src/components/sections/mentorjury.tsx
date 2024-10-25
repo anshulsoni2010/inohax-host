@@ -57,8 +57,8 @@ export default function MentorJurySection() {
             linkedin: "https://www.linkedin.com/in/tarun--bajaj/"
         },
         {
-            name: "Chandan Gowda",
-            designation: "Software Engineer at Commvault",
+            name: "Chandan",
+            designation: "Software Engineer - Commvault",
             image: ment2,
             linkedin: "https://www.linkedin.com/in/chandan-s-gowda/"
         },
