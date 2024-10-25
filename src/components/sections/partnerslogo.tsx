@@ -1,42 +1,27 @@
 import Image from "next/image"
+import CodeINBlogsLogo from "./partner-logo/CodeINBlogs.png"
+import BefikraLogo from "./partner-logo/BL3.png"
+import DevstationLogo from "./partner-logo/DevStation- transparent Logo.png"
+import DevorldLogo from "./partner-logo/Devorld.png"
+import SOSLogo from "./partner-logo/SOS.png"
 const logos = [
     {
-      name: 'Vercel',
-      url: 'https://res.cloudinary.com/dfhp33ufc/image/upload/v1715881430/vercel_wordmark_dark_mhv8u8.svg',
+      name: 'CodeINBlogs',
+      url: CodeINBlogsLogo,
     },
     {
-      name: 'Nextjs',
-      url: 'https://res.cloudinary.com/dfhp33ufc/image/upload/v1715881475/nextjs_logo_dark_gfkf8m.svg',
+      name: 'Befikra',
+      url: BefikraLogo,
     },
     {
-      name: 'Prime',
-      url: 'https://res.cloudinary.com/dfhp33ufc/image/upload/v1715276558/logos/t2awrrfzdvmg1chnzyfr.svg',
+      name: 'Devorld',
+      url: DevorldLogo,
     },
     {
-      name: 'Trustpilot',
-      url: 'https://res.cloudinary.com/dfhp33ufc/image/upload/v1715276558/logos/tkfspxqmjflfllbuqxsi.svg',
-    },
-    {
-      name: 'Webflow',
-      url: 'https://res.cloudinary.com/dfhp33ufc/image/upload/v1715276560/logos/nymiivu48d5lywhf9rpf.svg',
+      name: 'SOS',
+      url: SOSLogo,
     },
 
-    {
-      name: 'Airbnb',
-      url: 'https://res.cloudinary.com/dfhp33ufc/image/upload/v1715276558/logos/pmblusboe7vkw8vxdknx.svg',
-    },
-    {
-      name: 'Tina',
-      url: 'https://res.cloudinary.com/dfhp33ufc/image/upload/v1715276560/logos/afqhiygywyphuou6xtxc.svg',
-    },
-    {
-      name: 'Stackoverflow',
-      url: 'https://res.cloudinary.com/dfhp33ufc/image/upload/v1715276558/logos/ts1j4mkooxqmscgptafa.svg',
-    },
-    {
-      name: 'mistral',
-      url: 'https://res.cloudinary.com/dfhp33ufc/image/upload/v1715276558/logos/tyos2ayezryjskox3wzs.svg',
-    },
   ]
 
   const PartnersLogo = () => {
