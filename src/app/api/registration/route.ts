@@ -2,7 +2,7 @@ import dbConnect from '@/libs/dbConnect';
 import Registration from '@/model/Registration';
 import nodemailer from 'nodemailer';
 
-export default async function handler(req, res) {
+export default async function handler(req) {
   if (req.method === 'POST') {
     await dbConnect();
 
@@ -15,16 +15,17 @@ export default async function handler(req, res) {
         projectLink?: string;
         teamMembers: Array<{ name: string; socialMediaLink?: string }>;
         communityReferral?: string;
+        teamName?: string;
       } = await req.json();
 
       console.log("Team ", body);
 
       // Create the team entry in the database
       const team = await Registration.create(body);
-      team.save();
+      await team.save();
 
       // Send confirmation email to the team leader
-      await sendConfirmationEmail(body.teamLeaderEmail, body.teamLeaderName, body.teamName);
+      await sendConfirmationEmail(body.teamLeaderEmail, body.teamLeaderName, body.teamName || "");
 
       return new Response(JSON.stringify({ success: true, team }), { status: 201 });
     } catch (error: unknown) {
