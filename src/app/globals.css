@@ -15,11 +15,8 @@ body {
 }
 
 
-.csscode {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        grid-template-rows: repeat(2, 1fr);
-        grid-column-gap: 56px;
-        grid-row-gap: 24px;
-        justify-content: center;
+@media only screen and (max-width: 400px) {
+    .custom-hero-text {
+        font-size: 0.75rem;
+    }
 }
