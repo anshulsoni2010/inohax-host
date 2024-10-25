@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { useForm, Controller } from 'react-hook-form'
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -26,7 +26,7 @@ interface FormData {
     projectDomain: string;
     projectLink: string;
     teamMembers: TeamMember[];
-    communityReferral:string;
+    communityReferral: string;
 }
 
 export default function Component() {
@@ -36,9 +36,10 @@ export default function Component() {
         { name: '', socialMediaLink: '' },
         { name: '', socialMediaLink: '' }
     ]);
+    const errorShown = useRef(new Set<string>()); // Use ref to persist error state
 
     const addTeamMember = () => {
-        if (teamMembers.length >=5) {
+        if (teamMembers.length >= 5) {
             toast.warn("Cannot add more than 5 member")
         }
         else {
@@ -60,7 +61,65 @@ export default function Component() {
         setTeamMembers(updatedMembers);
     }
 
+    const validateProfileLink = (value: string) => {
+        const regex = /^https?:\/\/api\.inovact\.in\/v1\/user(\/.*)?(\?.*)?$/; // Updated regex to allow any path and query parameters
+        return { valid: regex.test(value), message: "Inovact Social Profile Link must start with https://api.inovact.in/v1/user" };
+    };
+
+    const validateProjectLink = (value: string) => {
+        const regex = /^https?:\/\/api\.inovact\.in\/v1\/post(\/.*)?(\?.*)?$/; // Updated regex to allow any path and query parameters
+        return { valid: regex.test(value), message: "Inovact Social Project/Idea Link must start with https://api.inovact.in/v1/post" };
+    };
+
+    const handleValidation = (field: string, validateFunc: (value: string) => { valid: boolean; message: string }, value: string) => {
+        const { valid, message } = validateFunc(value);
+        if (!valid) {
+            if (!errorShown.current.has(field)) {
+                setTimeout(() => {
+                    toast.error(message);
+                    errorShown.current.add(field); // Mark this error as shown
+                }, 2000); // Show error after 2 seconds
+            }
+        } else {
+            errorShown.current.delete(field); // Clear the error if valid
+        }
+    };
+
     const onSubmit = async (data: FormData) => {
+        // Test toast to check if notifications are working
+        toast.info("Testing toast notifications!");
+
+        // Check for required fields
+        const requiredFields = ['teamName', 'teamLeaderName', 'teamLeaderPhone', 'teamLeaderEmail', 'projectLink'];
+        let hasError = false; // Flag to track if there are any errors
+        const errorShown = new Set<string>(); // Set to track shown errors
+
+        // Check if any required fields are empty
+        for (const field of requiredFields) {
+            if (!data[field]) {
+                hasError = true; // Set error flag
+                break; // Exit loop if any required field is empty
+            }
+        }
+
+        if (hasError) {
+            toast.error("Please fill all the required details before submitting."); // Show toast notification
+            return; // Stop submission if any required field is empty
+        }
+
+        for (const field of requiredFields) {
+            if (!data[field] && !errorShown.has(field)) {
+                toast.error(`${field.replace(/([A-Z])/g, ' $1')} is required.`);
+                errorShown.add(field); // Mark this error as shown
+                hasError = true; // Set error flag
+            }
+        }
+
+        // If there are errors, stop submission
+        if (hasError) {
+            return; // Stop submission if any required field is empty
+        }
+
         const payload = {
             ...data,
             teamMembers,
@@ -76,13 +135,13 @@ export default function Component() {
             });
 
             if (response.ok) {
-                alert('Registration successful!');
+                toast.success('Registration successful!'); // Use toast for success message
             } else {
-                alert('Registration failed!');
+                toast.error('Registration failed!'); // Use toast for error message
             }
         } catch (error) {
             console.error('Error submitting form:', error);
-            alert('An error occurred while submitting the form. Please try again.');
+            toast.error('An error occurred while submitting the form. Please try again.'); // Use toast for error message
         }
     };
 
@@ -158,11 +217,10 @@ export default function Component() {
                                     </div>
                                 </div>
 
-
                                 <div className="space-y-4">
-                                    <h3 className="text-xl font-semibold text-gray-300">Project/Idea Details</h3>
+                                    <h3 className="text-xl font-semibold text-gray-300">Project / Idea Details</h3>
                                     <div className="space-y-2">
-                                        <Label htmlFor="projectDomain" className="text-gray-300">Project/Idea Domain</Label>
+                                        <Label htmlFor="projectDomain" className="text-gray-300">Project / Idea Domain *</Label>
                                         <Controller
                                             name="projectDomain"
                                             control={control}
@@ -175,14 +233,13 @@ export default function Component() {
                                                         <SelectItem value="edtech">EdTech</SelectItem>
                                                         <SelectItem value="hrtech">HR Tech</SelectItem>
                                                         <SelectItem value="web3">Web3</SelectItem>
-
                                                         <SelectItem value="FinTech"> FinTech </SelectItem>
-                                                        <SelectItem value="HealthTech">HealthTech    </SelectItem>
-                                                        <SelectItem value="AgriTech"> AgriTech    </SelectItem>
-                                                        <SelectItem value="AI & Machine Learning">AI & Machine Learning    </SelectItem>
-                                                        <SelectItem value="ClimateTec"> ClimateTech    </SelectItem>
-                                                        <SelectItem value="Smart Cities">Smart Cities    </SelectItem>
-                                                        <SelectItem value="Cybersecurity"> Cybersecurity  </SelectItem>
+                                                        <SelectItem value="HealthTech">HealthTech </SelectItem>
+                                                        <SelectItem value="AgriTech"> AgriTech </SelectItem>
+                                                        <SelectItem value="AI & Machine Learning">AI & Machine Learning </SelectItem>
+                                                        <SelectItem value="ClimateTec"> ClimateTech </SelectItem>
+                                                        <SelectItem value="Smart Cities">Smart Cities </SelectItem>
+                                                        <SelectItem value="Cybersecurity"> Cybersecurity </SelectItem>
                                                         <SelectItem value="other">Other</SelectItem>
                                                     </SelectContent>
                                                 </Select>
@@ -190,17 +247,23 @@ export default function Component() {
                                         />
                                     </div>
                                     <div className="space-y-2">
-                                        <Label htmlFor="projectLink" className="text-gray-300">Inovact Social Project/Idea Link
-                                            *</Label>
+                                        <Label htmlFor="projectLink" className="text-gray-300">Inovact Social Project/Idea Link *</Label>
                                         <p className="text-sm text-gray-400">Please upload basic details of your project/idea on Inovact Social and paste the post link here</p>
 
                                         <div className="relative">
                                             <Folder className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 h-5 w-5" />
                                             <Input
                                                 id="projectLink"
-                                                {...register('projectLink', { required: true })}
+                                                {...register('projectLink', {
+                                                    required: true,
+                                                    validate: (value) => {
+                                                        handleValidation('projectLink', validateProjectLink, value);
+                                                        return true; // Always return true to avoid blocking submission
+                                                    }
+                                                })}
                                                 className="bg-gray-900/30 border-gray-700 text-white placeholder-gray-500 pl-10"
                                                 placeholder="Enter project/idea link"
+                                                onBlur={(e) => handleValidation('projectLink', validateProjectLink, e.target.value)} // Validate on blur
                                             />
                                         </div>
                                         <div className="flex space-x-4"> {/* Added space-x-4 for horizontal spacing */}
@@ -217,7 +280,7 @@ export default function Component() {
                                                     type="button"
                                                     className="w-fit hover:bg-[#0d2c99]/60 bg-[#0d2c99] text-white"
                                                 >
-                                                     Demo On Uploading Post On Inovact Social
+                                                    Demo On Uploading Post On Inovact Social
                                                 </Button>
                                             </a>
                                         </div>
@@ -227,36 +290,31 @@ export default function Component() {
                                                     type="button"
                                                     className="w-full hover:bg-[#0d2c99]/60 bg-[#0d2c99] text-white"
                                                 >
-                                                     Demo On Uploading Post On Inovact Social
-                                                     </Button>
+                                                    Demo On Uploading Post On Inovact Social
+                                                </Button>
                                             </a>
                                         </div>
-                                          {/* New Community Referral Field */}
+                                        {/* New Community Referral Field */}
 
                                     </div>
 
                                 </div>
                                 <div className="space-y-4">
                                     <div className='flex flex-col md:flex-row justify-between'>
-
-                                  <div>
-
-
-                                    <h3 className="text-xl font-semibold text-gray-300">Team Members</h3>
-                                    </div>
-                                    <div>
-
-
-                                    <a href="https://drive.google.com/file/d/1Ahsj2IQ7F4m9xXnIyUo7T8JPDY8eVm0D/view?usp=drivesdk" target='_blank'>
+                                        <div>
+                                            <h3 className="text-xl font-semibold text-gray-300">Team Members</h3>
+                                        </div>
+                                        <div>
+                                            <a href="https://drive.google.com/file/d/1Ahsj2IQ7F4m9xXnIyUo7T8JPDY8eVm0D/view?usp=drivesdk" target='_blank'>
                                                 <Button
                                                     type="button"
                                                     className="w-fit hover:bg-[#0d2c99]/60 bg-[#0d2c99] text-white"
                                                 >
-                                                   Demo on Sharing Profile Link on Inovact Social
+                                                    Demo on Sharing Profile Link on Inovact Social
                                                 </Button>
                                             </a>
-                                            </div>
-                                            </div>
+                                        </div>
+                                    </div>
                                     <AnimatePresence>
                                         {teamMembers.map((member, index) => (
                                             <motion.div
@@ -318,7 +376,10 @@ export default function Component() {
                                                                 name={`teamMembers.${index}.socialMediaLink` as const}
                                                                 control={control}
                                                                 defaultValue={member.socialMediaLink}
-                                                                rules={{ required: index < 3 }}
+                                                                rules={{ required: index < 3, validate: (value) => {
+                                                                    handleValidation('memberLink' + index, validateProfileLink, value);
+                                                                    return true; // Always return true to avoid blocking submission
+                                                                }}}
                                                                 render={({ field }) => (
                                                                     <Input
                                                                         {...field}
@@ -329,6 +390,7 @@ export default function Component() {
                                                                         }}
                                                                         className="bg-gray-900/30 border-gray-700 text-white placeholder-gray-500 pl-10"
                                                                         placeholder="Enter Inovact Social Profile Link"
+                                                                        onBlur={(e) => handleValidation('memberLink' + index, validateProfileLink, e.target.value)} // Validate on blur
                                                                     />
                                                                 )}
                                                             />
@@ -347,20 +409,19 @@ export default function Component() {
                                         Add Team Member
                                     </Button>
                                 </div>
-
                             </div>
                             <div className="space-y-4">
-                                    <h3 className="text-xl font-semibold text-gray-300">Community Referral</h3>
-                                    <div className="space-y-2">
-                                        <Label htmlFor="communityReferral" className="text-gray-300">Referred by (Optional)</Label>
-                                        <Input
-                                            id="communityReferral"
-                                            {...register('communityReferral')}
-                                            className="bg-gray-900/30 border-gray-700 text-white placeholder-gray-500 pl-10"
-                                            placeholder="Enter community referral name or code"
-                                        />
-                                    </div>
+                                <h3 className="text-xl font-semibold text-gray-300">Community Referral</h3>
+                                <div className="space-y-2">
+                                    <Label htmlFor="communityReferral" className="text-gray-300">Referred by (Optional)</Label>
+                                    <Input
+                                        id="communityReferral"
+                                        {...register('communityReferral')}
+                                        className="bg-gray-900/30 border-gray-700 text-white placeholder-gray-500 pl-10"
+                                        placeholder="Enter community referral name or code"
+                                    />
                                 </div>
+                            </div>
                             <Button type="submit" className="w-full bg-gradient-to-r from-gray-700 to-gray-900 hover:from-gray-800 hover:to-black text-white font-bold py-3 rounded-lg transition duration-300 ease-in-out transform hover:scale-105">
                                 Submit Registration
                                 <ChevronRight className="ml-2 h-5 w-5" />
