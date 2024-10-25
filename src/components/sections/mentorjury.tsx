@@ -114,7 +114,7 @@ export default function MentorJurySection() {
                                     <motion.div
                                         key={index}
                                         variants={itemVariants}
-                                        className="flex flex-col items-center md:w-[800px] mb-8 p-8" // Increased margin-bottom for spacing
+                                        className="flex flex-col items-center md:w-[800px] mb-8 p-8"
                                         onMouseEnter={() => setHoveredIndex(index)}
                                         onMouseLeave={() => setHoveredIndex(null)}
                                     >
@@ -137,7 +137,9 @@ export default function MentorJurySection() {
                                         <h3 className="text-lg font-semibold mb-1 text-center">{mentor.name}</h3>
                                         <p className="text-sm text-blue-300 mb-2 text-center">{mentor.designation}</p>
                                         <motion.a
-                                            href="#"
+                                            href={mentor.linkedin} // Wrap the LinkedIn icon with the LinkedIn link
+                                            target="_blank" // Opens in a new tab
+                                            rel="noopener noreferrer" // Security attributes
                                             whileHover={{ scale: 1.2 }}
                                             whileTap={{ scale: 0.9 }}
                                             className="text-blue-400 hover:text-blue-300 transition-colors"
@@ -153,7 +155,7 @@ export default function MentorJurySection() {
                                     <motion.div
                                         key={index + 3}
                                         variants={itemVariants}
-                                        className="flex flex-col items-center md:w-[300px] mb-8 p-8" // Increased margin-bottom for spacing
+                                        className="flex flex-col items-center md:w-[300px] mb-8 p-8"
                                         onMouseEnter={() => setHoveredIndex(index + 3)}
                                         onMouseLeave={() => setHoveredIndex(null)}
                                     >
@@ -176,7 +178,9 @@ export default function MentorJurySection() {
                                         <h3 className="text-lg font-semibold mb-1 text-center">{mentor.name}</h3>
                                         <p className="text-sm text-blue-300 mb-2 text-center">{mentor.designation}</p>
                                         <motion.a
-                                            href="#"
+                                            href={mentor.linkedin} // Wrap the LinkedIn icon with the LinkedIn link
+                                            target="_blank" // Opens in a new tab
+                                            rel="noopener noreferrer" // Security attributes
                                             whileHover={{ scale: 1.2 }}
                                             whileTap={{ scale: 0.9 }}
                                             className="text-blue-400 hover:text-blue-300 transition-colors"
@@ -210,7 +214,7 @@ export default function MentorJurySection() {
                                 <motion.div
                                     key={index}
                                     variants={itemVariants}
-                                    className="flex flex-col items-center mb-6 p-8" // Consistent spacing
+                                    className="flex flex-col items-center mb-6 p-8"
                                     onMouseEnter={() => setHoveredIndex(index + mentors.length)}
                                     onMouseLeave={() => setHoveredIndex(null)}
                                 >
