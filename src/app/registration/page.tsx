@@ -450,6 +450,7 @@ export default function Component() {
                                     Submit Registration
                                     <ChevronRight className="ml-2 h-5 w-5" />
                                 </Button>
+                                <p className='text-center'><b>After submitting the form, You will receive an email from us. Do check the spam folder if you do not receive the email in your inbox</b></p>
                             </form>
                         </CardContent>
                     </Card>
