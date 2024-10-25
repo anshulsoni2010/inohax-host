@@ -96,9 +96,9 @@ const PartnersLogo = () => {
                                         className="mx-4"
                                     >
                                         <Image
-                                     
+
                                             src={logo.url}
-                                            className="h-full aspect-auto px-2"
+                                            className="h-16 w-full px-2"
                                             alt={`${logo.name}`}
                                         />
                                     </div>
