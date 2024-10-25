@@ -143,7 +143,7 @@ export default function MentorJurySection() {
                                             className="text-purple-400 hover:text-purple-300 transition-colors"
                                         >
                                             <Linkedin className="w-5 h-5" />
-                                            <span className="sr-only">LinkedIn profile of {mentor.name}</span>
+   <span className="sr-only">LinkedIn profile of {mentor.name}</span>
                                         </motion.a>
                                     </motion.div>
                                 ))}
