@@ -18,7 +18,7 @@ export default function Hero() {
                 <div className="max-w-screen-xl z-10 mx-auto px-4 py-10 sm:py-12 md:py-14 gap-6 text-gray-300">
                     <div className="space-y-8 max-w-3xl mx-auto text-center">
                         <h2 className="text-2xl sm:text-3xl text-leading md:text-4xl lg:text-5xl xl:text-6xl tracking-tighter font-geist bg-clip-text bg-[linear-gradient(180deg,_#FFF_0%,_rgba(255,_255,_255,_0.00)_202.08%)] text-transparent">
-                            A 24 hours Online Open Innovation Hackathon for{" "}
+                            A  24 hours Online Open Innovation Hackathon for{" "}
                             <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-300 to-orange-200">
                                 Students & Entrepreneurs
                             </span>
