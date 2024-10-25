@@ -32,6 +32,7 @@ interface FormData {
 
 export default function Component() {
     const { handleSubmit, control, register, reset } = useForm<FormData>();
+    const [loading, setLoading] = useState(false); // State for loading
     const [teamMembers, setTeamMembers] = useState<TeamMember[]>([
         { name: '', socialMediaLink: '' },
         { name: '', socialMediaLink: '' },
@@ -87,8 +88,7 @@ export default function Component() {
     };
 
     const onSubmit = async (data: FormData) => {
-        // Removed the test toast notification
-        // toast.info("Testing toast notifications!");
+        setLoading(true); // Set loading to true when submission starts
 
         const requiredFields: (keyof FormData)[] = ['teamName', 'teamLeaderName', 'teamLeaderPhone', 'teamLeaderEmail', 'projectLink'];
         let hasError = false; // Flag to track if there are any errors
@@ -144,6 +144,8 @@ export default function Component() {
         } catch (error) {
             console.error('Error submitting form:', error);
             toast.error('An error occurred while submitting the form. Please try again.'); // Use toast for error message
+        } finally {
+            setLoading(false); // Set loading to false when submission ends
         }
     };
 
@@ -168,7 +170,12 @@ export default function Component() {
                 <meta property="og:image:secure_url" content="https://inohax.inovact.in/poster.png" />
 
             </Head>
-            <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black text-white py-12 px-4 sm:px-6 lg:px-8">
+            <div className={`min-h-screen bg-gradient-to-br from-black via-gray-900 to-black text-white py-12 px-4 sm:px-6 lg:px-8 ${loading ? 'opacity-50' : 'opacity-100'}`}>
+                {loading && (
+                    <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50">
+                        <div className="loader"></div> {/* Circular loader */}
+                    </div>
+                )}
                 <div className="max-w-4xl mx-auto">
                     <div className="text-center mb-12">
                         <h1 className="text-5xl font-extrabold tracking-tight mb-4">

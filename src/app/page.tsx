@@ -17,6 +17,7 @@ export default function Home() {
       <MentorJurySection/>
       <FAQComponent/>
       <Footer/>
+
     </>
   );
 }
