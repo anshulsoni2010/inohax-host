@@ -30,7 +30,7 @@ interface FormData {
 }
 
 export default function Component() {
-    const { handleSubmit, control, register } = useForm<FormData>();
+    const { handleSubmit, control, register, reset } = useForm<FormData>();
     const [teamMembers, setTeamMembers] = useState<TeamMember[]>([
         { name: '', socialMediaLink: '' },
         { name: '', socialMediaLink: '' },
@@ -86,17 +86,17 @@ export default function Component() {
     };
 
     const onSubmit = async (data: FormData) => {
-        // Test toast to check if notifications are working
-        toast.info("Testing toast notifications!");
+        // Removed the test toast notification
+        // toast.info("Testing toast notifications!");
 
         // Check for required fields
-        const requiredFields = ['teamName', 'teamLeaderName', 'teamLeaderPhone', 'teamLeaderEmail', 'projectLink'];
+        const requiredFields: (keyof FormData)[] = ['teamName', 'teamLeaderName', 'teamLeaderPhone', 'teamLeaderEmail', 'projectLink'];
         let hasError = false; // Flag to track if there are any errors
         const errorShown = new Set<string>(); // Set to track shown errors
 
         // Check if any required fields are empty
         for (const field of requiredFields) {
-            if (!data[field]) {
+            if (!data[field as keyof FormData]) { // Use type assertion here
                 hasError = true; // Set error flag
                 break; // Exit loop if any required field is empty
             }
@@ -108,7 +108,7 @@ export default function Component() {
         }
 
         for (const field of requiredFields) {
-            if (!data[field] && !errorShown.has(field)) {
+            if (!data[field as keyof FormData] && !errorShown.has(field)) { // Use type assertion here
                 toast.error(`${field.replace(/([A-Z])/g, ' $1')} is required.`);
                 errorShown.add(field); // Mark this error as shown
                 hasError = true; // Set error flag
@@ -136,6 +136,8 @@ export default function Component() {
 
             if (response.ok) {
                 toast.success('Registration successful!'); // Use toast for success message
+                reset(); // Reset the form fields
+                setTeamMembers([{ name: '', socialMediaLink: '' }, { name: '', socialMediaLink: '' }, { name: '', socialMediaLink: '' }]); // Reset team members
             } else {
                 toast.error('Registration failed!'); // Use toast for error message
             }
