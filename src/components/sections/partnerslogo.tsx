@@ -1,4 +1,5 @@
 import Image from "next/image"
+import CodeINBlogsLogo from "./partner-logo/6._CodeINBlogs-removebg-preview-modified.png"
 import BefikraCommunityLogo from "./partner-logo/1._Befikra_Community-removebg-preview-modified.png"
 import BlockpenLogo from "./partner-logo/2._Blockpen-removebg-preview-modified.png"
 import AssamUniversityLogo from "./partner-logo/3._Assam_University_IT_club-removebg-preview-modified.png"
@@ -11,7 +12,8 @@ import CodingBitsLogo from "./partner-logo/10._Coding_Bits-removebg-preview-modi
 import DevCodeCommunityLogo from "./partner-logo/11._Dev_Code_Community-removebg-preview-modified.png"
 import SerenityLCLogo from "./partner-logo/12._Serenity_LC__Life_Community_for_Wellness-removebg-preview-modified.png"
 import CatsInTechLogo from "./partner-logo/13.1_Cats_In_Tech-removebg-preview-modified.png";
-import HackCultureLogo from "./partner-logo/WhatsApp_Image_2024-10-25_at_13.13.38_8f5203c9-removebg-preview.png"
+import HackCultureLogo from "./partner-logo/hackculture.png"
+
 const logos = [
     {
         name: 'Befikra Community',
@@ -25,6 +27,10 @@ const logos = [
     {
         name: 'Assam University IT Club',
         url: AssamUniversityLogo,
+    },
+    {
+        name: 'CodeINBlogs',
+        url: CodeINBlogsLogo,
     },
     {
         name: 'CodeClub JU',

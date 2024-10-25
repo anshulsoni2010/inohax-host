@@ -196,7 +196,7 @@ export default function MentorJurySection() {
                             initial={{ opacity: 0, x: -20 }}
                             animate={{ opacity: 1, x: 0 }}
                             transition={{ duration: 0.5, delay: 0.4 }}
-                            className="text-4xl font-semibold text-center mb-12 text-purple-300"
+                            className="text-4xl font-semibold text-center mb-12 text-blue-300"
                         >
                             Jury Members
                         </motion.h2>
@@ -229,7 +229,7 @@ export default function MentorJurySection() {
                                         />
                                     </div>
                                     <h3 className="text-3xl font-semibold mb-2">{juryMember.name}</h3>
-                                    <p className="text-purple-300 mb-4">{juryMember.designation}</p>
+                                    <p className="text-blue-300 mb-4">{juryMember.designation}</p>
                                     <motion.a
                                         href={juryMember.linkedin} // Using the LinkedIn URL from the data
                                         target="_blank" // Opens in a new tab
