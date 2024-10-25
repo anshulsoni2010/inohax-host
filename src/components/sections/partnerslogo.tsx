@@ -1,5 +1,5 @@
 import Image from "next/image"
-import CodeINBlogsLogo from "./partner-logo/6._CodeINBlogs-removebg-preview-modified.png"
+import CodeINBlogsLogo from "./partner-logo/6.png"
 import BefikraCommunityLogo from "./partner-logo/1.png"
 import BlockpenLogo from "./partner-logo/2.png"
 import AssamUniversityLogo from "./partner-logo/3.png"
@@ -7,12 +7,12 @@ import CodeClubJULogo from "./partner-logo/4.png"
 import BTechyLogo from "./partner-logo/5.png"
 import SOSLogo from "./partner-logo/7.png"
 import BitsOnlineLogo from "./partner-logo/8.png"
-import DevBoardLogo from "./partner-logo/9.png"
+import DevBoardLogo from "./partner-logo/13.png"
 import CodingBitsLogo from "./partner-logo/10.png"
 import DevCodeCommunityLogo from "./partner-logo/11.png"
-import SerenityLCLogo from "./partner-logo/12.png"
 import CatsInTechLogo from "./partner-logo/13.1_Cats_In_Tech-removebg-preview-modified.png";
 import HackCultureLogo from "./partner-logo/hackculture.png";
+import codeo from "./partner-logo/9.png";
 
 const logos = [
     {
@@ -66,8 +66,8 @@ const logos = [
         url: DevCodeCommunityLogo,
     },
     {
-        name: 'Serenity LC',
-        url: SerenityLCLogo,
+        name: 'codeNight',
+        url: codeo,
     },
     {
         name: 'Cats In Tech',
