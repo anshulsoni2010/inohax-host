@@ -217,7 +217,7 @@ export default function Component() {
                                                     type="button"
                                                     className="w-fit hover:bg-[#0d2c99]/60 bg-[#0d2c99] text-white"
                                                 >
-                                                     Demo On Uploading Project/Idea On Inovact Social
+                                                     Demo On Uploading Post On Inovact Social
                                                 </Button>
                                             </a>
                                         </div>
@@ -227,7 +227,7 @@ export default function Component() {
                                                     type="button"
                                                     className="w-full hover:bg-[#0d2c99]/60 bg-[#0d2c99] text-white"
                                                 >
-                                                     Demo On Uploading Project/Idea On Inovact Social
+                                                     Demo On Uploading Post On Inovact Social
                                                      </Button>
                                             </a>
                                         </div>
