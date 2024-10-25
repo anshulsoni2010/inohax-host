@@ -27,7 +27,6 @@ export default function RootLayout({
         <html lang="en">
             <head>
                 <link rel="icon" href="/inovact.pn" />
-                <title>Inohax 1.0</title>
                 <meta name="description" content="Inohax 1.0 - A 24 Hours Open Innovation Hackathon by Inovact for Students & Entrepreneurs" />
                 <meta property="og:url" content="https://inohax.inovact.in" />
                 <meta property="og:type" content="website" />
