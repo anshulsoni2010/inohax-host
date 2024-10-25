@@ -1,0 +1,25 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+}
+
+
+
+body {
+  background: black;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+
+.csscode {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: repeat(2, 1fr);
+        grid-column-gap: 56px;
+        grid-row-gap: 24px;
+        justify-content: center;
+}
