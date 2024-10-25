@@ -89,7 +89,7 @@ export default function Component() {
     const onSubmit = async (data: FormData) => {
         // Removed the test toast notification
         // toast.info("Testing toast notifications!");
-
+        
         // Check for required fields
         const requiredFields: (keyof FormData)[] = ['teamName', 'teamLeaderName', 'teamLeaderPhone', 'teamLeaderEmail', 'projectLink'];
         let hasError = false; // Flag to track if there are any errors
