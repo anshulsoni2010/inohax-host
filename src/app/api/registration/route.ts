@@ -50,31 +50,31 @@ async function sendConfirmationEmail(teamLeaderEmail: string, teamLeaderName: st
     }
   });
 
-  // Define the email content
   const mailOptions = {
     from: 'inovacteam@gmail.com', // Replace with your email
     to: teamLeaderEmail,
     subject: `${teamName} - Team Registration Confirmation`,
-    text: `Dear ${teamLeaderName},
+    html: `Dear ${teamLeaderName},<br><br>
 
-Thank you for submitting your application for Inohax 1.0! We’re excited to review your team’s project and appreciate the effort you’ve put into this stage.
+  Thank you for submitting your application for <b>Inohax 1.0</b>! We’re excited to review your team’s project and appreciate the effort you’ve put into this stage.<br><br>
 
-What’s Next?
-Our team will carefully evaluate all submissions, and we will notify you of your selection status before November 10th.
+  <b>What’s Next?</b><br>
+  Our team will carefully evaluate all submissions, and we will notify you of your selection status before November 10th.<br><br>
 
-If you have any questions or need assistance in the meantime, feel free to reach out to us at inohax1.0@gmail.com.
+  If you have any questions or need assistance in the meantime, feel free to reach out to us at inohax1.0@gmail.com
 
-Thank you once again for your interest in Inohax 1.0, and best of luck in the selection process!
+  Do checkout <a href="https://play.google.com/store/apps/details?id=in.pranaydas.inovact"> Inovact Social </a> - A Social Network For Students & Entreprenuers Making Collaborations Simple & Faster On Projects and Ideas Powered by Proof Of Work.
 
-Warm regards,
-The Inohax Team`
+
+  Thank you once again for your interest in <b>Inohax 1.0</b>, and best of luck in the selection process!<br><br>
+
+  Warm regards,<br>
+  The Inohax Team`
   };
-
-  // Send the email
   try {
     await transporter.sendMail(mailOptions);
     console.log('Confirmation email sent successfully to:', teamLeaderEmail);
   } catch (error) {
     console.error('Error sending email:', error);
   }
-}
+};
