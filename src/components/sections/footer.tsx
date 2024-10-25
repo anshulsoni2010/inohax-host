@@ -6,7 +6,7 @@ function Footer() {
     return (
         <footer className="mt-5 w-full border-t border-2 border-zinc-800/30 flex flex-col items-center justify-center gap-4 px-4 py-6 text-sm text-zinc-500 text-center">
             <p className="mb-2">© 2024 Inohax 1.0</p>
-            <Link href="/registration">
+            <Link href="/registration" target="_blank">
                 <button className="bg-slate-800 no-underline group cursor-pointer relative shadow-2xl shadow-zinc-900 rounded-full p-1 text-sm font-semibold leading-6 text-white inline-block">
                     <span className="absolute inset-0 overflow-hidden rounded-full">
                         <span className="absolute inset-0 rounded-full bg-[image:radial-gradient(75%_100%_at_50%_0%,rgba(56,189,248,0.6)_0%,rgba(56,189,248,0)_75%)] opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
