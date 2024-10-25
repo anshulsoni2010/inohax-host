@@ -62,11 +62,11 @@ async function sendConfirmationEmail(teamLeaderEmail: string, teamLeaderName: st
   Our team will carefully evaluate all submissions, and we will notify you of your selection status before November 8th.<br><br>
 
   If you have any questions or need assistance in the meantime, feel free to reach out to us at inohax1.0@gmail.com
-
-  Do checkout <a href="https://play.google.com/store/apps/details?id=in.pranaydas.inovact"> Inovact Social </a> - A Social Network For Students & Entreprenuers Making Collaborations Simple & Faster On Projects and Ideas Powered by Proof Of Work.
+<br>
+  Do checkout <a href="https://play.google.com/store/apps/details?id=in.pranaydas.inovact"> Inovact Social </a> - A Social Network For Students & Entreprenuers Making Collaborations Simple & Faster On Projects and Ideas Powered by Proof Of Work.<br>
 
   Thank you once again for your interest in <b>Inohax 1.0</b>, and best of luck in the selection process!<br><br>
-
+<br>
   Warm regards,<br>
   The Inohax Team`
   };
