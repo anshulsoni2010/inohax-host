@@ -51,6 +51,10 @@ const faqs = [
     {
         question: "Who can I contact if I have more questions?",
         answer: "For any additional queries, you can contact Rishab at +91 9205541450."
+    },
+    {
+        question: "Will Inohax give participants problem statements to work on?",
+        answer: "No, Since Inohax is an open innovation hackathon, participants are welcome to work on problem statements of their choice"
     }
 ]
 
