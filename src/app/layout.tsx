@@ -1,4 +1,4 @@
-import type { Metadata, script } from "next";
+import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import { Analytics } from "@vercel/analytics/react"
@@ -53,7 +53,6 @@ export default function RootLayout({
                 <meta property="og:image:type" content="image/png" />
                 <meta property="og:image:url" content="https://inohax.inovact.in/poster.png" />
                 <meta property="og:image:secure_url" content="https://inohax.inovact.in/poster.png" />
-
             </head>
             <body
                 className={`${geistSans.variable} ${geistMono.variable} antialiased`}
