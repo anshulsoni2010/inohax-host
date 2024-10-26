@@ -50,7 +50,14 @@ const faqs = [
     },
     {
         question: "Who can I contact if I have more questions?",
-        answer: "For any additional queries, you can contact Rishab at +91 9205541450."
+        answer: (
+            <>
+                For any additional queries, you can contact Rishab at {" "}
+                <a href="https://wa.me/919205541450" className="text-blue-500 underline">
+                    +91 9205541450.
+                </a>
+            </>
+        )
     },
     {
         question: "Will Inohax give participants problem statements to work on?",
