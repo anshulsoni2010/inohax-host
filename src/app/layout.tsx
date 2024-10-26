@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, script } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import { Analytics } from "@vercel/analytics/react"
@@ -27,6 +27,18 @@ export default function RootLayout({
     return (
         <html lang="en">
             <head>
+                <script
+                    type="text/javascript"
+                    dangerouslySetInnerHTML={{
+                        __html: `
+              (function(c,l,a,r,i,t,y){
+                c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+                t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+                y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+              })(window, document, "clarity", "script", "oolt1oy5wj");
+            `,
+                    }}
+                />
                 <link rel="icon" href="/inovact.png" />
                 <meta name="description" content="Inohax 1.0 - A 24 Hours Open Innovation Hackathon by Inovact for Students & Entrepreneurs" />
                 <meta property="og:url" content="https://inohax.inovact.in" />
@@ -47,7 +59,7 @@ export default function RootLayout({
                 className={`${geistSans.variable} ${geistMono.variable} antialiased`}
             >
                 {children}
-                <Analytics/>
+                <Analytics />
             </body>
         </html>
     );
