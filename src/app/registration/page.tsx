@@ -65,12 +65,12 @@ export default function Component() {
 
     const validateProfileLink = (value: string) => {
         const regex = /^https?:\/\/api\.inovact\.in\/v1\/user(\/.*)?(\?.*)?$/; // Updated regex to allow any path and query parameters
-        return { valid: regex.test(value), message: "Inovact Social Profile Link must start with https://api.inovact.in/v1/user" };
+        return { valid: regex.test(value), message: "Please input a valid Inovact Social profile link" };
     };
 
     const validateProjectLink = (value: string) => {
         const regex = /^https?:\/\/api\.inovact\.in\/v1\/post(\/.*)?(\?.*)?$/; // Updated regex to allow any path and query parameters
-        return { valid: regex.test(value), message: "Inovact Social Project/Idea Link must start with https://api.inovact.in/v1/post" };
+        return { valid: regex.test(value), message: "Please input a valid Inovact Social post link" };
     };
 
     const handleValidation = (field: string, validateFunc: (value: string) => { valid: boolean; message: string }, value: string) => {
