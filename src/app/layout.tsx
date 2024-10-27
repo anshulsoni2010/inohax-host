@@ -15,8 +15,10 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-    title: "Inohax 1.0",
-    description: "Inohax 1.0 - A 24 Hours Open Innovation Hackathon by Inovact for Students & Entrepreneurs",
+    title: "Inohax 1.0 - Open Innovation Hackathon for Students & Entrepreneurs",
+    description: "Join Inohax 1.0, a 24-hour open innovation hackathon by Inovact, designed for students and entrepreneurs to showcase their skills and creativity.",
+    keywords: "Inohax, hackathon, innovation, students, entrepreneurs, Inovact",
+    authors: [{ name: "Inovact Team" }],
 };
 
 export default function RootLayout({
@@ -47,12 +49,47 @@ export default function RootLayout({
                 <meta property="og:description" content="A 24 Hours Open Innovation Hackathon by Inovact for Students & Entrepreneurs" />
                 <meta property="og:title" content="Inohax 1.0 Registration Form" />
                 <meta property="og:locale" content="en_IN" />
+                <meta property="og:image" content="https://inohax.inovact.in/poster.png" />
                 <meta property="og:image:width" content="600" />
                 <meta property="og:image:height" content="600" />
                 <meta property="og:image:alt" content="Inohax 1.0 Poster" />
                 <meta property="og:image:type" content="image/png" />
                 <meta property="og:image:url" content="https://inohax.inovact.in/poster.png" />
                 <meta property="og:image:secure_url" content="https://inohax.inovact.in/poster.png" />
+                <script type="application/ld+json">
+                    {JSON.stringify({
+                        "@context": "https://schema.org",
+                        "@type": "Event",
+                        "name": "Inohax 1.0",
+                        "startDate": "2023-11-01T09:00",
+                        "endDate": "2023-11-02T09:00",
+                        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+                        "location": {
+                            "@type": "Place",
+                            "name": "Inovact Headquarters",
+                            "address": {
+                                "@type": "PostalAddress",
+                                "streetAddress": "123 Innovation Drive",
+                                "addressLocality": "City",
+                                "addressRegion": "State",
+                                "postalCode": "123456",
+                                "addressCountry": "Country"
+                            }
+                        },
+                        "image": "https://inohax.inovact.in/poster.png",
+                        "description": "A 24-hour open innovation hackathon by Inovact for students and entrepreneurs.",
+                        "offers": {
+                            "@type": "Offer",
+                            "url": "https://inohax.inovact.in/register",
+                            "price": "0",
+                            "priceCurrency": "USD",
+                            "itemOffered": {
+                                "@type": "EducationalOrganization",
+                                "name": "Inovact"
+                            }
+                        }
+                    })}
+                </script>
             </head>
             <body
                 className={`${geistSans.variable} ${geistMono.variable} antialiased`}

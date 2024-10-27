@@ -235,8 +235,8 @@ export default function MentorJurySection() {
                                     <h3 className="text-3xl font-semibold mb-2">{juryMember.name}</h3>
                                     <p className="text-blue-300 mb-4">{juryMember.designation}</p>
                                     <motion.a
-                                        href={juryMember.linkedin} // Using the LinkedIn URL from the data
-                                        target="_blank" // Opens in a new tab
+                                        href={juryMember.linkedin}
+                                        target="_blank"
                                         rel="noopener noreferrer" // Security attributes
                                         whileHover={{ scale: 1.2 }}
                                         whileTap={{ scale: 0.9 }}
