@@ -1,117 +1,53 @@
 'use client'
 
-import React, { useState, useRef } from 'react'
+import React, { useState } from 'react'
 import { useForm, Controller } from 'react-hook-form'
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { ChevronRight, User, Phone, Mail } from 'lucide-react'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { ChevronRight, Plus, X, User, Link, Users2, Phone, Mail, Folder } from 'lucide-react'
-import { motion, AnimatePresence } from 'framer-motion'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import Head from 'next/head'; // Import Head component
-// import Link from 'next/link'
-
-interface TeamMember {
-    name: string;
-    socialMediaLink: string;
-}
+import Head from 'next/head';
 
 interface FormData {
     teamName: string;
     teamLeaderName: string;
     teamLeaderPhone: string;
     teamLeaderEmail: string;
-    projectDomain: string;
-    projectLink: string;
-    teamMembers: TeamMember[];
+    projectTitle: string;
+    projectDescription: string;
+    relatedLink: string;
     communityReferral: string;
+    projectDomain: string; // Added projectDomain to FormData
 }
 
 export default function Component() {
     const { handleSubmit, control, register, reset } = useForm<FormData>();
     const [loading, setLoading] = useState(false); // State for loading
-    const [teamMembers, setTeamMembers] = useState<TeamMember[]>([
-        { name: '', socialMediaLink: '' },
-        { name: '', socialMediaLink: '' },
-        { name: '', socialMediaLink: '' }
-    ]);
-    const errorShown = useRef(new Set<string>()); // Use ref to persist error state
-
-    const addTeamMember = () => {
-        if (teamMembers.length >= 5) {
-            toast.warn("Cannot add more than 5 member")
-        }
-        else {
-
-            setTeamMembers([...teamMembers, { name: '', socialMediaLink: '' }])
-        }
-    }
-
-    const removeTeamMember = (index: number) => {
-        if (teamMembers.length > 3) {
-            const updatedMembers = teamMembers.filter((_, i) => i !== index)
-            setTeamMembers(updatedMembers)
-        }
-    }
-
-    const handleTeamMemberChange = (index: number, field: keyof TeamMember, value: string) => {
-        const updatedMembers = [...teamMembers];
-        updatedMembers[index][field] = value;
-        setTeamMembers(updatedMembers);
-    }
-
-    const validateProfileLink = (value: string) => {
-        const regex = /^https?:\/\/api\.inovact\.in\/v1\/user(\/.*)?(\?.*)?$/; // Updated regex to allow any path and query parameters
-        return { valid: regex.test(value), message: "Please input a valid Inovact Social profile link" };
-    };
-
-    const validateProjectLink = (value: string) => {
-        const regex = /^https?:\/\/api\.inovact\.in\/v1\/post(\/.*)?(\?.*)?$/; // Updated regex to allow any path and query parameters
-        return { valid: regex.test(value), message: "Please input a valid Inovact Social post link" };
-    };
-
-    const handleValidation = (field: string, validateFunc: (value: string) => { valid: boolean; message: string }, value: string) => {
-        const { valid, message } = validateFunc(value);
-        if (!valid) {
-            if (!errorShown.current.has(field)) {
-                setTimeout(() => {
-                    toast.error(message);
-                    errorShown.current.add(field); // Mark this error as shown
-                }, 2000); // Show error after 2 seconds
-            }
-        } else {
-            errorShown.current.delete(field); // Clear the error if valid
-        }
-    };
 
     const onSubmit = async (data: FormData) => {
         setLoading(true); // Set loading to true when submission starts
 
-        const requiredFields: (keyof FormData)[] = ['teamName', 'teamLeaderName', 'teamLeaderPhone', 'teamLeaderEmail', 'projectLink'];
+        const requiredFields: (keyof FormData)[] = [
+            'teamName',
+            'teamLeaderName',
+            'teamLeaderPhone',
+            'teamLeaderEmail',
+            'projectTitle',
+            'projectDescription',
+            'projectDomain', // Added projectDomain to required fields
+        ];
         let hasError = false; // Flag to track if there are any errors
-        const errorShown = new Set<string>(); // Set to track shown errors
 
         // Check if any required fields are empty
         for (const field of requiredFields) {
             if (!data[field as keyof FormData]) { // Use type assertion here
                 hasError = true; // Set error flag
-                break; // Exit loop if any required field is empty
-            }
-        }
-
-        if (hasError) {
-            toast.error("Please fill all the required details before submitting."); // Show toast notification
-            return; // Stop submission if any required field is empty
-        }
-
-        for (const field of requiredFields) {
-            if (!data[field as keyof FormData] && !errorShown.has(field)) { // Use type assertion here
                 toast.error(`${field.replace(/([A-Z])/g, ' $1')} is required.`);
-                errorShown.add(field); // Mark this error as shown
-                hasError = true; // Set error flag
+                break; // Exit loop if any required field is empty
             }
         }
 
@@ -122,7 +58,7 @@ export default function Component() {
 
         const payload = {
             ...data,
-            teamMembers,
+            teamMembers: [], // Set teamMembers to an empty array since we're removing this functionality
         };
 
         try {
@@ -137,7 +73,6 @@ export default function Component() {
             if (response.ok) {
                 toast.success('Registration successful!'); // Use toast for success message
                 reset(); // Reset the form fields
-                setTeamMembers([{ name: '', socialMediaLink: '' }, { name: '', socialMediaLink: '' }, { name: '', socialMediaLink: '' }]); // Reset team members
             } else {
                 toast.error('Registration failed!'); // Use toast for error message
             }
@@ -155,20 +90,6 @@ export default function Component() {
                 <link rel="icon" href="/inovact.png" />
                 <title>Inohax 1.0 Registration Form</title>
                 <meta name="description" content="A 24 Hours Open Innovation Hackathon by Inovact for Students & Entrepreneurs" />
-                <meta property="og:image" content="../poster.png" />
-                <meta property="og:url" content="https://inohax.inovact.in" />
-                <meta property="og:type" content="website" />
-                <meta property="og:site_name" content="Inohax 1.0" />
-                <meta property="og:description" content="A 24 Hours Open Innovation Hackathon by Inovact for Students & Entrepreneurs" />
-                <meta property="og:title" content="Inohax 1.0 Registration Form" />
-                <meta property="og:locale" content="en_IN" />
-                <meta property="og:image:width" content="600" />
-                <meta property="og:image:height" content="600" />
-                <meta property="og:image:alt" content="Inohax 1.0 Poster" />
-                <meta property="og:image:type" content="image/png" />
-                <meta property="og:image:url" content="https://inohax.inovact.in/poster.png" />
-                <meta property="og:image:secure_url" content="https://inohax.inovact.in/poster.png" />
-
             </Head>
             <div className={`min-h-screen bg-gradient-to-br from-black via-gray-900 to-black text-white py-12 px-4 sm:px-6 lg:px-8 ${loading ? 'opacity-50' : 'opacity-100'}`}>
                 {loading && (
@@ -197,7 +118,6 @@ export default function Component() {
                                         <div className="space-y-2">
                                             <Label htmlFor="teamName" className="text-gray-300">Team Name *</Label>
                                             <div className="relative">
-                                                <Users2 className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 h-5 w-5" />
                                                 <Input
                                                     id="teamName"
                                                     {...register('teamName', { required: true })}
@@ -209,7 +129,6 @@ export default function Component() {
                                         <div className="space-y-2">
                                             <Label htmlFor="teamLeaderName" className="text-gray-300">Team Leader Name *</Label>
                                             <div className="relative">
-                                                <User className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 h-5 w-5" />
                                                 <Input
                                                     id="teamLeaderName"
                                                     {...register('teamLeaderName', { required: true })}
@@ -221,7 +140,6 @@ export default function Component() {
                                         <div className="space-y-2">
                                             <Label htmlFor="teamLeaderPhone" className="text-gray-300">Team Leader Phone *</Label>
                                             <div className="relative">
-                                                <Phone className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 h-5 w-5" />
                                                 <Input
                                                     id="teamLeaderPhone"
                                                     {...register('teamLeaderPhone', { required: true })}
@@ -234,7 +152,6 @@ export default function Component() {
                                         <div className="space-y-2">
                                             <Label htmlFor="teamLeaderEmail" className="text-gray-300">Team Leader Email *</Label>
                                             <div className="relative">
-                                                <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 h-5 w-5" />
                                                 <Input
                                                     id="teamLeaderEmail"
                                                     {...register('teamLeaderEmail', { required: true })}
@@ -246,199 +163,61 @@ export default function Component() {
                                         </div>
                                     </div>
 
-                                    <div className="space-y-4">
-                                        <h3 className="text-xl font-semibold text-gray-300">Project / Idea Details</h3>
-                                        <div className="space-y-2">
-                                            <Label htmlFor="projectDomain" className="text-gray-300">Project / Idea Domain *</Label>
-                                            <Controller
-                                                name="projectDomain"
-                                                control={control}
-                                                render={({ field }) => (
-                                                    <Select onValueChange={field.onChange} defaultValue={field.value}>
-                                                        <SelectTrigger className="bg-gray-900/30 border-gray-700 text-white">
-                                                            <SelectValue placeholder="Select Project / Idea Domain" />
-                                                        </SelectTrigger>
-                                                        <SelectContent className="bg-gray-900 border-gray-700 text-white">
-                                                            <SelectItem value="edtech">EdTech</SelectItem>
-                                                            <SelectItem value="hrtech">HR Tech</SelectItem>
-                                                            <SelectItem value="web3">Web3</SelectItem>
-                                                            <SelectItem value="FinTech"> FinTech </SelectItem>
-                                                            <SelectItem value="HealthTech">HealthTech </SelectItem>
-                                                            <SelectItem value="AgriTech"> AgriTech </SelectItem>
-                                                            <SelectItem value="AI & Machine Learning">AI & Machine Learning </SelectItem>
-                                                            <SelectItem value="ClimateTec"> ClimateTech </SelectItem>
-                                                            <SelectItem value="Smart Cities">Smart Cities </SelectItem>
-                                                            <SelectItem value="Cybersecurity"> Cybersecurity </SelectItem>
-                                                            <SelectItem value="other">Other</SelectItem>
-                                                        </SelectContent>
-                                                    </Select>
-                                                )}
-                                            />
-                                        </div>
-                                        <div className="space-y-2">
-                                            <Label htmlFor="projectLink" className="text-gray-300">Inovact Social Project/Idea Link *</Label>
-                                            <p className="text-sm text-gray-400">Please upload basic details of your project/idea on Inovact Social and paste the post link here</p>
-
-                                            <div className="relative">
-                                                <Folder className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 h-5 w-5" />
-                                                <Input
-                                                    id="projectLink"
-                                                    {...register('projectLink', {
-                                                        required: true,
-                                                        validate: (value) => {
-                                                            handleValidation('projectLink', validateProjectLink, value);
-                                                            return true; // Always return true to avoid blocking submission
-                                                        }
-                                                    })}
-                                                    className="bg-gray-900/30 border-gray-700 text-white placeholder-gray-500 pl-10"
-                                                    placeholder="Enter project/idea link"
-                                                    onBlur={(e) => handleValidation('projectLink', validateProjectLink, e.target.value)} // Validate on blur
-                                                />
-                                            </div>
-                                            <div className="flex space-x-4"> {/* Added space-x-4 for horizontal spacing */}
-                                                <a href="https://play.google.com/store/apps/details?id=in.pranaydas.inovact" target='_blank'>
-                                                    <Button
-                                                        type="button"
-                                                        className="w-fit hover:bg-[#0d2c99]/60 bg-[#0d2c99] text-white"
-                                                    >
-                                                        Download Inovact Social
-                                                    </Button>
-                                                </a>
-                                                <a href="https://drive.google.com/file/d/1T_PpfjWKoUyOlJE5X3g9DTRUPL4xdB6o/view?usp=drivesdk" className='hidden md:block' target='_blank'>
-                                                    <Button
-                                                        type="button"
-                                                        className="w-fit hover:bg-[#0d2c99]/60 bg-[#0d2c99] text-white"
-                                                    >
-                                                        Demo On Uploading Post On Inovact Social
-                                                    </Button>
-                                                </a>
-                                            </div>
-                                            <div className="mt-4 md:hidden"> {/* New button for mobile size */}
-                                                <a href="https://drive.google.com/file/d/1T_PpfjWKoUyOlJE5X3g9DTRUPL4xdB6o/view?usp=drivesdk" target='_blank'>
-                                                    <Button
-                                                        type="button"
-                                                        className="w-full hover:bg-[#0d2c99]/60 bg-[#0d2c99] text-white"
-                                                    >
-                                                        Demo On Uploading Post On Inovact Social
-                                                    </Button>
-                                                </a>
-                                            </div>
-                                            {/* New Community Referral Field */}
-
-                                        </div>
-
+                                    <div className="space-y-2">
+                                        <Label htmlFor="projectDomain" className="text-gray-300">Project Domain *</Label>
+                                        <Controller
+                                            name="projectDomain"
+                                            control={control}
+                                            rules={{ required: true }} // Make this field required
+                                            render={({ field }) => (
+                                                <Select onValueChange={field.onChange} defaultValue={field.value}>
+                                                    <SelectTrigger className="bg-gray-900/30 border-gray-700 text-white">
+                                                        <SelectValue placeholder="Select Project Domain" />
+                                                    </SelectTrigger>
+                                                    <SelectContent className="bg-gray-900 border-gray-700 text-white">
+                                                        <SelectItem value="edtech">EdTech</SelectItem>
+                                                        <SelectItem value="hrtech">HR Tech</SelectItem>
+                                                        <SelectItem value="web3">Web3</SelectItem>
+                                                        <SelectItem value="fintech">FinTech</SelectItem>
+                                                        <SelectItem value="healthtech">HealthTech</SelectItem>
+                                                        <SelectItem value="agritech">AgriTech</SelectItem>
+                                                        <SelectItem value="ai_ml">AI & Machine Learning</SelectItem>
+                                                        <SelectItem value="climatetech">ClimateTech</SelectItem>
+                                                        <SelectItem value="smart_cities">Smart Cities</SelectItem>
+                                                        <SelectItem value="cybersecurity">Cybersecurity</SelectItem>
+                                                        <SelectItem value="other">Other</SelectItem>
+                                                    </SelectContent>
+                                                </Select>
+                                            )}
+                                        />
                                     </div>
-                                    <div className="space-y-4">
-                                        <div className='flex flex-col md:flex-row justify-between'>
-                                            <div>
-                                                <h3 className="text-xl font-semibold text-gray-300">Team Members</h3>
-                                            </div>
-                                            <div>
-                                                <a href="https://drive.google.com/file/d/1Ahsj2IQ7F4m9xXnIyUo7T8JPDY8eVm0D/view?usp=drivesdk" target='_blank'>
-                                                    <Button
-                                                        type="button"
-                                                        className="w-fit hover:bg-[#0d2c99]/60 bg-[#0d2c99] text-white"
-                                                    >
-                                                        Demo on Sharing Profile Link on Inovact Social
-                                                    </Button>
-                                                </a>
-                                            </div>
-                                        </div>
-                                        <AnimatePresence>
-                                            {teamMembers.map((member, index) => (
-                                                <motion.div
-                                                    key={index}
-                                                    initial={{ opacity: 0, y: -20 }}
-                                                    animate={{ opacity: 1, y: 0 }}
-                                                    exit={{ opacity: 0, y: -20 }}
-                                                    transition={{ duration: 0.3 }}
-                                                    className="bg-gray-800/50 backdrop-blur-sm border border-gray-700 rounded-lg p-4 mb-4"
-                                                >
-                                                    <div className="flex items-center justify-between mb-2">
-                                                        <h4 className="text-lg font-medium text-gray-300">Team Member {index + 1}</h4>
-                                                        {index >= 3 && (
-                                                            <Button
-                                                                type="button"
-                                                                onClick={() => removeTeamMember(index)}
-                                                                variant="ghost"
-                                                                size="icon"
-                                                                className="text-red-500 hover:text-red-400 hover:bg-red-500/20"
-                                                            >
-                                                                <X className="h-5 w-5" />
-                                                            </Button>
-                                                        )}
-                                                    </div>
-                                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                                        <div className="space-y-2">
-                                                            <Label htmlFor={`memberName${index}`} className="text-gray-400">
-                                                                Name {index < 3 ? '*' : ''}
-                                                            </Label>
-                                                            <div className="relative">
-                                                                <User className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 h-5 w-5" />
-                                                                <Controller
-                                                                    name={`teamMembers.${index}.name` as const}
-                                                                    control={control}
-                                                                    defaultValue={member.name}
-                                                                    rules={{ required: index < 3 }}
-                                                                    render={({ field }) => (
-                                                                        <Input
-                                                                            {...field}
-                                                                            id={`memberName${index}`}
-                                                                            onChange={(e) => {
-                                                                                handleTeamMemberChange(index, 'name', e.target.value);
-                                                                                field.onChange(e);
-                                                                            }}
-                                                                            className="bg-gray-900/30 border-gray-700 text-white placeholder-gray-500 pl-10"
-                                                                            placeholder="Enter name"
-                                                                        />
-                                                                    )}
-                                                                />
-                                                            </div>
-                                                        </div>
-                                                        <div className="space-y-2">
-                                                            <Label htmlFor={`memberLink${index}`} className="text-gray-400">
-                                                                Inovact Social Profile Link {index < 3 ? '*' : ''}
-                                                            </Label>
-                                                            <div className="relative">
-                                                                <Link className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 h-5 w-5" />
-                                                                <Controller
-                                                                    name={`teamMembers.${index}.socialMediaLink` as const}
-                                                                    control={control}
-                                                                    defaultValue={member.socialMediaLink}
-                                                                    rules={{
-                                                                        required: index < 3, validate: (value) => {
-                                                                            handleValidation('memberLink' + index, validateProfileLink, value);
-                                                                            return true; // Always return true to avoid blocking submission
-                                                                        }
-                                                                    }}
-                                                                    render={({ field }) => (
-                                                                        <Input
-                                                                            {...field}
-                                                                            id={`memberLink${index}`}
-                                                                            onChange={(e) => {
-                                                                                handleTeamMemberChange(index, 'socialMediaLink', e.target.value);
-                                                                                field.onChange(e);
-                                                                            }}
-                                                                            className="bg-gray-900/30 border-gray-700 text-white placeholder-gray-500 pl-10"
-                                                                            placeholder="Enter Inovact Social Profile Link"
-                                                                            onBlur={(e) => handleValidation('memberLink' + index, validateProfileLink, e.target.value)} // Validate on blur
-                                                                        />
-                                                                    )}
-                                                                />
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </motion.div>
-                                            ))}
-                                        </AnimatePresence>
-                                        <Button
-                                            type="button"
-                                            onClick={addTeamMember}
-                                            className="w-full bg-gray-700 hover:bg-gray-600 text-white transition-all duration-300 ease-in-out transform hover:scale-105"
-                                        >
-                                            <Plus className="h-5 w-5 mr-2" />
-                                            Add Team Member
-                                        </Button>
+
+                                    <div className="space-y-2">
+                                        <Label htmlFor="projectTitle" className="text-gray-300">Project Title *</Label>
+                                        <Input
+                                            id="projectTitle"
+                                            {...register('projectTitle', { required: true })}
+                                            className="bg-gray-900/30 border-gray-700 text-white placeholder-gray-500"
+                                            placeholder="Enter project title"
+                                        />
+                                    </div>
+                                    <div className="space-y-2">
+                                        <Label htmlFor="projectDescription" className="text-gray-300">Project Description *</Label>
+                                        <textarea
+                                            id="projectDescription"
+                                            {...register('projectDescription', { required: true })}
+                                            className="bg-gray-900/30 border-gray-700 text-white placeholder-gray-500 w-full h-24"
+                                            placeholder="Enter project description"
+                                        />
+                                    </div>
+                                    <div className="space-y-2">
+                                        <Label htmlFor="relatedLink" className="text-gray-300">Related Link (If any)</Label>
+                                        <Input
+                                            id="relatedLink"
+                                            {...register('relatedLink')}
+                                            className="bg-gray-900/30 border-gray-700 text-white placeholder-gray-500"
+                                            placeholder="Insert any link"
+                                        />
                                     </div>
                                 </div>
                                 <div className="space-y-4">
