@@ -1,4 +1,4 @@
-// src/model/Registration.ts
+
 
 import mongoose from 'mongoose';
 
