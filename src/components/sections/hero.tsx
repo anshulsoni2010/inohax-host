@@ -1,6 +1,6 @@
 'use client'
 
-import React from "react";
+import React, { useState } from "react";
 import { ArrowUpRight, X } from "lucide-react";
 import Link from "next/link";
 import { Navbar } from "@/components/sections/navbar";
@@ -10,6 +10,11 @@ import PartnersLogo from "./partnerslogo";
 export default function Hero() {
     const registrationEndDate = new Date('2024-11-06T23:59:00');
     const isRegistrationClosed = new Date() > registrationEndDate;
+    const [showPopup, setShowPopup] = useState(false);
+
+    const handleClosePopup = () => {
+        setShowPopup(false);
+    };
 
     return (
         <div className="relative min-h-screen">
@@ -46,12 +51,15 @@ export default function Hero() {
                         <div className="flex justify-center items-center">
 
                             {isRegistrationClosed ? (
-                                <div className="text-sm sm:text-base text-red-400 group font-geist mx-auto px-3 sm:px-4 py-4 bg-gradient-to-tr from-red-300/5 via-red-400/5 to-transparent border-[2px] border-red-400/15 rounded-full flex items-center justify-center w-fit">
+                                <button
+                                    onClick={() => setShowPopup(true)}
+                                    className="text-sm sm:text-base text-red-400 group font-geist mx-auto px-3 sm:px-4 py-4 bg-gradient-to-tr from-red-300/5 via-red-400/5 to-transparent border-[2px] border-red-400/15 rounded-full flex items-center justify-center w-fit"
+                                >
                                     Registrations Closed
                                     <div className="flex overflow-hidden relative justify-center items-center ml-2 w-4 sm:w-5 h-4 sm:h-5">
                                         <X className="w-4 sm:w-5 h-4 sm:h-5 text-red-400" />
                                     </div>
-                                </div>
+                                </button>
                             ) : (
                                 <Link href="/registration" target="_blank">
                                     <h1 className="text-sm sm:text-base text-gray-400 group font-geist mx-auto px-3 sm:px-4 py-4 bg-gradient-to-tr from-zinc-300/5 via-gray-400/5 to-transparent border-[2px] border-[#7877c64d]/15 rounded-full flex items-center justify-center w-fit">
@@ -73,6 +81,64 @@ export default function Hero() {
                     </div>
                 </div>
             </section>
+
+            {showPopup && (
+                <div className="fixed inset-0 z-50 flex items-center justify-center px-4 bg-black/65 backdrop-blur-md">
+                    <div className="relative w-full max-w-2xl">
+                        <button
+                            onClick={handleClosePopup}
+                            className="absolute -top-12 right-0 text-white hover:text-white"
+                        >
+                            <X className="w-6 h-6" />
+                        </button>
+
+                        <div className="text-center bg-[#021526]/90 p-6 sm:p-8 rounded-lg shadow-2xl backdrop-blur-md border-2 border-[#2f2e4e]/65">
+                            <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight mb-4">
+                                <span className="text-white">
+                                    Registration Closed
+                                </span>
+                            </h1>
+                            <p className="text-lg sm:text-xl text-white/90 mt-6">
+                                Thank you for your interest in Inohax 1.0! Registration for this event has closed as of November 6th, 2024 at 11:59 PM.
+                            </p>
+                            <p className="text-base sm:text-lg text-white/85 mt-4 mb-8">
+                                Stay tuned for future events by following us on our social media channels.
+                            </p>
+                            <div className='flex-col sm:flex-row justify-center items-center'>
+                                <Link href="https://chat.whatsapp.com/GClxUdUctuaEUeWmJmNYHo">
+                                    <button className="bg-blue-950/50 no-underline group cursor-pointer relative shadow-2xl shadow-red-900/20 rounded-full p-1 text-sm font-semibold leading-6 text-white inline-block">
+                                        <span className="absolute inset-0 overflow-hidden rounded-full">
+                                            <span className="absolute inset-0 rounded-full bg-[image:radial-gradient(75%_100%_at_50%_0%,rgba(220,38,38,0.6)_0%,rgba(220,38,38,0)_75%)] opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+                                        </span>
+                                        <div className="relative flex space-x-2 items-center z-10 rounded-full bg-black/80 py-0.5 px-4 ring-1 ring-red-500/20">
+                                            <span>Join Inovact Community</span>
+                                            <svg fill="none" height="16" viewBox="0 0 24 24" width="16" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M10.75 8.75L14.25 12L10.75 15.25" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5"/>
+                                            </svg>
+                                        </div>
+                                        <span className="absolute -bottom-0 left-[1.125rem] h-px w-[calc(100%-2.25rem)] bg-gradient-to-r from-indigo-500/0 via-indigo-500/90 to-indigo-500/0 transition-opacity duration-500 group-hover:opacity-40" />
+                                    </button>
+                                </Link>
+                                <div className="my-2" />
+                                <Link href="https://play.google.com/store/apps/details?id=in.pranaydas.inovact">
+                                    <button className="bg-indigo-950/90 no-underline group cursor-pointer relative shadow-2xl shadow-red-900/20 rounded-full p-1 text-sm font-semibold leading-6 text-white inline-block">
+                                        <span className="absolute inset-0 overflow-hidden rounded-full">
+                                            <span className="absolute inset-0 rounded-full bg-[image:radial-gradient(75%_100%_at_50%_0%,rgba(220,38,38,0.6)_0%,rgba(220,38,38,0)_75%)] opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+                                        </span>
+                                        <div className="relative flex space-x-2 items-center z-10 rounded-full bg-black/80 py-0.5 px-4 ring-1 ring-red-500/20">
+                                            <span>Download Inovact Social</span>
+                                            <svg fill="none" height="16" viewBox="0 0 24 24" width="16" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M10.75 8.75L14.25 12L10.75 15.25" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5"/>
+                                            </svg>
+                                        </div>
+                                        <span className="absolute -bottom-0 left-[1.125rem] h-px w-[calc(100%-2.25rem)] bg-gradient-to-r from-blue-500/0 via-blue-500/90 to-blue-500/0 transition-opacity duration-500 group-hover:opacity-40" />
+                                    </button>
+                                </Link>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
     );
 }
