@@ -25,9 +25,68 @@ interface FormData {
 }
 
 export default function Component() {
+    const { handleSubmit, control, register, reset } = useForm<FormData>();
+    const [loading, setLoading] = useState(false);
     const registrationEndDate = new Date('2024-11-06T23:59:00');
     const isRegistrationClosed = new Date() > registrationEndDate;
 
+    const onSubmit = async (data: FormData) => {
+        setLoading(true); // Set loading to true when submission starts
+
+        const requiredFields: (keyof FormData)[] = [
+            'teamName',
+            'teamLeaderName',
+            'teamLeaderPhone',
+            'teamLeaderEmail',
+            'projectTitle',
+            'projectDescription',
+            'projectDomain', // Added projectDomain to required fields
+        ];
+        let hasError = false; // Flag to track if there are any errors
+
+        // Check if any required fields are empty
+        for (const field of requiredFields) {
+            if (!data[field as keyof FormData]) { // Use type assertion here
+                hasError = true; // Set error flag
+                toast.error(`${field.replace(/([A-Z])/g, ' $1')} is required.`);
+                break; // Exit loop if any required field is empty
+            }
+        }
+
+        // If there are errors, stop submission
+        if (hasError) {
+            return; // Stop submission if any required field is empty
+        }
+
+        const payload = {
+            ...data,
+            teamMembers: [], // Set teamMembers to an empty array since we're removing this functionality
+        };
+
+        try {
+            const response = await fetch('/api/registration', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(payload),
+            });
+
+            if (response.ok) {
+                toast.success('Registration successful!'); // Use toast for success message
+                reset(); // Reset the form fields
+            } else {
+                toast.error('Registration failed!'); // Use toast for error message
+            }
+        } catch (error) {
+            console.error('Error submitting form:', error);
+            toast.error('An error occurred while submitting the form. Please try again.'); // Use toast for error message
+        } finally {
+            setLoading(false); // Set loading to false when submission ends
+        }
+    };
+
+    // Render registration closed UI if registration is closed
     if (isRegistrationClosed) {
         return (
             <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black text-white flex items-center justify-center">
@@ -105,65 +164,7 @@ export default function Component() {
         );
     }
 
-    const { handleSubmit, control, register, reset } = useForm<FormData>();
-    const [loading, setLoading] = useState(false); // State for loading
-
-    const onSubmit = async (data: FormData) => {
-        setLoading(true); // Set loading to true when submission starts
-
-        const requiredFields: (keyof FormData)[] = [
-            'teamName',
-            'teamLeaderName',
-            'teamLeaderPhone',
-            'teamLeaderEmail',
-            'projectTitle',
-            'projectDescription',
-            'projectDomain', // Added projectDomain to required fields
-        ];
-        let hasError = false; // Flag to track if there are any errors
-
-        // Check if any required fields are empty
-        for (const field of requiredFields) {
-            if (!data[field as keyof FormData]) { // Use type assertion here
-                hasError = true; // Set error flag
-                toast.error(`${field.replace(/([A-Z])/g, ' $1')} is required.`);
-                break; // Exit loop if any required field is empty
-            }
-        }
-
-        // If there are errors, stop submission
-        if (hasError) {
-            return; // Stop submission if any required field is empty
-        }
-
-        const payload = {
-            ...data,
-            teamMembers: [], // Set teamMembers to an empty array since we're removing this functionality
-        };
-
-        try {
-            const response = await fetch('/api/registration', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(payload),
-            });
-
-            if (response.ok) {
-                toast.success('Registration successful!'); // Use toast for success message
-                reset(); // Reset the form fields
-            } else {
-                toast.error('Registration failed!'); // Use toast for error message
-            }
-        } catch (error) {
-            console.error('Error submitting form:', error);
-            toast.error('An error occurred while submitting the form. Please try again.'); // Use toast for error message
-        } finally {
-            setLoading(false); // Set loading to false when submission ends
-        }
-    };
-
+    // Render registration form if registration is open
     return (
         <>
             <Head>
