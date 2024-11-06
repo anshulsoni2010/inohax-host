@@ -13,6 +13,14 @@ import DevCodeCommunityLogo from "./partner-logo/11.png"
 import CatsInTechLogo from "./partner-logo/13.1_Cats_In_Tech-removebg-preview-modified.png";
 import HackCultureLogo from "./partner-logo/hackculture.png";
 import codeo from "./partner-logo/9.png";
+import ALogo from "./partner-logo/A.jpg"
+import Blogo from "./partner-logo/B.jpg"
+import CLogo from "./partner-logo/C.jpg"
+import DLogo from "./partner-logo/D.jpg"
+import ELogo from  "./partner-logo/E.jpg"
+import FLogo from "./partner-logo/F.png"
+import GLogo from "./partner-logo/G.png"
+
 
 const logos = [
     {
@@ -73,6 +81,34 @@ const logos = [
         name: 'Cats In Tech',
         url: CatsInTechLogo,
     },
+    {
+        name: 'ALogo',
+        url: ALogo,
+    },
+    {
+        name: 'BLogo',
+        url: Blogo,
+    },
+    {
+        name: 'CLogo',
+        url: CLogo,
+    },
+    {
+        name: 'DLogo',
+        url: DLogo,
+    },
+    {
+        name: 'ELogo',
+        url: ELogo,
+    },
+    {
+        name: 'FLogo',
+        url: FLogo,
+    },
+    {
+        name: 'GLogo',
+        url: GLogo,
+    }
 ]
 
 const PartnersLogo = () => {
