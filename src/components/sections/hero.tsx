@@ -1,13 +1,16 @@
 'use client'
 
 import React from "react";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, X } from "lucide-react";
 import Link from "next/link";
 import { Navbar } from "@/components/sections/navbar";
 import Countdown from "./countdown";
 import PartnersLogo from "./partnerslogo";
 
 export default function Hero() {
+    const registrationEndDate = new Date('2024-11-06T23:59:00');
+    const isRegistrationClosed = new Date() > registrationEndDate;
+
     return (
         <div className="relative min-h-screen">
             <div className="sticky top-3 z-[1]">
@@ -42,15 +45,24 @@ export default function Hero() {
                             </svg></span>                        </div>
                         <div className="flex justify-center items-center">
 
-                            <Link href="/registration" target="_blank">
-                                <h1 className="text-sm sm:text-base text-gray-400 group font-geist mx-auto px-3 sm:px-4 py-4 bg-gradient-to-tr from-zinc-300/5 via-gray-400/5 to-transparent border-[2px] border-[#7877c64d]/15 rounded-full flex items-center justify-center w-fit">
-                                    Register Now
+                            {isRegistrationClosed ? (
+                                <div className="text-sm sm:text-base text-red-400 group font-geist mx-auto px-3 sm:px-4 py-4 bg-gradient-to-tr from-red-300/5 via-red-400/5 to-transparent border-[2px] border-red-400/15 rounded-full flex items-center justify-center w-fit">
+                                    Registrations Closed
                                     <div className="flex overflow-hidden relative justify-center items-center ml-2 w-4 sm:w-5 h-4 sm:h-5">
-                                        <ArrowUpRight className="absolute transition-all duration-500 group-hover:translate-x-4 group-hover:-translate-y-5" />
-                                        <ArrowUpRight className="absolute transition-all duration-500 -translate-x-4 -translate-y-5 group-hover:translate-x-0 group-hover:translate-y-0" />
+                                        <X className="w-4 sm:w-5 h-4 sm:h-5 text-red-400" />
                                     </div>
-                                </h1>
-                            </Link>
+                                </div>
+                            ) : (
+                                <Link href="/registration" target="_blank">
+                                    <h1 className="text-sm sm:text-base text-gray-400 group font-geist mx-auto px-3 sm:px-4 py-4 bg-gradient-to-tr from-zinc-300/5 via-gray-400/5 to-transparent border-[2px] border-[#7877c64d]/15 rounded-full flex items-center justify-center w-fit">
+                                        Register Now
+                                        <div className="flex overflow-hidden relative justify-center items-center ml-2 w-4 sm:w-5 h-4 sm:h-5">
+                                            <ArrowUpRight className="absolute transition-all duration-500 group-hover:translate-x-4 group-hover:-translate-y-5" />
+                                            <ArrowUpRight className="absolute transition-all duration-500 -translate-x-4 -translate-y-5 group-hover:translate-x-0 group-hover:translate-y-0" />
+                                        </div>
+                                    </h1>
+                                </Link>
+                            )}
                         </div>
                     </div>
                     <div className="mt-10">

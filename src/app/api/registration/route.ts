@@ -3,6 +3,17 @@ import Registration from '@/model/Registration';
 import nodemailer from 'nodemailer';
 
 export async function POST(req: Request) {
+    const registrationEndDate = new Date('2024-11-06T23:59:00');
+  if (new Date() > registrationEndDate) {
+    return new Response(
+      JSON.stringify({
+        success: false,
+        error: 'Registration period has ended'
+      }),
+      { status: 403 }
+    );
+  }
+
   await dbConnect();
 
   try {
@@ -43,10 +54,10 @@ export async function POST(req: Request) {
 async function sendConfirmationEmail(teamLeaderEmail: string, teamLeaderName: string, teamName: string) {
   // Configure the nodemailer transport
   const transporter = nodemailer.createTransport({
-    service: 'gmail',  // You can also use SMTP if needed
+    service: 'gmail',
     auth: {
-      user: process.env.EMAIL_NAME, // Replace with your email
-      pass:  process.env.EMAIL_PASWORD   // Replace with your email password or app-specific password
+      user: process.env.EMAIL_NAME,
+     pass:  process.env.EMAIL_PASWORD
     }
   });
 

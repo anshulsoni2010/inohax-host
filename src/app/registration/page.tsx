@@ -11,7 +11,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Head from 'next/head';
-
+import Link from 'next/link';
 interface FormData {
     teamName: string;
     teamLeaderName: string;
@@ -25,6 +25,86 @@ interface FormData {
 }
 
 export default function Component() {
+    const registrationEndDate = new Date('2024-11-06T23:59:00');
+    const isRegistrationClosed = new Date() > registrationEndDate;
+
+    if (isRegistrationClosed) {
+        return (
+            <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black text-white flex items-center justify-center">
+                <div className="w-full max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div className="text-center bg-red-950/30 p-6 sm:p-8 rounded-lg shadow-2xl backdrop-blur-sm border border-red-800/40">
+                        <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight mb-4">
+                            <span className="text-white ">
+                                Registration Closed
+                            </span>
+                        </h1>
+                        <p className="text-lg sm:text-xl text-white/90 mt-6">
+                            Thank you for your interest in Inohax 1.0! Registration for this event has closed as of November 6th, 2024 at 11:59 PM.
+                        </p>
+                        <p className="text-base sm:text-lg text-white/85 mt-4 mb-8">
+                            Stay tuned for future events by following us on our social media channels.
+                        </p>
+                        <div className='flex-col sm:flex-row justify-centent items-center'>
+                            <Link href="https://chat.whatsapp.com/GClxUdUctuaEUeWmJmNYHo">
+                                <button className="bg-blue-950/50 no-underline group cursor-pointer relative shadow-2xl shadow-red-900/20 rounded-full p-1 text-sm font-semibold leading-6 text-white inline-block">
+                                    <span className="absolute inset-0 overflow-hidden rounded-full">
+                                        <span className="absolute inset-0 rounded-full bg-[image:radial-gradient(75%_100%_at_50%_0%,rgba(220,38,38,0.6)_0%,rgba(220,38,38,0)_75%)] opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+                                    </span>
+                                    <div className="relative flex space-x-2 items-center z-10 rounded-full bg-black/80 py-0.5 px-4 ring-1 ring-red-500/20">
+                                        <span>Join Inovact Community</span>
+                                        <svg
+                                            fill="none"
+                                            height="16"
+                                            viewBox="0 0 24 24"
+                                            width="16"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                        >
+                                            <path
+                                                d="M10.75 8.75L14.25 12L10.75 15.25"
+                                                stroke="currentColor"
+                                                strokeLinecap="round"
+                                                strokeLinejoin="round"
+                                                strokeWidth="1.5"
+                                            />
+                                        </svg>
+                                    </div>
+                                    <span className="absolute -bottom-0 left-[1.125rem] h-px w-[calc(100%-2.25rem)] bg-gradient-to-r from-indigo-500/0 via-indigo-500/90 to-indigo-500/0 transition-opacity duration-500 group-hover:opacity-40" />
+                                </button>
+                            </Link>
+                            <div className="my-2" /> {/* Added space between buttons */}
+                            <Link href="https://play.google.com/store/apps/details?id=in.pranaydas.inovact">
+                                <button className="bg-indigo-950/90 no-underline group cursor-pointer relative shadow-2xl shadow-red-900/20 rounded-full p-1 text-sm font-semibold leading-6 text-white inline-block">
+                                    <span className="absolute inset-0 overflow-hidden rounded-full">
+                                        <span className="absolute inset-0 rounded-full bg-[image:radial-gradient(75%_100%_at_50%_0%,rgba(220,38,38,0.6)_0%,rgba(220,38,38,0)_75%)] opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+                                    </span>
+                                    <div className="relative flex space-x-2 items-center z-10 rounded-full bg-black/80 py-0.5 px-4 ring-1 ring-red-500/20">
+                                        <span>Download Inovact Social</span>
+                                        <svg
+                                            fill="none"
+                                            height="16"
+                                            viewBox="0 0 24 24"
+                                            width="16"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                        >
+                                            <path
+                                                d="M10.75 8.75L14.25 12L10.75 15.25"
+                                                stroke="currentColor"
+                                                strokeLinecap="round"
+                                                strokeLinejoin="round"
+                                                strokeWidth="1.5"
+                                            />
+                                        </svg>
+                                    </div>
+                                    <span className="absolute -bottom-0 left-[1.125rem] h-px w-[calc(100%-2.25rem)] bg-gradient-to-r from-blue-500/0 via-blue-500/90 to-blue-500/0 transition-opacity duration-500 group-hover:opacity-40" />
+                                </button>
+                            </Link>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        );
+    }
+
     const { handleSubmit, control, register, reset } = useForm<FormData>();
     const [loading, setLoading] = useState(false); // State for loading
 
