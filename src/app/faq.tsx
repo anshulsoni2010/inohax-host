@@ -5,12 +5,12 @@ import { ChevronDown, ChevronUp } from 'lucide-react'
 
 const faqs = [
     {
-        question: "What is Inohax 1.0?",
-        answer: "Inohax 1.0 is a 24-hour online open innovation hackathon designed for students and entrepreneurs to collaborate, innovate, and showcase their skills. The event will be held on the 9th and 10th of November 2024."
+        question: "What is Inohax 2.0?",
+        answer: "Inohax 2.0 is a 24-hour online open innovation hackathon designed for students and entrepreneurs to collaborate, innovate, and showcase their skills. The event will be held on the 9th and 10th of November 2024."
     },
     {
         question: "Who can participate in the hackathon?",
-        answer: "Inohax 1.0 is open to students and entrepreneurs from any background. If you have a passion for problem-solving and innovation, you are welcome to join!"
+        answer: "Inohax 2.0 is open to students and entrepreneurs from any background. If you have a passion for problem-solving and innovation, you are welcome to join!"
     },
     {
         question: "What is the prize for the winning team?",
@@ -22,7 +22,7 @@ const faqs = [
     },
     {
         question: "Is there a participation fee?",
-        answer: "No, participation in Inohax 1.0 is completely free."
+        answer: "No, participation in Inohax 2.0 is completely free."
     },
     {
         question: "How many members can be in a team?",
@@ -30,7 +30,7 @@ const faqs = [
     },
     {
         question: "What is the format of the hackathon?",
-        answer: "Inohax 1.0 is an online hackathon, so you can participate from anywhere. The event will take place over 24 hours, starting on November 9th at 11 AM and ending on November 10th at 12 PM."
+        answer: "Inohax 2.0 is an online hackathon, so you can participate from anywhere. The event will take place over 24 hours, starting on November 9th at 11 AM and ending on November 10th at 12 PM."
     },
     {
         question: "Do I need to use Inovact Social for the hackathon?",

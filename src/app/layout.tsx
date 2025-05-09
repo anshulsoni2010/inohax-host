@@ -15,8 +15,8 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-    title: "Inohax 1.0 - Open Innovation Hackathon for Students & Entrepreneurs",
-    description: "Join Inohax 1.0, a 24-hour open innovation hackathon by Inovact, designed for students and entrepreneurs to showcase their skills and creativity.",
+    title: "Inohax 2.0 - Open Innovation Hackathon for Students & Entrepreneurs",
+    description: "Join Inohax 2.0, a 24-hour open innovation hackathon by Inovact, designed for students and entrepreneurs to showcase their skills and creativity.",
     keywords: "Inohax, hackathon, innovation, students, entrepreneurs, Inovact",
     authors: [{ name: "Inovact Team" }],
 };
@@ -42,12 +42,12 @@ export default function RootLayout({
                     }}
                 />
                 <link rel="icon" href="/inovact.png" />
-                <meta name="description" content="Inohax 1.0 - A 24 Hours Open Innovation Hackathon by Inovact for Students & Entrepreneurs" />
+                <meta name="description" content="Inohax 2.0 - A 24 Hours Open Innovation Hackathon by Inovact for Students & Entrepreneurs" />
                 <meta property="og:url" content="https://inohax.inovact.in" />
                 <meta property="og:type" content="website" />
-                <meta property="og:site_name" content="Inohax 1.0" />
+                <meta property="og:site_name" content="Inohax 2.0" />
                 <meta property="og:description" content="A 24 Hours Open Innovation Hackathon by Inovact for Students & Entrepreneurs" />
-                <meta property="og:title" content="Inohax 1.0 Registration Form" />
+                <meta property="og:title" content="Inohax 2.0 Registration Form" />
                 <meta property="og:locale" content="en_IN" />
                 <meta property="og:image" content="https://inohax.inovact.in/poster.png" />
                 <meta property="og:image:width" content="600" />
@@ -60,7 +60,7 @@ export default function RootLayout({
                     {JSON.stringify({
                         "@context": "https://schema.org",
                         "@type": "Event",
-                        "name": "Inohax 1.0",
+                        "name": "Inohax 2.0",
                         "startDate": "2024-11-09T11:00",
                         "endDate": "2024-11-10T15:00",
                         "registrationEndDate": "2025-05-21T23:59:00",

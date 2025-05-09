@@ -8,7 +8,7 @@ import Countdown from "./countdown";
 import PartnersLogo from "./partnerslogo";
 
 export default function Hero() {
-    const registrationEndDate = new Date('2025-05-21T23:59:00');
+    const registrationEndDate = new Date('2025-05-20T23:59:00');
     const isRegistrationClosed = new Date() > registrationEndDate;
     const [showPopup, setShowPopup] = useState(false);
 
@@ -99,7 +99,7 @@ export default function Hero() {
                                 </span>
                             </h1>
                             <p className="text-lg sm:text-xl text-white/90 mt-6">
-                                Thank you for your interest in Inohax 1.0! Registration for this event has closed as of May 21st, 2025 at 11:59 PM.
+                                Thank you for your interest in Inohax 2.0! Registration for this event has closed as of May 21st, 2025 at 11:59 PM.
                             </p>
                             <p className="text-base sm:text-lg text-white/85 mt-4 mb-8">
                                 Stay tuned for future events by following us on our social media channels.

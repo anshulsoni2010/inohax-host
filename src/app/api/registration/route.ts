@@ -67,20 +67,20 @@ async function sendConfirmationEmail(teamLeaderEmail: string, teamLeaderName: st
     subject: `${teamName} - Team Registration Confirmation`,
     html: `Dear ${teamLeaderName},<br><br>
 
-  Thank you for submitting your application for <b>Inohax 1.0</b>! We’re excited to review your team’s project and appreciate the effort you’ve put into this stage.<br><br>
+  Thank you for submitting your application for <b>Inohax 2.0</b>! We’re excited to review your team’s project and appreciate the effort you’ve put into this stage.<br><br>
 
   <b>What’s Next?</b><br>
   Our team will carefully evaluate all submissions, and we will notify you of your selection status before November 8th.<br><br>
 
-  If you have any questions or need assistance in the meantime, feel free to reach out to us at inohax1.0@gmail.com
+  If you have any questions or need assistance in the meantime, feel free to reach out to us at inohax2.0@gmail.com
 <br> <br>
   Do checkout <a href="https://play.google.com/store/apps/details?id=in.pranaydas.inovact"> Inovact Social </a> - A Social Network For Students & Entreprenuers Making Collaborations Simple & Faster On Projects and Ideas Powered by Proof Of Work.
 <br>  <br>
 
-  Thank you once again for your interest in <b>Inohax 1.0</b>, and best of luck in the selection process!<br><br>
+  Thank you once again for your interest in <b>Inohax 2.0</b>, and best of luck in the selection process!<br><br>
 <br> <br>
   Warm regards,<br>
-  The Inohax Team`
+  The Inohax 2.0 Team`
   };
   try {
     await transporter.sendMail(mailOptions);

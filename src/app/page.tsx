@@ -9,7 +9,7 @@ export default function Home() {
   return (
     <>
     <Head>
-      <title>Inohax 1.0</title>
+      <title>Inohax 2.0</title>
     </Head>
       <Hero />
       <Benefits />

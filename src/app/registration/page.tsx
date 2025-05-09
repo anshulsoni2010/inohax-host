@@ -38,9 +38,10 @@ export default function Component() {
             'teamLeaderName',
             'teamLeaderPhone',
             'teamLeaderEmail',
-            'projectTitle',
-            'projectDescription',
-            'projectDomain', // Added projectDomain to required fields
+            // 'projectTitle',
+            'InovactSocialProjectLink'
+            // 'projectDescription',
+            // 'projectDomain', 
         ];
         let hasError = false; // Flag to track if there are any errors
 
@@ -98,7 +99,7 @@ export default function Component() {
                             </span>
                         </h1>
                         <p className="text-lg sm:text-xl text-white/90 mt-6">
-                            Thank you for your interest in Inohax 1.0! Registration for this event has closed as of May 21st, 2025 at 11:59 PM.
+                            Thank you for your interest in Inohax 2.0! Registration for this event has closed as of May 21st, 2025 at 11:59 PM.
                         </p>
                         <p className="text-base sm:text-lg text-white/85 mt-4 mb-8">
                             Stay tuned for future events by following us on our social media channels.
@@ -169,7 +170,7 @@ export default function Component() {
         <>
             <Head>
                 <link rel="icon" href="/inovact.png" />
-                <title>Inohax 1.0 Registration Form</title>
+                <title>Inohax 2.0 Registration Form</title>
                 <meta name="description" content="A 24 Hours Open Innovation Hackathon by Inovact for Students & Entrepreneurs" />
             </Head>
             <div className={`min-h-screen bg-gradient-to-br from-black via-gray-900 to-black text-white py-12 px-4 sm:px-6 lg:px-8 ${loading ? 'opacity-50' : 'opacity-100'}`}>
@@ -182,7 +183,7 @@ export default function Component() {
                     <div className="text-center mb-12">
                         <h1 className="text-5xl font-extrabold tracking-tight mb-4">
                             <span className="bg-clip-text text-transparent bg-gradient-to-r from-gray-200 to-gray-500">
-                                Inohax 1.0 Registration
+                                Inohax 2.0 Registration
                             </span>
                         </h1>
                     </div>
