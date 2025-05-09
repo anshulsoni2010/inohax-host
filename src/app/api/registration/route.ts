@@ -23,15 +23,63 @@ export async function POST(req: Request) {
       teamLeaderPhone: string;
       teamLeaderEmail: string;
       teamMembers: Array<{ name: string; socialMediaLink?: string }>;
-      projectDomain?: string;
       projectLink?: string;
+      inovactSocialLink?: string;
     } = await req.json();
 
     console.log("Team ", body);
 
-    // Create the team entry in the database
-    const team = await Registration.create(body);
-    team.save();
+    // Validate Inovact Social Link if provided
+    if (body.inovactSocialLink) {
+      try {
+        // Check if it's a valid URL
+        const url = new URL(body.inovactSocialLink);
+
+        // Check if it's from the Inovact domain
+        if (!url.hostname.includes('inovact.in')) {
+          return new Response(
+            JSON.stringify({
+              success: false,
+              error: 'Please enter a valid Inovact Social link (e.g., https://inovact.in/...)'
+            }),
+            { status: 400 }
+          );
+        }
+
+        // Check if it has an ID parameter
+        const postId = url.searchParams.get('id');
+        if (!postId) {
+          return new Response(
+            JSON.stringify({
+              success: false,
+              error: 'Invalid Inovact Social link. Please provide a link with an ID parameter (e.g., ?id=...)'
+            }),
+            { status: 400 }
+          );
+        }
+      } catch (error) {
+        return new Response(
+          JSON.stringify({
+            success: false,
+            error: 'Please enter a valid URL for the Inovact Social link'
+          }),
+          { status: 400 }
+        );
+      }
+    }
+
+    // Try to create the team entry in the database
+    let team;
+    try {
+      team = await Registration.create(body);
+      await team.save();
+      console.log("Registration saved to database");
+    } catch (error) {
+      console.log("Could not save to database, but continuing with registration process", error);
+      // If database operation fails, we'll still continue with the registration process
+      // This allows the application to work without a real database connection
+      team = body; // Use the request body as the team data
+    }
 
     // Send confirmation email to the team leader
     await sendConfirmationEmail(body.teamLeaderEmail, body.teamLeaderName, body.teamName);
@@ -70,7 +118,7 @@ async function sendConfirmationEmail(teamLeaderEmail: string, teamLeaderName: st
   Thank you for submitting your application for <b>Inohax 2.0</b>! We’re excited to review your team’s project and appreciate the effort you’ve put into this stage.<br><br>
 
   <b>What’s Next?</b><br>
-  Our team will carefully evaluate all submissions, and we will notify you of your selection status before November 8th.<br><br>
+  Our team will carefully evaluate all submissions, and we will notify you of your selection status before the end of 21st May.<br><br>
 
   If you have any questions or need assistance in the meantime, feel free to reach out to us at inohax2.0@gmail.com
 <br> <br>

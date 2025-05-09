@@ -1,13 +1,12 @@
 'use client'
 
 import React, { useState } from 'react'
-import { useForm, Controller } from 'react-hook-form'
+import { useForm } from 'react-hook-form'
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { ChevronRight } from 'lucide-react'
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Head from 'next/head';
@@ -17,15 +16,11 @@ interface FormData {
     teamLeaderName: string;
     teamLeaderPhone: string;
     teamLeaderEmail: string;
-    projectTitle: string;
-    projectDescription: string;
-    relatedLink: string;
-    communityReferral: string;
-    projectDomain: string; // Added projectDomain to FormData
+    inovactSocialLink: string;
 }
 
 export default function Component() {
-    const { handleSubmit, control, register, reset } = useForm<FormData>();
+    const { handleSubmit, register, reset } = useForm<FormData>();
     const [loading, setLoading] = useState(false);
     const registrationEndDate = new Date('2025-05-21T23:59:00');
     const isRegistrationClosed = new Date() > registrationEndDate;
@@ -38,10 +33,7 @@ export default function Component() {
             'teamLeaderName',
             'teamLeaderPhone',
             'teamLeaderEmail',
-            'projectTitle',
-            // 'InovactSocialProjectLink'
-            'projectDescription',
-            'projectDomain', 
+            'inovactSocialLink'
         ];
         let hasError = false; // Flag to track if there are any errors
 
@@ -57,6 +49,31 @@ export default function Component() {
         // If there are errors, stop submission
         if (hasError) {
             return; // Stop submission if any required field is empty
+        }
+
+        // Validate Inovact Social Link
+        try {
+            // Check if it's a valid URL
+            const url = new URL(data.inovactSocialLink);
+
+            // Check if it's from the Inovact domain
+            if (!url.hostname.includes('inovact.in')) {
+                toast.error('Please enter a valid Inovact Social link (e.g., https://inovact.in/...)');
+                setLoading(false);
+                return;
+            }
+
+            // Check if it has an ID parameter
+            const postId = url.searchParams.get('id');
+            if (!postId) {
+                toast.error('Invalid Inovact Social link. Please provide a link with an ID parameter (e.g., ?id=...)');
+                setLoading(false);
+                return;
+            }
+        } catch (error) {
+            toast.error('Please enter a valid URL for the Inovact Social link');
+            setLoading(false);
+            return;
         }
 
         const payload = {
@@ -246,72 +263,16 @@ export default function Component() {
                                     </div>
 
                                     <div className="space-y-2">
-                                        <Label htmlFor="projectDomain" className="text-gray-300">Project Domain *</Label>
-                                        <Controller
-                                            name="projectDomain"
-                                            control={control}
-                                            rules={{ required: true }} // Make this field required
-                                            render={({ field }) => (
-                                                <Select onValueChange={field.onChange} defaultValue={field.value}>
-                                                    <SelectTrigger className="bg-gray-900/30 border-gray-700 text-white">
-                                                        <SelectValue placeholder="Select Project Domain" />
-                                                    </SelectTrigger>
-                                                    <SelectContent className="bg-gray-900 border-gray-700 text-white">
-                                                        <SelectItem value="edtech">EdTech</SelectItem>
-                                                        <SelectItem value="hrtech">HR Tech</SelectItem>
-                                                        <SelectItem value="web3">Web3</SelectItem>
-                                                        <SelectItem value="fintech">FinTech</SelectItem>
-                                                        <SelectItem value="healthtech">HealthTech</SelectItem>
-                                                        <SelectItem value="agritech">AgriTech</SelectItem>
-                                                        <SelectItem value="ai_ml">AI & Machine Learning</SelectItem>
-                                                        <SelectItem value="climatetech">ClimateTech</SelectItem>
-                                                        <SelectItem value="smart_cities">Smart Cities</SelectItem>
-                                                        <SelectItem value="cybersecurity">Cybersecurity</SelectItem>
-                                                        <SelectItem value="other">Other</SelectItem>
-                                                    </SelectContent>
-                                                </Select>
-                                            )}
-                                        />
-                                    </div>
-
-                                    <div className="space-y-2">
-                                        <Label htmlFor="projectTitle" className="text-gray-300">Project Title *</Label>
+                                        <Label htmlFor="inovactSocialLink" className="text-gray-300">Inovact Social Link *</Label>
                                         <Input
-                                            id="projectTitle"
-                                            {...register('projectTitle', { required: true })}
+                                            id="inovactSocialLink"
+                                            {...register('inovactSocialLink', { required: true })}
                                             className="bg-gray-900/30 border-gray-700 text-white placeholder-gray-500"
-                                            placeholder="Enter project title"
+                                            placeholder="Enter your Inovact Social link (e.g., https://inovact.in/...?id=...)"
                                         />
-                                    </div>
-                                    <div className="space-y-2">
-                                        <Label htmlFor="projectDescription" className="text-gray-300">Project Description *</Label>
-                                        <textarea
-                                            id="projectDescription"
-                                            {...register('projectDescription', { required: true })}
-                                            className="bg-gray-900/30 border-gray-700 text-white placeholder-gray-500 w-full h-24"
-                                            placeholder="Enter project description"
-                                        />
-                                    </div>
-                                    <div className="space-y-2">
-                                        <Label htmlFor="relatedLink" className="text-gray-300">Related Link (If any)</Label>
-                                        <Input
-                                            id="relatedLink"
-                                            {...register('relatedLink')}
-                                            className="bg-gray-900/30 border-gray-700 text-white placeholder-gray-500"
-                                            placeholder="Insert any link"
-                                        />
-                                    </div>
-                                </div>
-                                <div className="space-y-4">
-                                    <h3 className="text-xl font-semibold text-gray-300">Community Referral</h3>
-                                    <div className="space-y-2">
-                                        <Label htmlFor="communityReferral" className="text-gray-300">Referred by (Optional)</Label>
-                                        <Input
-                                            id="communityReferral"
-                                            {...register('communityReferral')}
-                                            className="bg-gray-900/30 border-gray-700 text-white placeholder-gray-500 pl-10"
-                                            placeholder="Enter community referral name or code"
-                                        />
+                                        <p className="text-xs text-gray-400 mt-1">
+                                            Must be a valid Inovact Social link with an ID parameter (https://inovact.in/...?id=...)
+                                        </p>
                                     </div>
                                 </div>
                                 <Button type="submit" className="w-full bg-gradient-to-r from-gray-700 to-gray-900 hover:from-gray-800 hover:to-black text-white font-bold py-3 rounded-lg transition duration-300 ease-in-out transform hover:scale-105">
