@@ -122,13 +122,13 @@ async function sendConfirmationEmail(teamLeaderEmail: string, teamLeaderName: st
 
   If you have any questions or need assistance in the meantime, feel free to reach out to us at inohax2.0@gmail.com
 <br> <br>
-  Do checkout <a href="https://play.google.com/store/apps/details?id=in.pranaydas.inovact"> Inovact Social </a> - A Social Network For Students & Entreprenuers Making Collaborations Simple & Faster On Projects and Ideas Powered by Proof Of Work.
+  Do checkout <a href="https://inovact.in/"> Inovact </a> - A Social Network For Students & Entreprenuers Making Collaborations Simple & Faster On Projects and Ideas Powered by Proof Of Work.
 <br>  <br>
 
   Thank you once again for your interest in <b>Inohax 2.0</b>, and best of luck in the selection process!<br><br>
 <br> <br>
   Warm regards,<br>
-  The Inohax 2.0 Team`
+  Team Inohax`
   };
   try {
     await transporter.sendMail(mailOptions);
