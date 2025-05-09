@@ -8,7 +8,7 @@ import Countdown from "./countdown";
 import PartnersLogo from "./partnerslogo";
 
 export default function Hero() {
-    const registrationEndDate = new Date('2024-11-06T23:59:00');
+    const registrationEndDate = new Date('2025-05-27T23:59:00');
     const isRegistrationClosed = new Date() > registrationEndDate;
     const [showPopup, setShowPopup] = useState(false);
 
@@ -50,7 +50,7 @@ export default function Hero() {
                             </svg></span>                        </div>
                         <div className="flex justify-center items-center">
 
-                            {isRegistrationClosed ? (
+                            {/* {isRegistrationClosed ? (
                                 <button
                                     onClick={() => setShowPopup(true)}
                                     className="text-sm sm:text-base text-red-400 group font-geist mx-auto px-3 sm:px-4 py-4 bg-gradient-to-tr from-red-300/5 via-red-400/5 to-transparent border-[2px] border-red-400/15 rounded-full flex items-center justify-center w-fit"
@@ -60,7 +60,7 @@ export default function Hero() {
                                         <X className="w-4 sm:w-5 h-4 sm:h-5 text-red-400" />
                                     </div>
                                 </button>
-                            ) : (
+                            ) : ( */}
                                 <Link href="/registration" target="_blank">
                                     <h1 className="text-sm sm:text-base text-gray-400 group font-geist mx-auto px-3 sm:px-4 py-4 bg-gradient-to-tr from-zinc-300/5 via-gray-400/5 to-transparent border-[2px] border-[#7877c64d]/15 rounded-full flex items-center justify-center w-fit">
                                         Register Now
@@ -70,7 +70,7 @@ export default function Hero() {
                                         </div>
                                     </h1>
                                 </Link>
-                            )}
+                            {/* )} */}
                         </div>
                     </div>
                     <div className="mt-10">
