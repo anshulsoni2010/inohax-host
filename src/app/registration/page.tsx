@@ -58,7 +58,7 @@ export default function Component() {
 
             // Check if it's from the Inovact domain
             if (!url.hostname.includes('inovact.in')) {
-                toast.error('Please enter a valid Inovact Social link (e.g., https://inovact.in/...)');
+                toast.error('Please enter a valid Inovact Social link (e.g., https://api.inovact.in/v1/post?id=...)');
                 setLoading(false);
                 return;
             }
@@ -263,16 +263,14 @@ export default function Component() {
                                     </div>
 
                                     <div className="space-y-2">
-                                        <Label htmlFor="inovactSocialLink" className="text-gray-300">Inovact Social Link *</Label>
+                                        <Label htmlFor="inovactSocialLink" className="text-gray-300">Inovact Social Project Link *</Label>
                                         <Input
                                             id="inovactSocialLink"
                                             {...register('inovactSocialLink', { required: true })}
                                             className="bg-gray-900/30 border-gray-700 text-white placeholder-gray-500"
-                                            placeholder="Enter your Inovact Social link (e.g., https://inovact.in/...?id=...)"
+                                            placeholder="Enter your Inovact Social Project link ( e.g., https://api.inovact.in/v1/post?id=... )"
                                         />
-                                        <p className="text-xs text-gray-400 mt-1">
-                                            Must be a valid Inovact Social link with an ID parameter (https://inovact.in/...?id=...)
-                                        </p>
+                                       
                                     </div>
                                 </div>
                                 <Button type="submit" className="w-full bg-gradient-to-r from-gray-700 to-gray-900 hover:from-gray-800 hover:to-black text-white font-bold py-3 rounded-lg transition duration-300 ease-in-out transform hover:scale-105">
