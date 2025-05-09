@@ -3,7 +3,7 @@ import Registration from '@/model/Registration';
 import nodemailer from 'nodemailer';
 
 export async function POST(req: Request) {
-    const registrationEndDate = new Date('2024-11-06T23:59:00');
+    const registrationEndDate = new Date('2025-05-21T23:59:00');
   if (new Date() > registrationEndDate) {
     return new Response(
       JSON.stringify({

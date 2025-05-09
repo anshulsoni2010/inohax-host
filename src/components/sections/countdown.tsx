@@ -6,11 +6,8 @@ import { motion, AnimatePresence } from 'framer-motion'
 const useCountdown = () => {
   const calculateTimeLeft = () => {
     const now = new Date()
-    let targetDate = new Date(now.getFullYear(), 10, 9, 11, 0, 0)
-
-    if (now > targetDate) {
-      targetDate = new Date(now.getFullYear() + 1, 10, 9, 11, 0, 0)
-    }
+    // Set target date to May 24, 2025 at midnight (23:59:00)
+    let targetDate = new Date('2025-05-24T00:00:00')
 
     const difference = targetDate.getTime() - now.getTime()
 
@@ -75,7 +72,7 @@ export default function Countdown() {
     <div className="w-full">
       <div className="bg-black bg-opacity-70 p-12 rounded-3xl shadow-2xl backdrop-blur-xl">
         {timeLeft.isComplete ? (
-          <p className="text-center text-4xl font-bold text-green-500">Hackathon in Progress!</p>
+          <p className="text-center text-4xl font-bold text-red-500">Registration Closed!</p>
         ) : (
           <div className="flex justify-center space-x-4 px-20">
             <TimeUnit value={timeLeft.days} label="Days" />

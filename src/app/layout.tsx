@@ -61,8 +61,9 @@ export default function RootLayout({
                         "@context": "https://schema.org",
                         "@type": "Event",
                         "name": "Inohax 1.0",
-                        "startDate": "2023-11-01T09:00",
-                        "endDate": "2023-11-02T09:00",
+                        "startDate": "2024-11-09T11:00",
+                        "endDate": "2024-11-10T15:00",
+                        "registrationEndDate": "2025-05-21T23:59:00",
                         "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
                         "location": {
                             "@type": "Place",

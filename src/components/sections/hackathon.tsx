@@ -4,13 +4,15 @@ import React, { useRef } from 'react'
 import { Calendar, Clock } from 'lucide-react'
 
 const events = [
-    { date: "26th October 2024", time: "", title: "Applications Open", icon: "🚀", color: "from-purple-400 to-indigo-400" },
-    { date: "9th Nov", time: "11 AM", title: "Hackathon Kick-off", icon: "🎬", color: "from-blue-400 to-cyan-400" },
-    { date: "9th Nov", time: "12 PM", title: "Hackathon Starts", icon: "🏁", color: "from-green-400 to-emerald-400" },
-    { date: "9th Nov", time: "5 PM", title: "First Mentorship Round", icon: "🧠", color: "from-yellow-400 to-amber-400" },
-    { date: "10th Nov", time: "9 AM", title: "Second Mentorship Round", icon: "💡", color: "from-orange-400 to-red-400" },
-    { date: "10th Nov", time: "12 PM", title: "Final Submission", icon: "📤", color: "from-pink-400 to-rose-400" },
-    { date: "10th Nov", time: "3 PM", title: "Winner Announcement", icon: "🏆", color: "from-purple-400 to-indigo-400" },
+    { date: "10th May 2025", time: "", title: "Applications Open", icon: "🚀", color: "from-purple-400 to-indigo-400" },
+    { date: "21st May 2025", time: "11:59 PM", title: "Registration Closes", icon: "🔒", color: "from-red-400 to-orange-400" },
+    { date: "23rd May 2025", time: "11 AM", title: "Hackathon Kick-off", icon: "🎬", color: "from-blue-400 to-cyan-400" },
+    { date: "23rd May 2025", time: "12 PM", title: "Hackathon Starts", icon: "🏁", color: "from-green-400 to-emerald-400" },
+    { date: "23rd May 2025", time: "5 PM", title: "First Mentorship Round", icon: "🧠", color: "from-yellow-400 to-amber-400" },
+    { date: "24th May 2025", time: "12 PM", title: "Hackathon Ends", icon: "🏁", color: "from-green-400 to-emerald-400" },
+    { date: "24th May 2025", time: "9 AM", title: "Second Mentorship Round", icon: "💡", color: "from-orange-400 to-red-400" },
+    { date: "24th May 2025", time: "12 PM", title: "Final Submission", icon: "📤", color: "from-pink-400 to-rose-400" },
+    { date: "24th May 2025", time: "3 PM", title: "Winner Announcement", icon: "🏆", color: "from-purple-400 to-indigo-400" },
 ]
 
 export default function Component() {

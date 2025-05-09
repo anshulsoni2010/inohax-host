@@ -27,7 +27,7 @@ interface FormData {
 export default function Component() {
     const { handleSubmit, control, register, reset } = useForm<FormData>();
     const [loading, setLoading] = useState(false);
-    const registrationEndDate = new Date('2024-11-06T23:59:00');
+    const registrationEndDate = new Date('2025-05-21T23:59:00');
     const isRegistrationClosed = new Date() > registrationEndDate;
 
     const onSubmit = async (data: FormData) => {
@@ -98,7 +98,7 @@ export default function Component() {
                             </span>
                         </h1>
                         <p className="text-lg sm:text-xl text-white/90 mt-6">
-                            Thank you for your interest in Inohax 1.0! Registration for this event has closed as of November 6th, 2024 at 11:59 PM.
+                            Thank you for your interest in Inohax 1.0! Registration for this event has closed as of May 21st, 2025 at 11:59 PM.
                         </p>
                         <p className="text-base sm:text-lg text-white/85 mt-4 mb-8">
                             Stay tuned for future events by following us on our social media channels.
