@@ -5,11 +5,11 @@ import { ArrowUpRight, X } from "lucide-react";
 import Link from "next/link";
 import { Navbar } from "@/components/sections/navbar";
 import Countdown from "./countdown";
-import PartnersLogo from "./partnerslogo";
 
 export default function Hero() {
-    const registrationEndDate = new Date('2025-05-20T23:59:00');
-    const isRegistrationClosed = new Date() > registrationEndDate;
+    // Registration date and closed state are used in commented code, keeping as comments for future reference
+    // const registrationEndDate = new Date('2025-05-20T23:59:00');
+    // const isRegistrationClosed = new Date() > registrationEndDate;
     const [showPopup, setShowPopup] = useState(false);
 
     const handleClosePopup = () => {

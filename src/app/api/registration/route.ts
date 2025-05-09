@@ -57,7 +57,8 @@ export async function POST(req: Request) {
             { status: 400 }
           );
         }
-      } catch (error) {
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      } catch (_error) {
         return new Response(
           JSON.stringify({
             success: false,

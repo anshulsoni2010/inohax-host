@@ -70,7 +70,8 @@ export default function Component() {
                 setLoading(false);
                 return;
             }
-        } catch (error) {
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        } catch (_error) {
             toast.error('Please enter a valid URL for the Inovact Social link');
             setLoading(false);
             return;
@@ -270,7 +271,7 @@ export default function Component() {
                                             className="bg-gray-900/30 border-gray-700 text-white placeholder-gray-500"
                                             placeholder="Enter your Inovact Social Project link ( e.g., https://api.inovact.in/v1/post?id=... )"
                                         />
-                                       
+
                                     </div>
                                 </div>
                                 <Button type="submit" className="w-full bg-gradient-to-r from-gray-700 to-gray-900 hover:from-gray-800 hover:to-black text-white font-bold py-3 rounded-lg transition duration-300 ease-in-out transform hover:scale-105">

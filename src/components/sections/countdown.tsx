@@ -7,7 +7,7 @@ const useCountdown = () => {
   const calculateTimeLeft = () => {
     const now = new Date()
     // Set target date to May 24, 2025 at midnight (23:59:00)
-    let targetDate = new Date('2025-05-24T00:00:00')
+    const targetDate = new Date('2025-05-24T00:00:00')
 
     const difference = targetDate.getTime() - now.getTime()
 

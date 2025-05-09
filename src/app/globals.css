@@ -7,6 +7,11 @@
     --foreground: #ededed;
 }
 
+@layer base {
+  body {
+    @apply bg-black text-white;
+  }
+}
 
 
 body {
@@ -25,4 +30,4 @@ body {
 }
 
 
- 
+
