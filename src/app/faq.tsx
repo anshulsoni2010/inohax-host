@@ -6,7 +6,7 @@ import { ChevronDown, ChevronUp } from 'lucide-react'
 const faqs = [
     {
         question: "What is Inohax 2.0?",
-        answer: "Inohax 2.0 is a 24-hour online open innovation hackathon designed for students and entrepreneurs to collaborate, innovate, and showcase their skills. The event will be held on the 9th and 10th of November 2024."
+        answer: "Inohax 2.0 is a 24-hour online open innovation hackathon designed for students and entrepreneurs to collaborate, innovate, and showcase their skills. The event will be held on the 23rd and 24th of May 2025."
     },
     {
         question: "Who can participate in the hackathon?",
@@ -30,7 +30,7 @@ const faqs = [
     },
     {
         question: "What is the format of the hackathon?",
-        answer: "Inohax 2.0 is an online hackathon, so you can participate from anywhere. The event will take place over 24 hours, starting on November 9th at 11 AM and ending on November 10th at 12 PM."
+        answer: "Inohax 2.0 is an online hackathon, so you can participate from anywhere. The event will take place over 24 hours, starting on May 23rd at 12 PM and ending on May 24th at 12 PM."
     },
     {
         question: "Do I need to use Inovact Social for the hackathon?",
@@ -42,11 +42,11 @@ const faqs = [
     },
     {
         question: "How will mentorship work during the hackathon?",
-        answer: "There will be two mentorship rounds during the hackathon. The first round will be at 5 PM on November 9th, and the second will be at 9 AM on November 10th. Mentors will provide guidance and feedback on your project."
+        answer: "There will be two mentorship rounds during the hackathon. The first round will be at 5 PM on May 23rd, and the second will be at 9 AM on May 24th. Mentors will provide guidance and feedback on your project."
     },
     {
         question: "How will the winners be selected?",
-        answer: "A panel of judges will evaluate the projects based on innovation, execution, and impact. The top 3 teams will present their projects to the jury at 2 PM on November 10th, followed by the winner announcement at 2:45 PM."
+        answer: "A panel of judges will evaluate the projects based on innovation, execution, and impact. The winner announcement will be at 3 PM on May 24th."
     },
     {
         question: "Who can I contact if I have more questions?",
@@ -62,6 +62,14 @@ const faqs = [
     {
         question: "Will Inohax give participants problem statements to work on?",
         answer: "No, Since Inohax is an open innovation hackathon, participants are welcome to work on problem statements of their choice"
+    },
+    {
+        question: "When is the registration deadline?",
+        answer: "Registration for Inohax 2.0 closes on May 20th, 2025 at 11:59 PM. Make sure to register your team before this deadline to participate in the hackathon."
+    },
+    {
+        question: "When do applications open?",
+        answer: "Applications for Inohax 2.0 open on May 10th, 2025. You can register your team anytime between May 10th and May 20th, 2025."
     }
 ]
 

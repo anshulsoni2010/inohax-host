@@ -5,7 +5,7 @@ import Link from "next/link";
 function Footer() {
     return (
         <footer className="mt-5 w-full border-t border-2 border-zinc-800/30 flex flex-col items-center justify-center gap-4 px-4 py-6 text-sm text-zinc-500 text-center">
-            <p className="mb-2">© 2024 Inohax 2.0</p>
+            <p className="mb-2">© 2025 Inohax 2.0</p>
             <Link href="/registration" target="_blank">
                 <button className="bg-slate-800 no-underline group cursor-pointer relative shadow-2xl shadow-zinc-900 rounded-full p-1 text-sm font-semibold leading-6 text-white inline-block">
                     <span className="absolute inset-0 overflow-hidden rounded-full">

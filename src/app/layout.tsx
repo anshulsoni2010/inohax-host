@@ -16,7 +16,7 @@ const geistMono = localFont({
 
 export const metadata: Metadata = {
     title: "Inohax 2.0 - Open Innovation Hackathon for Students & Entrepreneurs",
-    description: "Join Inohax 2.0, a 24-hour open innovation hackathon by Inovact, designed for students and entrepreneurs to showcase their skills and creativity.",
+    description: "Join Inohax 2.0, a 24-hour online open innovation hackathon by Inovact, taking place on May 23-24, 2025. Designed for students and entrepreneurs to showcase their skills and creativity.",
     keywords: "Inohax, hackathon, innovation, students, entrepreneurs, Inovact",
     authors: [{ name: "Inovact Team" }],
 };
@@ -42,17 +42,17 @@ export default function RootLayout({
                     }}
                 />
                 <link rel="icon" href="/inovact.png" />
-                <meta name="description" content="Inohax 2.0 - A 24 Hours Open Innovation Hackathon by Inovact for Students & Entrepreneurs" />
+                <meta name="description" content="Inohax 2.0 - A 24 Hours Online Open Innovation Hackathon by Inovact for Students & Entrepreneurs, May 23-24, 2025" />
                 <meta property="og:url" content="https://inohax.inovact.in" />
                 <meta property="og:type" content="website" />
                 <meta property="og:site_name" content="Inohax 2.0" />
-                <meta property="og:description" content="A 24 Hours Open Innovation Hackathon by Inovact for Students & Entrepreneurs" />
-                <meta property="og:title" content="Inohax 2.0 Registration Form" />
+                <meta property="og:description" content="A 24 Hours Online Open Innovation Hackathon by Inovact for Students & Entrepreneurs, taking place on May 23-24, 2025" />
+                <meta property="og:title" content="Inohax 2.0 - Open Innovation Hackathon | May 23-24, 2025" />
                 <meta property="og:locale" content="en_IN" />
                 <meta property="og:image" content="https://inohax.inovact.in/poster.png" />
                 <meta property="og:image:width" content="600" />
                 <meta property="og:image:height" content="600" />
-                <meta property="og:image:alt" content="Inohax 1.0 Poster" />
+                <meta property="og:image:alt" content="Inohax 2.0 Poster" />
                 <meta property="og:image:type" content="image/png" />
                 <meta property="og:image:url" content="https://inohax.inovact.in/poster.png" />
                 <meta property="og:image:secure_url" content="https://inohax.inovact.in/poster.png" />
@@ -61,10 +61,10 @@ export default function RootLayout({
                         "@context": "https://schema.org",
                         "@type": "Event",
                         "name": "Inohax 2.0",
-                        "startDate": "2024-11-09T11:00",
-                        "endDate": "2024-11-10T15:00",
-                        "registrationEndDate": "2025-05-21T23:59:00",
-                        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+                        "startDate": "2025-05-23T12:00",
+                        "endDate": "2025-05-24T15:00",
+                        "registrationEndDate": "2025-05-20T23:59:00",
+                        "eventAttendanceMode": "https://schema.org/OnlineEventAttendanceMode",
                         "location": {
                             "@type": "Place",
                             "name": "Inovact Headquarters",
@@ -78,12 +78,12 @@ export default function RootLayout({
                             }
                         },
                         "image": "https://inohax.inovact.in/poster.png",
-                        "description": "A 24-hour open innovation hackathon by Inovact for students and entrepreneurs.",
+                        "description": "A 24-hour online open innovation hackathon by Inovact for students and entrepreneurs, taking place on May 23-24, 2025. Register by May 20th to participate!",
                         "offers": {
                             "@type": "Offer",
-                            "url": "https://inohax.inovact.in/register",
+                            "url": "https://inohax.inovact.in/registration",
                             "price": "0",
-                            "priceCurrency": "USD",
+                            "priceCurrency": "INR",
                             "itemOffered": {
                                 "@type": "EducationalOrganization",
                                 "name": "Inovact"
