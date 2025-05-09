@@ -38,10 +38,10 @@ export default function Component() {
             'teamLeaderName',
             'teamLeaderPhone',
             'teamLeaderEmail',
-            // 'projectTitle',
-            'InovactSocialProjectLink'
-            // 'projectDescription',
-            // 'projectDomain', 
+            'projectTitle',
+            // 'InovactSocialProjectLink'
+            'projectDescription',
+            'projectDomain', 
         ];
         let hasError = false; // Flag to track if there are any errors
 
