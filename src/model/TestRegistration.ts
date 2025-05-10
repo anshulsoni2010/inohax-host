@@ -1,8 +1,7 @@
-
-
 import mongoose from 'mongoose';
 
-const RegistrationSchema = new mongoose.Schema({
+// This schema is identical to the Registration schema but uses a different collection
+const TestRegistrationSchema = new mongoose.Schema({
   teamName: { type: String, required: true },
   teamLeaderName: { type: String, required: true },
   teamLeaderPhone: { type: String, required: true },
@@ -17,9 +16,11 @@ const RegistrationSchema = new mongoose.Schema({
   inovactSocialLink: { type: String, required: false },
 }, {
   timestamps: true, // Add createdAt and updatedAt fields
-  collection: 'registrations' // Explicitly set the collection name
+  collection: 'test_registrations' // Explicitly set the collection name to test_registrations
 });
 
-const Registration = mongoose.models.Registration || mongoose.model('Registration', RegistrationSchema);
+// Create the model if it doesn't exist
+const TestRegistration = mongoose.models.TestRegistration || 
+  mongoose.model('TestRegistration', TestRegistrationSchema);
 
-export default Registration;
+export default TestRegistration;

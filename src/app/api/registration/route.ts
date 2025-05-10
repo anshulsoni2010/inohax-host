@@ -1,6 +1,7 @@
 import dbConnect from '@/libs/dbConnect';
 import Registration from '@/model/Registration';
 import nodemailer from 'nodemailer';
+import mongoose from 'mongoose';
 
 export async function POST(req: Request) {
     const registrationEndDate = new Date('2025-05-21T23:59:00');
@@ -14,6 +15,7 @@ export async function POST(req: Request) {
     );
   }
 
+  // Try to connect to MongoDB, but continue even if it fails
   await dbConnect();
 
   try {
@@ -71,21 +73,50 @@ export async function POST(req: Request) {
 
     // Try to create the team entry in the database
     let team;
-    try {
-      team = await Registration.create(body);
-      await team.save();
-      console.log("Registration saved to database");
-    } catch (error) {
-      console.log("Could not save to database, but continuing with registration process", error);
-      // If database operation fails, we'll still continue with the registration process
-      // This allows the application to work without a real database connection
-      team = body; // Use the request body as the team data
+
+    // Create a registration document regardless of database connection
+    const registrationData = {
+      teamName: body.teamName,
+      teamLeaderName: body.teamLeaderName,
+      teamLeaderPhone: body.teamLeaderPhone,
+      teamLeaderEmail: body.teamLeaderEmail,
+      teamMembers: body.teamMembers || [],
+      projectLink: body.projectLink,
+      inovactSocialLink: body.inovactSocialLink
+    };
+
+    // Check if mongoose is connected
+    const isConnected = mongoose.connection.readyState === 1;
+
+    if (isConnected) {
+      try {
+        // Create a new registration document
+        team = new Registration(registrationData);
+
+        // Save with a short timeout
+        await team.save({ timeout: 3000 });
+        console.log("✅ Registration saved to database successfully");
+      } catch (error) {
+        console.log("⚠️ Could not save to database:", error instanceof Error ? error.message : 'Unknown error');
+        // Use the registration data if save fails
+        team = registrationData;
+      }
+    } else {
+      console.log("⚠️ MongoDB is not connected, processing registration without database save");
+      team = registrationData;
     }
 
     // Send confirmation email to the team leader
-    await sendConfirmationEmail(body.teamLeaderEmail, body.teamLeaderName, body.teamName);
+    await sendConfirmationEmail(body.teamLeaderEmail, body.teamLeaderName, body.teamName, body.inovactSocialLink);
 
-    return new Response(JSON.stringify({ success: true, team }), { status: 201 });
+    return new Response(
+      JSON.stringify({
+        success: true,
+        team,
+        message: "Registration successful! A confirmation email has been sent to your email address."
+      }),
+      { status: 201 }
+    );
   } catch (error: unknown) {
     console.log("Error", error);
 
@@ -100,7 +131,7 @@ export async function POST(req: Request) {
   }
 }
 
-async function sendConfirmationEmail(teamLeaderEmail: string, teamLeaderName: string, teamName: string) {
+async function sendConfirmationEmail(teamLeaderEmail: string, teamLeaderName: string, teamName: string, inovactSocialLink?: string) {
   // Configure the nodemailer transport
   const transporter = nodemailer.createTransport({
     service: 'gmail',
@@ -110,10 +141,11 @@ async function sendConfirmationEmail(teamLeaderEmail: string, teamLeaderName: st
     }
   });
 
+  // Send email to the team leader
   const mailOptions = {
     from: 'inovacteam@gmail.com', // Replace with your email
     to: teamLeaderEmail,
-    subject: `${teamName} - Team Registration Confirmation`,
+    subject: `Inohax 2.0 Registration Confirmation for Team "${teamName}"`,
     html: `Dear ${teamLeaderName},<br><br>
 
   Thank you for submitting your application for <b>Inohax 2.0</b>! We’re excited to review your team’s project and appreciate the effort you’ve put into this stage.<br><br>
@@ -132,8 +164,27 @@ async function sendConfirmationEmail(teamLeaderEmail: string, teamLeaderName: st
   Team Inohax`
   };
   try {
+    // Send email to the team leader
     await transporter.sendMail(mailOptions);
     console.log('Confirmation email sent successfully to:', teamLeaderEmail);
+
+    // Send a copy of the registration to the admin email
+    const adminMailOptions = {
+      from: 'inovacteam@gmail.com',
+      to: 'inohax2.0@gmail.com', // Admin email address
+      subject: `New Inohax 2.0 Registration: Team "${teamName}"`,
+      html: `
+        <h2>New Team Registration</h2>
+        <p><strong>Team Name:</strong> ${teamName}</p>
+        <p><strong>Team Leader:</strong> ${teamLeaderName}</p>
+        <p><strong>Email:</strong> ${teamLeaderEmail}</p>
+        <p><strong>Inovact Social Link:</strong> ${inovactSocialLink || 'Not provided'}</p>
+        <p>A confirmation email has been sent to the team leader.</p>
+      `
+    };
+
+    await transporter.sendMail(adminMailOptions);
+    console.log('Notification email sent to admin');
   } catch (error) {
     console.error('Error sending email:', error);
   }

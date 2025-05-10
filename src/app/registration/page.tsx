@@ -22,6 +22,7 @@ interface FormData {
 export default function Component() {
     const { handleSubmit, register, reset } = useForm<FormData>();
     const [loading, setLoading] = useState(false);
+    const [redirecting, setRedirecting] = useState(false);
     const registrationEndDate = new Date('2025-05-21T23:59:00');
     const isRegistrationClosed = new Date() > registrationEndDate;
 
@@ -48,6 +49,7 @@ export default function Component() {
 
         // If there are errors, stop submission
         if (hasError) {
+            setLoading(false); // Reset loading state
             return; // Stop submission if any required field is empty
         }
 
@@ -92,16 +94,33 @@ export default function Component() {
             });
 
             if (response.ok) {
-                toast.success('Registration successful!'); // Use toast for success message
-                reset(); // Reset the form fields
+                // Show success message
+                toast.success('Registration successful!');
+
+                // Reset the form fields
+                reset();
+
+                // Set redirecting state to show a message
+                setRedirecting(true);
+
+                // Create the confirmation URL with team info
+                const confirmationUrl = `/registration/confirmation?teamName=${encodeURIComponent(data.teamName)}&teamLeaderName=${encodeURIComponent(data.teamLeaderName)}&teamLeaderEmail=${encodeURIComponent(data.teamLeaderEmail)}`;
+
+                // Redirect after a short delay to ensure the toast is visible
+                setTimeout(() => {
+                    window.location.href = confirmationUrl;
+                }, 2000);
             } else {
-                toast.error('Registration failed!'); // Use toast for error message
+                const errorData = await response.json();
+                toast.error(errorData.error || 'Registration failed!');
+                setLoading(false); // Reset loading state
+                setRedirecting(false); // Reset redirecting state
             }
         } catch (error) {
             console.error('Error submitting form:', error);
             toast.error('An error occurred while submitting the form. Please try again.'); // Use toast for error message
-        } finally {
-            setLoading(false); // Set loading to false when submission ends
+            setLoading(false); // Reset loading state on error
+            setRedirecting(false); // Reset redirecting state
         }
     };
 
@@ -191,10 +210,17 @@ export default function Component() {
                 <title>Inohax 2.0 Registration Form</title>
                 <meta name="description" content="A 24 Hours Open Innovation Hackathon by Inovact for Students & Entrepreneurs" />
             </Head>
-            <div className={`min-h-screen bg-gradient-to-br from-black via-gray-900 to-black text-white py-12 px-4 sm:px-6 lg:px-8 ${loading ? 'opacity-50' : 'opacity-100'}`}>
+            <div className={`min-h-screen bg-gradient-to-br from-black via-gray-900 to-black text-white py-12 px-4 sm:px-6 lg:px-8 ${loading || redirecting ? 'opacity-50' : 'opacity-100'}`}>
                 {loading && (
                     <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50">
                         <div className="loader"></div> {/* Circular loader */}
+                    </div>
+                )}
+                {redirecting && (
+                    <div className="absolute inset-0 flex flex-col items-center justify-center bg-black bg-opacity-70 z-50">
+                        <div className="animate-pulse text-green-500 text-4xl mb-4">✓</div>
+                        <h2 className="text-2xl font-bold text-white mb-2">Registration Successful!</h2>
+                        <p className="text-gray-300">Redirecting to confirmation page...</p>
                     </div>
                 )}
                 <div className="max-w-4xl mx-auto">
@@ -272,6 +298,152 @@ export default function Component() {
                                             placeholder="Enter your Inovact Social Project link ( e.g., https://api.inovact.in/v1/post?id=... )"
                                         />
 
+                                        <div className="mt-4 p-5 bg-gradient-to-b from-gray-800/60 to-gray-800/40 border border-gray-700 rounded-lg shadow-inner">
+                                            <div className="flex items-center mb-4 pb-3 border-b border-gray-700/50">
+                                                <div className="bg-blue-500/20 p-2 rounded-full mr-3">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-blue-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                                        <circle cx="12" cy="12" r="10"></circle>
+                                                        <line x1="12" y1="16" x2="12" y2="12"></line>
+                                                        <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                                                    </svg>
+                                                </div>
+                                                <h3 className="text-lg font-semibold text-gray-200">Inovact Social Project Requirement</h3>
+                                            </div>
+
+                                            <p className="text-gray-300 mb-4 ml-1">As part of the registration process, all teams must upload their hackathon idea on Inovact Social.</p>
+                                            <p className="text-gray-300 mb-4 ml-1">This helps us evaluate your idea, and it also gives your team visibility and credibility on the platform.</p>
+
+                                            <div className="flex flex-wrap gap-4 mb-5 ml-1">
+                                                <a href="https://play.google.com/store/search?q=inovact+social&c=apps&hl=en_US" target="_blank" rel="noopener noreferrer" className="inline-flex items-center px-4 py-2 bg-gray-700/70 hover:bg-gray-600/80 text-blue-300 hover:text-blue-200 rounded-md transition-colors shadow-sm hover:shadow">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" viewBox="0 0 48 48" fill="currentColor">
+                                                        <path d="M25.88 24L7.31 42.57C7.1 42.13 7 41.65 7 41.15V6.85c0-.5.1-.98.31-1.42L25.88 24zM28 26.12l6.21 6.21-22.05 11.9c-.52.28-1.09.42-1.66.42-.31 0-.61-.04-.91-.12L28 26.12zM28 21.88L9.6 3.48c.85-.24 1.76-.14 2.56.29l22.05 11.9L28 21.88zM45.79 24c0 1.29-.71 2.47-1.84 3.08l-6.98 3.77L30.12 24l6.85-6.85 6.98 3.77C45.08 21.53 45.79 22.71 45.79 24z" />
+                                                    </svg>
+                                                    <span>For Android</span>
+                                                </a>
+                                                <a href="https://apps.apple.com/in/app/inovact-social/id6742887820" target="_blank" rel="noopener noreferrer" className="inline-flex items-center px-4 py-2 bg-gray-700/70 hover:bg-gray-600/80 text-blue-300 hover:text-blue-200 rounded-md transition-colors shadow-sm hover:shadow">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" viewBox="0 0 24 24" fill="currentColor">
+                                                        <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+                                                    </svg>
+                                                    <span>For iOS</span>
+                                                </a>
+                                            </div>
+
+                                            <div className="flex items-center mb-3 ml-1 mt-4">
+                                                <div className="bg-blue-500/20 p-1.5 rounded-full mr-2">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-blue-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                                        <polyline points="9 11 12 14 22 4"></polyline>
+                                                        <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
+                                                    </svg>
+                                                </div>
+                                                <p className="text-gray-200 font-medium">Step-by-Step Guide:</p>
+                                            </div>
+
+                                            <div className="ml-2 space-y-4">
+                                                <div className="flex">
+                                                    <div className="flex-shrink-0 h-6 w-6 rounded-full bg-blue-500/20 flex items-center justify-center mr-3 mt-0.5">
+                                                        <span className="text-blue-300 text-sm font-bold">1</span>
+                                                    </div>
+                                                    <div>
+                                                        <p className="leading-relaxed text-gray-200">Download and Sign Up on Inovact Social</p>
+                                                    </div>
+                                                </div>
+
+                                                <div className="flex">
+                                                    <div className="flex-shrink-0 h-6 w-6 rounded-full bg-blue-500/20 flex items-center justify-center mr-3 mt-0.5">
+                                                        <span className="text-blue-300 text-sm font-bold">2</span>
+                                                    </div>
+                                                    <div>
+                                                        <p className="leading-relaxed text-gray-200 mb-2">
+                                                            Upload Your Hackathon Idea as a Project
+                                                        </p>
+                                                        <ul className="list-none space-y-1.5 ml-1.5 text-sm text-gray-300">
+                                                            <li className="flex items-center">
+                                                                <svg className="h-3.5 w-3.5 mr-1.5 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
+                                                                </svg>
+                                                                <span>Open the app and go to "Create Project"</span>
+                                                            </li>
+                                                            <li className="flex items-center">
+                                                                <svg className="h-3.5 w-3.5 mr-1.5 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
+                                                                </svg>
+                                                                <span>Fill in:</span>
+                                                            </li>
+                                                            <li className="flex items-center ml-5">
+                                                                <svg className="h-3 w-3 mr-1.5 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
+                                                                </svg>
+                                                                <span>Title of your hackathon idea</span>
+                                                            </li>
+                                                            <li className="flex items-center ml-5">
+                                                                <svg className="h-3 w-3 mr-1.5 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
+                                                                </svg>
+                                                                <span>Detailed Description</span>
+                                                            </li>
+                                                            <li className="flex items-center ml-5">
+                                                                <svg className="h-3 w-3 mr-1.5 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
+                                                                </svg>
+                                                                <span>Any relevant Links (optional)</span>
+                                                            </li>
+                                                            <li className="flex items-center ml-5">
+                                                                <svg className="h-3 w-3 mr-1.5 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
+                                                                </svg>
+                                                                <span>Add Relevant Keywords (e.g., EdTech, FinTech, AI, etc.)</span>
+                                                            </li>
+                                                            <li className="flex items-center">
+                                                                <svg className="h-3.5 w-3.5 mr-1.5 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
+                                                                </svg>
+                                                                <span>Tap Post</span>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+
+                                                <div className="flex">
+                                                    <div className="flex-shrink-0 h-6 w-6 rounded-full bg-blue-500/20 flex items-center justify-center mr-3 mt-0.5">
+                                                        <span className="text-blue-300 text-sm font-bold">3</span>
+                                                    </div>
+                                                    <div>
+                                                        <p className="leading-relaxed text-gray-200 mb-2">
+                                                            Copy the Project Link
+                                                        </p>
+                                                        <ul className="list-none space-y-1.5 ml-1.5 text-sm text-gray-300">
+                                                            <li className="flex items-center">
+                                                                <svg className="h-3.5 w-3.5 mr-1.5 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
+                                                                </svg>
+                                                                <span>Go to Your Profile → Projects</span>
+                                                            </li>
+                                                            <li className="flex items-center">
+                                                                <svg className="h-3.5 w-3.5 mr-1.5 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
+                                                                </svg>
+                                                                <span>Click the Share button on your project</span>
+                                                            </li>
+                                                            <li className="flex items-center">
+                                                                <svg className="h-3.5 w-3.5 mr-1.5 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
+                                                                </svg>
+                                                                <span>Copy the project link</span>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+
+                                                <div className="flex">
+                                                    <div className="flex-shrink-0 h-6 w-6 rounded-full bg-blue-500/20 flex items-center justify-center mr-3 mt-0.5">
+                                                        <span className="text-blue-300 text-sm font-bold">4</span>
+                                                    </div>
+                                                    <p className="leading-relaxed text-gray-200">
+                                                        Paste the Link in the Registration Form
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                                 <Button type="submit" className="w-full bg-gradient-to-r from-gray-700 to-gray-900 hover:from-gray-800 hover:to-black text-white font-bold py-3 rounded-lg transition duration-300 ease-in-out transform hover:scale-105">
