@@ -394,18 +394,7 @@ export default function RegistrationsTable() {
               </div>
 
               <div className="space-y-4">
-                <div>
-                  <h3 className="text-sm font-medium text-gray-400">Team Members</h3>
-                  {selectedRegistration.teamMembers.length > 0 ? (
-                    <ul className="list-disc list-inside text-gray-200">
-                      {selectedRegistration.teamMembers.map((member, index) => (
-                        <li key={index}>{member.name}</li>
-                      ))}
-                    </ul>
-                  ) : (
-                    <p className="text-gray-500">No team members</p>
-                  )}
-                </div>
+                
 
                 <div>
                   <h3 className="text-sm font-medium text-gray-400">Inovact Social Link</h3>

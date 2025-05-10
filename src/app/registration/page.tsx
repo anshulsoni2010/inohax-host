@@ -390,10 +390,10 @@ export default function Component() {
                                                 <h3 className="text-lg font-semibold text-gray-200">Inovact Social Project Requirement</h3>
                                             </div>
 
-                                            <p className="text-gray-300 mb-4 ml-1">As part of the registration process, all teams must upload their hackathon idea on Inovact Social.</p>
-                                            <p className="text-gray-300 mb-4 ml-1">This helps us evaluate your idea, and it also gives your team visibility and credibility on the platform.</p>
+                                            <p className="text-gray-300 mb-4 ml-0 text-left">As part of the registration process, all teams must upload their hackathon idea on Inovact Social.</p>
+                                            <p className="text-gray-300 mb-4 ml-0 text-left">This helps us evaluate your idea, and it also gives your team visibility and credibility on the platform.</p>
 
-                                            <div className="flex flex-wrap gap-4 mb-5 ml-1">
+                                            <div className="flex flex-wrap gap-4 mb-5 ml-0 text-left">
                                                 <a href="https://play.google.com/store/search?q=inovact+social&c=apps&hl=en_US" target="_blank" rel="noopener noreferrer" className="inline-flex items-center px-4 py-2 bg-gray-700/70 hover:bg-gray-600/80 text-blue-300 hover:text-blue-200 rounded-md transition-colors shadow-sm hover:shadow">
                                                     <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" viewBox="0 0 48 48" fill="currentColor">
                                                         <path d="M25.88 24L7.31 42.57C7.1 42.13 7 41.65 7 41.15V6.85c0-.5.1-.98.31-1.42L25.88 24zM28 26.12l6.21 6.21-22.05 11.9c-.52.28-1.09.42-1.66.42-.31 0-.61-.04-.91-.12L28 26.12zM28 21.88L9.6 3.48c.85-.24 1.76-.14 2.56.29l22.05 11.9L28 21.88zM45.79 24c0 1.29-.71 2.47-1.84 3.08l-6.98 3.77L30.12 24l6.85-6.85 6.98 3.77C45.08 21.53 45.79 22.71 45.79 24z" />
@@ -408,73 +408,73 @@ export default function Component() {
                                                 </a>
                                             </div>
 
-                                            <div className="flex items-center mb-3 ml-1 mt-4">
+                                            <div className="flex items-center mb-3 ml-0 mt-4 text-left">
                                                 <div className="bg-blue-500/20 p-1.5 rounded-full mr-2">
                                                     <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-blue-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                                                         <polyline points="9 11 12 14 22 4"></polyline>
                                                         <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
                                                     </svg>
                                                 </div>
-                                                <p className="text-gray-200 font-medium">Step-by-Step Guide:</p>
+                                                <p className="text-gray-200 font-medium text-left">Step-by-Step Guide:</p>
                                             </div>
 
-                                            <div className="ml-2 space-y-4">
-                                                <div className="flex">
-                                                    <div className="flex-shrink-0 h-6 w-6 rounded-full bg-blue-500/20 flex items-center justify-center mr-3 mt-0.5">
-                                                        <span className="text-blue-300 text-sm font-bold">1</span>
+                                            <div className="ml-0 space-y-3 text-left">
+                                                <div className="flex items-start pl-0">
+                                                    <div className="flex-shrink-0 h-5 w-5 rounded-full bg-blue-500/20 flex items-center justify-center mr-1 mt-0.5">
+                                                        <span className="text-blue-300 text-xs font-bold">1</span>
                                                     </div>
                                                     <div>
-                                                        <p className="leading-relaxed text-gray-200">Download and Sign Up on Inovact Social</p>
+                                                        <p className="leading-tight text-gray-200 text-left">Download and Sign Up on Inovact Social</p>
                                                     </div>
                                                 </div>
 
-                                                <div className="flex">
-                                                    <div className="flex-shrink-0 h-6 w-6 rounded-full bg-blue-500/20 flex items-center justify-center mr-3 mt-0.5">
-                                                        <span className="text-blue-300 text-sm font-bold">2</span>
+                                                <div className="flex items-start pl-0">
+                                                    <div className="flex-shrink-0 h-5 w-5 rounded-full bg-blue-500/20 flex items-center justify-center mr-1 mt-0.5">
+                                                        <span className="text-blue-300 text-xs font-bold">2</span>
                                                     </div>
-                                                    <div>
-                                                        <p className="leading-relaxed text-gray-200 mb-2">
+                                                    <div className="flex-1">
+                                                        <p className="leading-tight text-gray-200 mb-1 text-left">
                                                             Upload Your Hackathon Idea as a Project
                                                         </p>
-                                                        <ul className="list-none space-y-1.5 ml-1.5 text-sm text-gray-300">
-                                                            <li className="flex items-center">
-                                                                <svg className="h-3.5 w-3.5 mr-1.5 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        <ul className="list-none space-y-1 ml-0 pl-0 text-sm text-gray-300 text-left">
+                                                            <li className="flex items-start">
+                                                                <svg className="h-3 w-3 mr-0.5 text-blue-400 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
                                                                 </svg>
                                                                 <span>Open the app and go to "Create Project"</span>
                                                             </li>
-                                                            <li className="flex items-center">
-                                                                <svg className="h-3.5 w-3.5 mr-1.5 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                            <li className="flex items-start">
+                                                                <svg className="h-3 w-3 mr-0.5 text-blue-400 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
                                                                 </svg>
                                                                 <span>Fill in:</span>
                                                             </li>
-                                                            <li className="flex items-center ml-5">
-                                                                <svg className="h-3 w-3 mr-1.5 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                            <li className="flex items-start ml-0 sm:ml-5 pl-2">
+                                                                <svg className="h-2.5 w-2.5 mr-0.5 text-blue-400 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
                                                                 </svg>
                                                                 <span>Title of your hackathon idea</span>
                                                             </li>
-                                                            <li className="flex items-center ml-5">
-                                                                <svg className="h-3 w-3 mr-1.5 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                            <li className="flex items-start ml-0 sm:ml-5 pl-2">
+                                                                <svg className="h-2.5 w-2.5 mr-0.5 text-blue-400 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
                                                                 </svg>
                                                                 <span>Detailed Description</span>
                                                             </li>
-                                                            <li className="flex items-center ml-5">
-                                                                <svg className="h-3 w-3 mr-1.5 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                            <li className="flex items-start ml-0 sm:ml-5 pl-2">
+                                                                <svg className="h-2.5 w-2.5 mr-0.5 text-blue-400 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
                                                                 </svg>
                                                                 <span>Any relevant Links (optional)</span>
                                                             </li>
-                                                            <li className="flex items-center ml-5">
-                                                                <svg className="h-3 w-3 mr-1.5 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                            <li className="flex items-start ml-0 sm:ml-5 pl-2">
+                                                                <svg className="h-2.5 w-2.5 mr-0.5 text-blue-400 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
                                                                 </svg>
                                                                 <span>Add Relevant Keywords (e.g., EdTech, FinTech, AI, etc.)</span>
                                                             </li>
-                                                            <li className="flex items-center">
-                                                                <svg className="h-3.5 w-3.5 mr-1.5 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                            <li className="flex items-start">
+                                                                <svg className="h-3 w-3 mr-0.5 text-blue-400 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
                                                                 </svg>
                                                                 <span>Tap Post</span>
@@ -483,29 +483,29 @@ export default function Component() {
                                                     </div>
                                                 </div>
 
-                                                <div className="flex">
-                                                    <div className="flex-shrink-0 h-6 w-6 rounded-full bg-blue-500/20 flex items-center justify-center mr-3 mt-0.5">
-                                                        <span className="text-blue-300 text-sm font-bold">3</span>
+                                                <div className="flex items-start pl-0">
+                                                    <div className="flex-shrink-0 h-5 w-5 rounded-full bg-blue-500/20 flex items-center justify-center mr-1 mt-0.5">
+                                                        <span className="text-blue-300 text-xs font-bold">3</span>
                                                     </div>
-                                                    <div>
-                                                        <p className="leading-relaxed text-gray-200 mb-2">
+                                                    <div className="flex-1">
+                                                        <p className="leading-tight text-gray-200 mb-1 text-left">
                                                             Copy the Project Link
                                                         </p>
-                                                        <ul className="list-none space-y-1.5 ml-1.5 text-sm text-gray-300">
-                                                            <li className="flex items-center">
-                                                                <svg className="h-3.5 w-3.5 mr-1.5 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        <ul className="list-none space-y-1 ml-0 pl-0 text-sm text-gray-300 text-left">
+                                                            <li className="flex items-start">
+                                                                <svg className="h-3 w-3 mr-0.5 text-blue-400 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
                                                                 </svg>
                                                                 <span>Go to Your Profile → Projects</span>
                                                             </li>
-                                                            <li className="flex items-center">
-                                                                <svg className="h-3.5 w-3.5 mr-1.5 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                            <li className="flex items-start">
+                                                                <svg className="h-3 w-3 mr-0.5 text-blue-400 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
                                                                 </svg>
                                                                 <span>Click the Share button on your project</span>
                                                             </li>
-                                                            <li className="flex items-center">
-                                                                <svg className="h-3.5 w-3.5 mr-1.5 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                            <li className="flex items-start">
+                                                                <svg className="h-3 w-3 mr-0.5 text-blue-400 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
                                                                 </svg>
                                                                 <span>Copy the project link</span>
@@ -514,11 +514,11 @@ export default function Component() {
                                                     </div>
                                                 </div>
 
-                                                <div className="flex">
-                                                    <div className="flex-shrink-0 h-6 w-6 rounded-full bg-blue-500/20 flex items-center justify-center mr-3 mt-0.5">
-                                                        <span className="text-blue-300 text-sm font-bold">4</span>
+                                                <div className="flex items-start pl-0">
+                                                    <div className="flex-shrink-0 h-5 w-5 rounded-full bg-blue-500/20 flex items-center justify-center mr-1 mt-0.5">
+                                                        <span className="text-blue-300 text-xs font-bold">4</span>
                                                     </div>
-                                                    <p className="leading-relaxed text-gray-200">
+                                                    <p className="leading-tight text-gray-200 text-left">
                                                         Paste the Link in the Registration Form
                                                     </p>
                                                 </div>
