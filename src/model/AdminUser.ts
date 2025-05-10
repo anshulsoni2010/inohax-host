@@ -93,6 +93,11 @@ AdminUserSchema.pre('validate', async function(next) {
   }
 });
 
+// Define interface for AdminUser model with static methods
+interface IAdminUserModel extends mongoose.Model<any> {
+  createInitialAdmin(): Promise<void>;
+}
+
 // Static method to create initial admin if none exists
 AdminUserSchema.statics.createInitialAdmin = async function() {
   const AdminUser = this;
@@ -126,7 +131,7 @@ AdminUserSchema.statics.createInitialAdmin = async function() {
   }
 };
 
-// Create the model
-const AdminUser = mongoose.models.AdminUser || mongoose.model('AdminUser', AdminUserSchema);
+// Create the model with the interface
+const AdminUser = (mongoose.models.AdminUser || mongoose.model<any, IAdminUserModel>('AdminUser', AdminUserSchema)) as IAdminUserModel;
 
 export default AdminUser;

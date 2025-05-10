@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, Suspense } from 'react'
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { CheckCircle, ChevronLeft, Calendar, Mail, Users, ExternalLink } from 'lucide-react'
@@ -9,7 +9,18 @@ import Head from 'next/head'
 import { Separator } from '@/components/ui/separator'
 import { useSearchParams } from 'next/navigation'
 
-export default function RegistrationConfirmation() {
+// Loading component to show while the page is loading
+function ConfirmationLoading() {
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black text-white flex items-center justify-center">
+      <div className="loader"></div>
+      <p className="ml-4 text-xl font-medium">Loading confirmation...</p>
+    </div>
+  )
+}
+
+// Component that uses searchParams
+function ConfirmationContent() {
   const searchParams = useSearchParams()
   const [teamInfo, setTeamInfo] = useState({
     teamName: searchParams.get('teamName') || 'Your Team',
@@ -169,5 +180,14 @@ export default function RegistrationConfirmation() {
         </div>
       </div>
     </>
+  )
+}
+
+// Main component with Suspense boundary
+export default function RegistrationConfirmation() {
+  return (
+    <Suspense fallback={<ConfirmationLoading />}>
+      <ConfirmationContent />
+    </Suspense>
   )
 }
