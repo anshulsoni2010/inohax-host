@@ -26,6 +26,7 @@ import {
 } from "@/components/ui/dialog"
 import { toast } from 'react-toastify'
 import { Search, Eye, Trash2, ExternalLink, Download, ChevronLeft, ChevronRight } from 'lucide-react'
+import OverviewStats from './overview-stats'
 
 interface Registration {
   _id: string
@@ -228,39 +229,57 @@ export default function RegistrationsTable() {
     )
   }
 
-  return (
-    <Card className="bg-black/30 border-gray-800">
-      <CardHeader>
-        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-          <div>
-            <CardTitle className="text-xl font-medium text-gray-300">All Registrations</CardTitle>
-            <CardDescription>Manage team registrations</CardDescription>
-          </div>
+  // Calculate stats for overview
+  const totalRegistrations = registrations.length;
+  const recentRegistrations = registrations.filter(reg => {
+    const regDate = new Date(reg.createdAt);
+    const sevenDaysAgo = new Date();
+    sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
+    return regDate >= sevenDaysAgo;
+  }).length;
+  const inovactLinks = registrations.filter(reg => reg.inovactSocialLink).length;
 
-          <div className="flex flex-col sm:flex-row gap-2">
-            <div className="relative">
-              <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-gray-500" />
-              <Input
-                type="search"
-                placeholder="Search teams..."
-                className="pl-8 bg-gray-900/50 border-gray-700 w-full sm:w-64"
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-              />
+  return (
+    <div className="space-y-6">
+      {/* Overview Stats */}
+      <OverviewStats
+        totalRegistrations={totalRegistrations}
+        recentRegistrations={recentRegistrations}
+        inovactLinks={inovactLinks}
+      />
+
+      <Card className="bg-black/30 border-gray-800">
+        <CardHeader>
+          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+            <div>
+              <CardTitle className="text-xl font-medium text-gray-300">All Registrations</CardTitle>
+              <CardDescription>Manage team registrations</CardDescription>
             </div>
 
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={handleExportCSV}
-              className="text-green-400 border-green-400/30 hover:bg-green-400/10"
-            >
-              <Download className="h-4 w-4 mr-2" />
-              Export CSV
-            </Button>
+            <div className="flex flex-col sm:flex-row gap-2">
+              <div className="relative">
+                <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-gray-500" />
+                <Input
+                  type="search"
+                  placeholder="Search teams..."
+                  className="pl-8 bg-gray-900/50 border-gray-700 w-full sm:w-64"
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                />
+              </div>
+
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={handleExportCSV}
+                className="text-green-400 border-green-400/30 hover:bg-green-400/10"
+              >
+                <Download className="h-4 w-4 mr-2" />
+                Export CSV
+              </Button>
+            </div>
           </div>
-        </div>
-      </CardHeader>
+        </CardHeader>
       <CardContent>
         <div className="overflow-x-auto">
           <Table>
@@ -382,7 +401,7 @@ export default function RegistrationsTable() {
                   <p className="text-lg font-semibold text-gray-200">{selectedRegistration.teamLeaderName}</p>
                 </div>
 
-           
+
 
                 <div>
                   <h3 className="text-sm font-medium text-gray-400">Phone</h3>
