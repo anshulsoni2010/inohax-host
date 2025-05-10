@@ -51,7 +51,6 @@ export default function Component() {
     });
 
     const [loading, setLoading] = useState(false);
-    const [redirecting, setRedirecting] = useState(false);
     const registrationEndDate = new Date('2025-05-21T23:59:00');
     const isRegistrationClosed = new Date() > registrationEndDate;
 
@@ -119,13 +118,11 @@ export default function Component() {
                 const errorData = await response.json();
                 toast.error(errorData.error || 'Registration failed!');
                 setLoading(false); // Reset loading state
-                setRedirecting(false); // Reset redirecting state
             }
         } catch (error) {
             console.error('Error submitting form:', error);
             toast.error('An error occurred while submitting the form. Please try again.'); // Use toast for error message
             setLoading(false); // Reset loading state on error
-            setRedirecting(false); // Reset redirecting state
         }
     };
 
@@ -215,17 +212,10 @@ export default function Component() {
                 <title>Inohax 2.0 Registration Form</title>
                 <meta name="description" content="A 24 Hours Open Innovation Hackathon by Inovact for Students & Entrepreneurs" />
             </Head>
-            <div className={`min-h-screen bg-gradient-to-br from-black via-gray-900 to-black text-white py-12 px-4 sm:px-6 lg:px-8 ${loading || redirecting ? 'opacity-50' : 'opacity-100'}`}>
+            <div className={`min-h-screen bg-gradient-to-br from-black via-gray-900 to-black text-white py-12 px-4 sm:px-6 lg:px-8 ${loading ? 'opacity-50' : 'opacity-100'}`}>
                 {loading && (
                     <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50">
                         <div className="loader"></div> {/* Circular loader */}
-                    </div>
-                )}
-                {redirecting && (
-                    <div className="absolute inset-0 flex flex-col items-center justify-center bg-black bg-opacity-70 z-50">
-                        <div className="animate-pulse text-green-500 text-4xl mb-4">✓</div>
-                        <h2 className="text-2xl font-bold text-white mb-2">Registration Successful!</h2>
-                        <p className="text-gray-300">Redirecting to confirmation page...</p>
                     </div>
                 )}
                 <div className="max-w-4xl mx-auto">
