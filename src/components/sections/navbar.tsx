@@ -40,54 +40,7 @@ export const Navbar = () => {
                         {/* <Image src="/inovact.webp" className="rounded-full" alt="Inohax Logo" width={50} height={50} /> */}
                         <span className="text-2xl navbar-text">Inohax 2.0</span>
                     </Link>
-                    {/* Mobile Menu */}
-                    <div className="flex items-center lg:hidden">
-                        <Sheet open={isOpen} onOpenChange={setIsOpen}>
-                            <SheetTrigger asChild>
-                                <Menu
-                                    onClick={() => setIsOpen(!isOpen)}
-                                    className="cursor-pointer lg:hidden"
-                                />
-                            </SheetTrigger>
-
-                            <SheetContent
-                                side="left"
-                                className="flex flex-col justify-between rounded-tr-2xl rounded-br-2xl bg-card border-secondary"
-                            >
-                                <SheetClose asChild>
-                                    <div>
-                                        <SheetHeader className="mb-4 ml-4">
-                                            <SheetTitle className="flex items-center">
-                                                <Link href="/" className="flex items-center text-white">
-                                                    Inohax 2.0
-                                                </Link>
-                                            </SheetTitle>
-                                        </SheetHeader>
-
-                                        <div className="flex flex-col gap-2">
-                                            {routeList.map(({ href, label }) => (
-                                                <Button
-                                                    key={href}
-                                                    onClick={() => setIsOpen(false)}
-                                                    asChild
-                                                    className="justify-start text-base text-white"
-                                                >
-                                                    <Link href={href} target="_blank" className="w-full text-left">
-                                                        {label}
-                                                    </Link>
-                                                </Button>
-                                            ))}
-                                        </div>
-                                    </div>
-
-                                    <SheetFooter className="flex-col sm:flex-col justify-start items-start">
-                                        <Separator className="mb-2" />
-                                    </SheetFooter>
-                                </SheetClose>
-                            </SheetContent>
-                        </Sheet>
-                    </div>
-
+                    
                     {/* Desktop Menu */}
                     <div className="hidden lg:flex relative">
                         {routeList.map(({ href, label }) => (
