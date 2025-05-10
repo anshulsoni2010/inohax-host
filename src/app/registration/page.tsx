@@ -33,13 +33,17 @@ const PATTERNS = {
 }
 
 export default function Component() {
+    // Reference to the hidden form for new tab redirection
+    const confirmationFormRef = React.useRef<HTMLFormElement>(null);
+
     const {
         handleSubmit,
         register,
         reset,
+        watch,
         formState: { errors, isDirty, isSubmitting }
     } = useForm<FormData>({
-        mode: 'onChange', // Validate on change
+        mode: 'all', // Validate on all events
         criteriaMode: 'all', // Show all validation errors
         defaultValues: {
             teamName: '',
@@ -49,6 +53,18 @@ export default function Component() {
             inovactSocialLink: ''
         }
     });
+
+    // Watch all form fields to determine if form is complete
+    const watchAllFields = watch();
+
+    // Check if all required fields are filled
+    const isFormComplete = Boolean(
+        watchAllFields.teamName &&
+        watchAllFields.teamLeaderName &&
+        watchAllFields.teamLeaderPhone &&
+        watchAllFields.teamLeaderEmail &&
+        watchAllFields.inovactSocialLink
+    );
 
     const [loading, setLoading] = useState(false);
     const registrationEndDate = new Date('2025-05-21T23:59:00');
@@ -106,13 +122,25 @@ export default function Component() {
                 // Reset the form fields
                 reset();
 
-                // Create the confirmation URL with team info
-                const confirmationUrl = `/registration/confirmation?teamName=${encodeURIComponent(data.teamName)}&teamLeaderName=${encodeURIComponent(data.teamLeaderName)}&teamLeaderEmail=${encodeURIComponent(data.teamLeaderEmail)}`;
+                // Set the form input values
+                if (confirmationFormRef.current) {
+                    const teamNameInput = confirmationFormRef.current.querySelector('input[name="teamName"]') as HTMLInputElement;
+                    const teamLeaderNameInput = confirmationFormRef.current.querySelector('input[name="teamLeaderName"]') as HTMLInputElement;
+                    const teamLeaderEmailInput = confirmationFormRef.current.querySelector('input[name="teamLeaderEmail"]') as HTMLInputElement;
 
-                // Open confirmation page in a new tab immediately
-                window.open(confirmationUrl, '_blank');
+                    if (teamNameInput) teamNameInput.value = data.teamName;
+                    if (teamLeaderNameInput) teamLeaderNameInput.value = data.teamLeaderName;
+                    if (teamLeaderEmailInput) teamLeaderEmailInput.value = data.teamLeaderEmail;
 
-                // Reset loading state after opening the new tab
+                    // Submit the form to open in a new tab
+                    confirmationFormRef.current.submit();
+                } else {
+                    // Fallback if form ref is not available
+                    const confirmationUrl = `/registration/confirmation?teamName=${encodeURIComponent(data.teamName)}&teamLeaderName=${encodeURIComponent(data.teamLeaderName)}&teamLeaderEmail=${encodeURIComponent(data.teamLeaderEmail)}`;
+                    window.open(confirmationUrl, '_blank');
+                }
+
+                // Reset loading state
                 setLoading(false);
             } else {
                 const errorData = await response.json();
@@ -501,11 +529,11 @@ export default function Component() {
                                 <Button
                                     type="submit"
                                     className={`w-full bg-gradient-to-r ${
-                                        !isDirty || Object.keys(errors).length > 0
+                                        !isFormComplete || Object.keys(errors).length > 0
                                             ? 'from-gray-600 to-gray-800 opacity-70 cursor-not-allowed'
                                             : 'from-gray-700 to-gray-900 hover:from-gray-800 hover:to-black transform hover:scale-105'
                                     } text-white font-bold py-3 rounded-lg transition duration-300 ease-in-out`}
-                                    disabled={!isDirty || Object.keys(errors).length > 0 || isSubmitting || loading}
+                                    disabled={!isFormComplete || Object.keys(errors).length > 0 || isSubmitting || loading}
                                 >
                                     {isSubmitting || loading ? (
                                         <>
@@ -519,6 +547,14 @@ export default function Component() {
                                         </>
                                     )}
                                 </Button>
+                                {!isFormComplete && isDirty && (
+                                    <div className="mt-4 p-3 bg-yellow-900/20 border border-yellow-800/30 rounded-md">
+                                        <p className="text-yellow-400 text-sm flex items-center">
+                                            <AlertCircle className="h-4 w-4 mr-2" />
+                                            Please fill in all required fields to enable the submit button.
+                                        </p>
+                                    </div>
+                                )}
                                 {(Object.keys(errors).length > 0 && isDirty) && (
                                     <div className="mt-4 p-3 bg-red-900/20 border border-red-800/30 rounded-md">
                                         <p className="text-red-400 text-sm flex items-center">
@@ -533,6 +569,19 @@ export default function Component() {
                     </Card>
                 </div>
                 <ToastContainer />
+
+                {/* Hidden form for opening confirmation in new tab */}
+                <form
+                    ref={confirmationFormRef}
+                    action="/registration/confirmation"
+                    method="get"
+                    target="_blank"
+                    style={{ display: 'none' }}
+                >
+                    <input type="hidden" name="teamName" />
+                    <input type="hidden" name="teamLeaderName" />
+                    <input type="hidden" name="teamLeaderEmail" />
+                </form>
             </div>
         </>
     )
