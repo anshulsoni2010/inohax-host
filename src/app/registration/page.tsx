@@ -378,16 +378,16 @@ export default function Component() {
                                             </div>
                                         )}
 
-                                        <div className="mt-4 p-5 bg-gradient-to-b from-gray-800/60 to-gray-800/40 border border-gray-700 rounded-lg shadow-inner">
-                                            <div className="flex items-center mb-4 pb-3 border-b border-gray-700/50">
-                                                <div className="bg-blue-500/20 p-2 rounded-full mr-3">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-blue-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                        <div className="mt-3 p-3 bg-gradient-to-b from-gray-800/60 to-gray-800/40 border border-gray-700 rounded-lg shadow-inner">
+                                            <div className="flex items-center mb-2 pb-2 border-b border-gray-700/50">
+                                                <div className="bg-blue-500/20 p-1 rounded-full mr-2">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-blue-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                                                         <circle cx="12" cy="12" r="10"></circle>
                                                         <line x1="12" y1="16" x2="12" y2="12"></line>
                                                         <line x1="12" y1="8" x2="12.01" y2="8"></line>
                                                     </svg>
                                                 </div>
-                                                <h3 className="text-lg font-semibold text-gray-200">Inovact Social Project Requirement</h3>
+                                                <h3 className="text-base font-semibold text-gray-200">Inovact Social Project Requirement</h3>
                                             </div>
 
                                             <p className="text-gray-300 mb-2 ml-0 text-left text-sm">As part of the registration process, all teams must upload their hackathon idea on Inovact Social.</p>
