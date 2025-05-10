@@ -149,25 +149,37 @@ export async function POST(req: Request) {
 }
 
 async function sendConfirmationEmail(teamLeaderEmail: string, teamLeaderName: string, teamName: string, inovactSocialLink?: string) {
-  // Configure the nodemailer transport
+  console.log('Starting email sending process...');
+
+  // Check if email credentials are available
+  if (!process.env.EMAIL_NAME || !process.env.EMAIL_PASSWORD) {
+    console.error('Email credentials are missing in environment variables');
+    throw new Error('Email credentials are missing. Please check your environment variables.');
+  }
+
+  // Configure the nodemailer transport with settings optimized for serverless environments
+  // Using a simpler configuration that works better in AWS Lambda
   const transporter = nodemailer.createTransport({
-    service: 'gmail',
+    service: 'gmail', // Using the service name is more reliable in serverless
     auth: {
       user: process.env.EMAIL_NAME,
-      pass: process.env.EMAIL_PASSWORD
+      pass: process.env.EMAIL_PASSWORD // This should be an app password, not your regular password
+    },
+    tls: {
+      rejectUnauthorized: false // Helps with some SSL issues in serverless environments
     }
   });
 
   // Send email to the team leader
   const mailOptions = {
-    from: 'inovacteam@gmail.com', // Replace with your email
+    from: `"Inohax Team" <${process.env.EMAIL_NAME}>`, // Proper format with name and email
     to: teamLeaderEmail,
     subject: `Inohax 2.0 Registration Confirmation for Team "${teamName}"`,
     html: `Dear ${teamLeaderName},<br><br>
 
-  Thank you for submitting your application for <b>Inohax 2.0</b>! We’re excited to review your team’s project and appreciate the effort you’ve put into this stage.<br><br>
+  Thank you for submitting your application for <b>Inohax 2.0</b>! We're excited to review your team's project and appreciate the effort you've put into this stage.<br><br>
 
-  <b>What’s Next?</b><br>
+  <b>What's Next?</b><br>
   Our team will carefully evaluate all submissions, and we will notify you of your selection status before the end of 21st May.<br><br>
 
   If you have any questions or need assistance in the meantime, feel free to reach out to us at inohax2.0@gmail.com
@@ -178,8 +190,25 @@ async function sendConfirmationEmail(teamLeaderEmail: string, teamLeaderName: st
   Thank you once again for your interest in <b>Inohax 2.0</b>, and best of luck in the selection process!<br><br>
 <br> <br>
   Warm regards,<br>
-  Team Inohax`
+  Team Inohax`,
+    // Add text version for better deliverability
+    text: `Dear ${teamLeaderName},
+
+Thank you for submitting your application for Inohax 2.0! We're excited to review your team's project and appreciate the effort you've put into this stage.
+
+What's Next?
+Our team will carefully evaluate all submissions, and we will notify you of your selection status before the end of 21st May.
+
+If you have any questions or need assistance in the meantime, feel free to reach out to us at inohax2.0@gmail.com
+
+Do checkout Inovact (https://inovact.in/) - A Social Network For Students & Entreprenuers Making Collaborations Simple & Faster On Projects and Ideas Powered by Proof Of Work.
+
+Thank you once again for your interest in Inohax 2.0, and best of luck in the selection process!
+
+Warm regards,
+Team Inohax`
   };
+
   try {
     // Send email to the team leader
     await transporter.sendMail(mailOptions);
@@ -187,7 +216,7 @@ async function sendConfirmationEmail(teamLeaderEmail: string, teamLeaderName: st
 
     // Send a copy of the registration to the admin email
     const adminMailOptions = {
-      from: 'inovacteam@gmail.com',
+      from: `"Inohax Team" <${process.env.EMAIL_NAME}>`,
       to: 'inohax2.0@gmail.com', // Admin email address
       subject: `New Inohax 2.0 Registration: Team "${teamName}"`,
       html: `
