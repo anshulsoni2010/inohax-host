@@ -123,7 +123,7 @@ function ConfirmationContent() {
                 <div className="flex items-start space-x-4">
                   <Calendar className="h-6 w-6 text-green-500 mt-0.5 flex-shrink-0" />
                   <div>
-                    <h3 className="text-lg font-semibold text-gray-200">Event Date</h3>
+                    <h3 className="text-lg font-semibold text-gray-200">Hackathon Date</h3>
                     <p className="text-gray-300">May 23-24, 2025</p>
                   </div>
                 </div>

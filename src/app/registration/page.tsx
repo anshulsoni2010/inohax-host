@@ -6,11 +6,12 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { ChevronRight } from 'lucide-react'
+import { ChevronRight, AlertCircle } from 'lucide-react'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Head from 'next/head';
 import Link from 'next/link';
+
 interface FormData {
     teamName: string;
     teamLeaderName: string;
@@ -19,41 +20,48 @@ interface FormData {
     inovactSocialLink: string;
 }
 
+// Validation patterns
+const PATTERNS = {
+    // Allow only letters, numbers, spaces, and common punctuation
+    NAME: /^[A-Za-z0-9\s.,'-]+$/,
+    // Basic email validation
+    EMAIL: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+    // Allow Indian phone numbers (10 digits, optional +91 prefix)
+    PHONE: /^(\+91)?[6-9]\d{9}$/,
+    // Basic URL validation
+    URL: /^(https?:\/\/)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)$/
+}
+
 export default function Component() {
-    const { handleSubmit, register, reset } = useForm<FormData>();
+    const {
+        handleSubmit,
+        register,
+        reset,
+        formState: { errors, isDirty, isSubmitting }
+    } = useForm<FormData>({
+        mode: 'onChange', // Validate on change
+        criteriaMode: 'all', // Show all validation errors
+        defaultValues: {
+            teamName: '',
+            teamLeaderName: '',
+            teamLeaderPhone: '',
+            teamLeaderEmail: '',
+            inovactSocialLink: ''
+        }
+    });
+
     const [loading, setLoading] = useState(false);
     const [redirecting, setRedirecting] = useState(false);
     const registrationEndDate = new Date('2025-05-21T23:59:00');
     const isRegistrationClosed = new Date() > registrationEndDate;
 
     const onSubmit = async (data: FormData) => {
+        // Form is already validated by react-hook-form
+        // This function will only be called if all validations pass
         setLoading(true); // Set loading to true when submission starts
 
-        const requiredFields: (keyof FormData)[] = [
-            'teamName',
-            'teamLeaderName',
-            'teamLeaderPhone',
-            'teamLeaderEmail',
-            'inovactSocialLink'
-        ];
-        let hasError = false; // Flag to track if there are any errors
-
-        // Check if any required fields are empty
-        for (const field of requiredFields) {
-            if (!data[field as keyof FormData]) { // Use type assertion here
-                hasError = true; // Set error flag
-                toast.error(`${field.replace(/([A-Z])/g, ' $1')} is required.`);
-                break; // Exit loop if any required field is empty
-            }
-        }
-
-        // If there are errors, stop submission
-        if (hasError) {
-            setLoading(false); // Reset loading state
-            return; // Stop submission if any required field is empty
-        }
-
-        // Validate Inovact Social Link
+        // The Inovact Social Link is already validated by react-hook-form
+        // This is just an additional check for extra security
         try {
             // Check if it's a valid URL
             const url = new URL(data.inovactSocialLink);
@@ -72,8 +80,7 @@ export default function Component() {
                 setLoading(false);
                 return;
             }
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        } catch (_error) {
+        } catch (error) {
             toast.error('Please enter a valid URL for the Inovact Social link');
             setLoading(false);
             return;
@@ -100,16 +107,14 @@ export default function Component() {
                 // Reset the form fields
                 reset();
 
-                // Set redirecting state to show a message
-                setRedirecting(true);
-
                 // Create the confirmation URL with team info
                 const confirmationUrl = `/registration/confirmation?teamName=${encodeURIComponent(data.teamName)}&teamLeaderName=${encodeURIComponent(data.teamLeaderName)}&teamLeaderEmail=${encodeURIComponent(data.teamLeaderEmail)}`;
 
-                // Redirect after a short delay to ensure the toast is visible
-                setTimeout(() => {
-                    window.location.href = confirmationUrl;
-                }, 2000);
+                // Open confirmation page in a new tab immediately
+                window.open(confirmationUrl, '_blank');
+
+                // Reset loading state after opening the new tab
+                setLoading(false);
             } else {
                 const errorData = await response.json();
                 toast.error(errorData.error || 'Registration failed!');
@@ -246,10 +251,22 @@ export default function Component() {
                                             <div className="relative">
                                                 <Input
                                                     id="teamName"
-                                                    {...register('teamName', { required: true })}
-                                                    className="bg-gray-900/30 border-gray-700 text-white placeholder-gray-500 pl-10"
+                                                    {...register('teamName', {
+                                                        required: 'Team name is required',
+                                                        minLength: { value: 2, message: 'Team name must be at least 2 characters' },
+                                                        maxLength: { value: 50, message: 'Team name must be less than 50 characters' },
+                                                        pattern: { value: PATTERNS.NAME, message: 'Please enter a valid team name' }
+                                                    })}
+                                                    className={`bg-gray-900/30 border-gray-700 text-white placeholder-gray-500 pl-10 ${errors.teamName ? 'border-red-500 focus:border-red-500' : ''}`}
                                                     placeholder="Enter team name"
+                                                    aria-invalid={errors.teamName ? "true" : "false"}
                                                 />
+                                                {errors.teamName && (
+                                                    <div className="text-red-500 text-sm mt-1 flex items-center">
+                                                        <AlertCircle className="h-4 w-4 mr-1" />
+                                                        {errors.teamName.message}
+                                                    </div>
+                                                )}
                                             </div>
                                         </div>
                                         <div className="space-y-2">
@@ -257,10 +274,22 @@ export default function Component() {
                                             <div className="relative">
                                                 <Input
                                                     id="teamLeaderName"
-                                                    {...register('teamLeaderName', { required: true })}
-                                                    className="bg-gray-900/30 border-gray-700 text-white placeholder-gray-500 pl-10"
+                                                    {...register('teamLeaderName', {
+                                                        required: 'Team leader name is required',
+                                                        minLength: { value: 2, message: 'Name must be at least 2 characters' },
+                                                        maxLength: { value: 50, message: 'Name must be less than 50 characters' },
+                                                        pattern: { value: PATTERNS.NAME, message: 'Please enter a valid name' }
+                                                    })}
+                                                    className={`bg-gray-900/30 border-gray-700 text-white placeholder-gray-500 pl-10 ${errors.teamLeaderName ? 'border-red-500 focus:border-red-500' : ''}`}
                                                     placeholder="Enter leader name"
+                                                    aria-invalid={errors.teamLeaderName ? "true" : "false"}
                                                 />
+                                                {errors.teamLeaderName && (
+                                                    <div className="text-red-500 text-sm mt-1 flex items-center">
+                                                        <AlertCircle className="h-4 w-4 mr-1" />
+                                                        {errors.teamLeaderName.message}
+                                                    </div>
+                                                )}
                                             </div>
                                         </div>
                                         <div className="space-y-2">
@@ -268,11 +297,21 @@ export default function Component() {
                                             <div className="relative">
                                                 <Input
                                                     id="teamLeaderPhone"
-                                                    {...register('teamLeaderPhone', { required: true })}
+                                                    {...register('teamLeaderPhone', {
+                                                        required: 'Phone number is required',
+                                                        pattern: { value: PATTERNS.PHONE, message: 'Please enter a valid Indian phone number (10 digits)' }
+                                                    })}
                                                     type="tel"
-                                                    className="bg-gray-900/30 border-gray-700 text-white placeholder-gray-500 pl-10"
-                                                    placeholder="Enter phone number"
+                                                    className={`bg-gray-900/30 border-gray-700 text-white placeholder-gray-500 pl-10 ${errors.teamLeaderPhone ? 'border-red-500 focus:border-red-500' : ''}`}
+                                                    placeholder="Enter phone number (e.g., 9876543210)"
+                                                    aria-invalid={errors.teamLeaderPhone ? "true" : "false"}
                                                 />
+                                                {errors.teamLeaderPhone && (
+                                                    <div className="text-red-500 text-sm mt-1 flex items-center">
+                                                        <AlertCircle className="h-4 w-4 mr-1" />
+                                                        {errors.teamLeaderPhone.message}
+                                                    </div>
+                                                )}
                                             </div>
                                         </div>
                                         <div className="space-y-2">
@@ -280,11 +319,21 @@ export default function Component() {
                                             <div className="relative">
                                                 <Input
                                                     id="teamLeaderEmail"
-                                                    {...register('teamLeaderEmail', { required: true })}
+                                                    {...register('teamLeaderEmail', {
+                                                        required: 'Email address is required',
+                                                        pattern: { value: PATTERNS.EMAIL, message: 'Please enter a valid email address' }
+                                                    })}
                                                     type="email"
-                                                    className="bg-gray-900/30 border-gray-700 text-white placeholder-gray-500 pl-10"
+                                                    className={`bg-gray-900/30 border-gray-700 text-white placeholder-gray-500 pl-10 ${errors.teamLeaderEmail ? 'border-red-500 focus:border-red-500' : ''}`}
                                                     placeholder="Enter email address"
+                                                    aria-invalid={errors.teamLeaderEmail ? "true" : "false"}
                                                 />
+                                                {errors.teamLeaderEmail && (
+                                                    <div className="text-red-500 text-sm mt-1 flex items-center">
+                                                        <AlertCircle className="h-4 w-4 mr-1" />
+                                                        {errors.teamLeaderEmail.message}
+                                                    </div>
+                                                )}
                                             </div>
                                         </div>
                                     </div>
@@ -293,10 +342,23 @@ export default function Component() {
                                         <Label htmlFor="inovactSocialLink" className="text-gray-300">Inovact Social Project Link *</Label>
                                         <Input
                                             id="inovactSocialLink"
-                                            {...register('inovactSocialLink', { required: true })}
-                                            className="bg-gray-900/30 border-gray-700 text-white placeholder-gray-500"
+                                            {...register('inovactSocialLink', {
+                                                required: 'Inovact Social Project link is required',
+                                                pattern: {
+                                                    value: /^https?:\/\/.*inovact\.in.*\?id=.*$/i,
+                                                    message: 'Please enter a valid Inovact Social link (e.g., https://api.inovact.in/v1/post?id=...)'
+                                                }
+                                            })}
+                                            className={`bg-gray-900/30 border-gray-700 text-white placeholder-gray-500 ${errors.inovactSocialLink ? 'border-red-500 focus:border-red-500' : ''}`}
                                             placeholder="Enter your Inovact Social Project link ( e.g., https://api.inovact.in/v1/post?id=... )"
+                                            aria-invalid={errors.inovactSocialLink ? "true" : "false"}
                                         />
+                                        {errors.inovactSocialLink && (
+                                            <div className="text-red-500 text-sm mt-1 flex items-center">
+                                                <AlertCircle className="h-4 w-4 mr-1" />
+                                                {errors.inovactSocialLink.message}
+                                            </div>
+                                        )}
 
                                         <div className="mt-4 p-5 bg-gradient-to-b from-gray-800/60 to-gray-800/40 border border-gray-700 rounded-lg shadow-inner">
                                             <div className="flex items-center mb-4 pb-3 border-b border-gray-700/50">
@@ -446,10 +508,35 @@ export default function Component() {
                                         </div>
                                     </div>
                                 </div>
-                                <Button type="submit" className="w-full bg-gradient-to-r from-gray-700 to-gray-900 hover:from-gray-800 hover:to-black text-white font-bold py-3 rounded-lg transition duration-300 ease-in-out transform hover:scale-105">
-                                    Submit Registration
-                                    <ChevronRight className="ml-2 h-5 w-5" />
+                                <Button
+                                    type="submit"
+                                    className={`w-full bg-gradient-to-r ${
+                                        !isDirty || Object.keys(errors).length > 0
+                                            ? 'from-gray-600 to-gray-800 opacity-70 cursor-not-allowed'
+                                            : 'from-gray-700 to-gray-900 hover:from-gray-800 hover:to-black transform hover:scale-105'
+                                    } text-white font-bold py-3 rounded-lg transition duration-300 ease-in-out`}
+                                    disabled={!isDirty || Object.keys(errors).length > 0 || isSubmitting || loading}
+                                >
+                                    {isSubmitting || loading ? (
+                                        <>
+                                            <div className="h-5 w-5 border-2 border-white border-t-transparent rounded-full animate-spin mr-2"></div>
+                                            Processing...
+                                        </>
+                                    ) : (
+                                        <>
+                                            Submit Registration
+                                            <ChevronRight className="ml-2 h-5 w-5" />
+                                        </>
+                                    )}
                                 </Button>
+                                {(Object.keys(errors).length > 0 && isDirty) && (
+                                    <div className="mt-4 p-3 bg-red-900/20 border border-red-800/30 rounded-md">
+                                        <p className="text-red-400 text-sm flex items-center">
+                                            <AlertCircle className="h-4 w-4 mr-2" />
+                                            Please fix the errors above before submitting the form.
+                                        </p>
+                                    </div>
+                                )}
                                 <p className='text-center'><b>After submitting the form, You will receive an email from us. Do check the spam folder if you do not receive the email in your inbox</b></p>
                             </form>
                         </CardContent>
