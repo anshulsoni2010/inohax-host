@@ -144,8 +144,63 @@ export default function Component() {
                 setLoading(false);
             } else {
                 const errorData = await response.json();
-                toast.error(errorData.error || 'Registration failed!');
-                setLoading(false); // Reset loading state
+
+                // Special handling for database connection errors
+                if (errorData.error && errorData.error.includes("Database connection is not available")) {
+                    // Try again automatically - this will use the already established connection
+                    console.log("Database connection error detected, retrying submission...");
+
+                    // Small delay before retrying
+                    setTimeout(async () => {
+                        try {
+                            const retryResponse = await fetch('/api/registration', {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json',
+                                },
+                                body: JSON.stringify(payload),
+                            });
+
+                            if (retryResponse.ok) {
+                                // Show success message
+                                toast.success('Registration successful!');
+
+                                // Reset the form fields
+                                reset();
+
+                                // Set the form input values and redirect
+                                if (confirmationFormRef.current) {
+                                    const teamNameInput = confirmationFormRef.current.querySelector('input[name="teamName"]') as HTMLInputElement;
+                                    const teamLeaderNameInput = confirmationFormRef.current.querySelector('input[name="teamLeaderName"]') as HTMLInputElement;
+                                    const teamLeaderEmailInput = confirmationFormRef.current.querySelector('input[name="teamLeaderEmail"]') as HTMLInputElement;
+
+                                    if (teamNameInput) teamNameInput.value = data.teamName;
+                                    if (teamLeaderNameInput) teamLeaderNameInput.value = data.teamLeaderName;
+                                    if (teamLeaderEmailInput) teamLeaderEmailInput.value = data.teamLeaderEmail;
+
+                                    // Submit the form to open in a new tab
+                                    confirmationFormRef.current.submit();
+                                } else {
+                                    // Fallback if form ref is not available
+                                    const confirmationUrl = `/registration/confirmation?teamName=${encodeURIComponent(data.teamName)}&teamLeaderName=${encodeURIComponent(data.teamLeaderName)}&teamLeaderEmail=${encodeURIComponent(data.teamLeaderEmail)}`;
+                                    window.open(confirmationUrl, '_blank');
+                                }
+                            } else {
+                                const retryErrorData = await retryResponse.json();
+                                toast.error(retryErrorData.error || 'Registration failed after retry!');
+                            }
+                        } catch (retryError) {
+                            console.error('Error during retry:', retryError);
+                            toast.error('Registration failed after retry. Please try again.');
+                        } finally {
+                            setLoading(false); // Reset loading state
+                        }
+                    }, 1000); // Wait 1 second before retrying
+                } else {
+                    // Handle other errors normally
+                    toast.error(errorData.error || 'Registration failed!');
+                    setLoading(false); // Reset loading state
+                }
             }
         } catch (error) {
             console.error('Error submitting form:', error);

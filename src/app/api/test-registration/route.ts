@@ -5,11 +5,12 @@ import nodemailer from 'nodemailer';
 
 export async function POST(req: Request) {
   // No registration end date check for test registrations
-  
-  // Try to connect to MongoDB, but continue even if it fails
-  await dbConnect();
 
   try {
+    // Try to connect to MongoDB with a more robust approach
+    const connectionResult = await dbConnect();
+    console.log(`MongoDB connection attempt result for test registration: ${connectionResult ? 'Connected' : 'Failed to connect'}`);
+
     const body: {
       teamName: string;
       teamLeaderName: string;
@@ -64,7 +65,7 @@ export async function POST(req: Request) {
 
     // Try to create the test registration entry in the database
     let testRegistration;
-    
+
     // Create a registration document regardless of database connection
     const registrationData = {
       teamName: body.teamName,
@@ -75,17 +76,17 @@ export async function POST(req: Request) {
       projectLink: body.projectLink,
       inovactSocialLink: body.inovactSocialLink
     };
-    
+
     // Check if mongoose is connected
     const isConnected = mongoose.connection.readyState === 1;
-    
+
     if (isConnected) {
       try {
         // Create a new test registration document
         testRegistration = new TestRegistration(registrationData);
-        
-        // Save with a short timeout
-        await testRegistration.save({ timeout: 3000 });
+
+        // Save with a longer timeout
+        await testRegistration.save({ timeout: 10000 });
         console.log("✅ Test registration saved to database successfully");
       } catch (error) {
         console.log("⚠️ Could not save test registration to database:", error instanceof Error ? error.message : 'Unknown error');
@@ -103,11 +104,11 @@ export async function POST(req: Request) {
     console.log(`[TEST MODE] Would have sent notification email to admin`);
 
     return new Response(
-      JSON.stringify({ 
-        success: true, 
+      JSON.stringify({
+        success: true,
         testRegistration,
         message: "Test registration processed successfully. No emails were sent."
-      }), 
+      }),
       { status: 201 }
     );
   } catch (error: unknown) {
@@ -121,7 +122,7 @@ export async function POST(req: Request) {
     }
 
     return new Response(
-      JSON.stringify({ success: false, error: errorMessage }), 
+      JSON.stringify({ success: false, error: errorMessage }),
       { status: 400 }
     );
   }
