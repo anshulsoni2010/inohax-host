@@ -58,12 +58,15 @@ body {
 
 /* Loader animation */
 .loader {
-  border: 4px solid rgba(255, 255, 255, 0.3);
+  border: 4px solid rgba(255, 255, 255, 0.1);
   border-radius: 50%;
-  border-top: 4px solid #fff;
+  border-top: 4px solid #8b5cf6;
+  border-right: 4px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 4px solid #8b5cf6;
+  border-left: 4px solid rgba(255, 255, 255, 0.1);
   width: 40px;
   height: 40px;
-  animation: spin 1s linear infinite;
+  animation: spin 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
 }
 
 @keyframes spin {
