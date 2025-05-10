@@ -93,21 +93,38 @@ export async function POST(req: Request) {
         // Create a new registration document
         team = new Registration(registrationData);
 
-        // Save with a short timeout
-        await team.save({ timeout: 3000 });
+        // Save with a short timeout and await completion
+        await team.save({ timeout: 5000 });
         console.log("✅ Registration saved to database successfully");
       } catch (error) {
         console.log("⚠️ Could not save to database:", error instanceof Error ? error.message : 'Unknown error');
-        // Use the registration data if save fails
-        team = registrationData;
+        // Return an error response if database save fails
+        return new Response(
+          JSON.stringify({
+            success: false,
+            error: "Failed to save registration to database. Please try again."
+          }),
+          { status: 500 }
+        );
       }
     } else {
-      console.log("⚠️ MongoDB is not connected, processing registration without database save");
-      team = registrationData;
+      console.log("⚠️ MongoDB is not connected, cannot process registration");
+      return new Response(
+        JSON.stringify({
+          success: false,
+          error: "Database connection is not available. Please try again later."
+        }),
+        { status: 503 }
+      );
     }
 
     // Send confirmation email to the team leader
-    await sendConfirmationEmail(body.teamLeaderEmail, body.teamLeaderName, body.teamName, body.inovactSocialLink);
+    try {
+      await sendConfirmationEmail(body.teamLeaderEmail, body.teamLeaderName, body.teamName, body.inovactSocialLink);
+    } catch (error) {
+      console.error("⚠️ Failed to send confirmation email:", error instanceof Error ? error.message : 'Unknown error');
+      // Continue even if email sending fails, but log the error
+    }
 
     return new Response(
       JSON.stringify({

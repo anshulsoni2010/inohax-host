@@ -442,6 +442,7 @@ export default function RegistrationsTable() {
           </DialogContent>
         </Dialog>
       )}
-    </Card>
+      </Card>
+    </div>
   )
 }
