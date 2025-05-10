@@ -237,6 +237,7 @@ export default function RegistrationsTable() {
     sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
     return regDate >= sevenDaysAgo;
   }).length;
+  // Count registrations with Inovact links
   const inovactLinks = registrations.filter(reg => reg.inovactSocialLink).length;
 
   return (
