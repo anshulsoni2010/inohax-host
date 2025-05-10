@@ -382,10 +382,7 @@ export default function RegistrationsTable() {
                   <p className="text-lg font-semibold text-gray-200">{selectedRegistration.teamLeaderName}</p>
                 </div>
 
-                <div>
-                  <h3 className="text-sm font-medium text-gray-400">Email</h3>
-                  <p className="text-gray-200">{selectedRegistration.teamLeaderEmail}</p>
-                </div>
+           
 
                 <div>
                   <h3 className="text-sm font-medium text-gray-400">Phone</h3>
@@ -394,7 +391,10 @@ export default function RegistrationsTable() {
               </div>
 
               <div className="space-y-4">
-                
+                 <div>
+                  <h3 className="text-sm font-medium text-gray-400">Email</h3>
+                  <p className="text-gray-200">{selectedRegistration.teamLeaderEmail}</p>
+                </div>
 
                 <div>
                   <h3 className="text-sm font-medium text-gray-400">Inovact Social Link</h3>

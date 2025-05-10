@@ -390,32 +390,32 @@ export default function Component() {
                                                 <h3 className="text-lg font-semibold text-gray-200">Inovact Social Project Requirement</h3>
                                             </div>
 
-                                            <p className="text-gray-300 mb-4 ml-0 text-left">As part of the registration process, all teams must upload their hackathon idea on Inovact Social.</p>
-                                            <p className="text-gray-300 mb-4 ml-0 text-left">This helps us evaluate your idea, and it also gives your team visibility and credibility on the platform.</p>
+                                            <p className="text-gray-300 mb-2 ml-0 text-left text-sm">As part of the registration process, all teams must upload their hackathon idea on Inovact Social.</p>
+                                            <p className="text-gray-300 mb-2 ml-0 text-left text-sm">This helps us evaluate your idea, and it also gives your team visibility and credibility on the platform.</p>
 
-                                            <div className="flex flex-wrap gap-4 mb-5 ml-0 text-left">
-                                                <a href="https://play.google.com/store/search?q=inovact+social&c=apps&hl=en_US" target="_blank" rel="noopener noreferrer" className="inline-flex items-center px-4 py-2 bg-gray-700/70 hover:bg-gray-600/80 text-blue-300 hover:text-blue-200 rounded-md transition-colors shadow-sm hover:shadow">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" viewBox="0 0 48 48" fill="currentColor">
+                                            <div className="flex flex-wrap gap-2 mb-3 ml-0 text-left">
+                                                <a href="https://play.google.com/store/search?q=inovact+social&c=apps&hl=en_US" target="_blank" rel="noopener noreferrer" className="inline-flex items-center px-3 py-1 bg-gray-700/70 hover:bg-gray-600/80 text-blue-300 hover:text-blue-200 rounded-md transition-colors shadow-sm hover:shadow">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1" viewBox="0 0 48 48" fill="currentColor">
                                                         <path d="M25.88 24L7.31 42.57C7.1 42.13 7 41.65 7 41.15V6.85c0-.5.1-.98.31-1.42L25.88 24zM28 26.12l6.21 6.21-22.05 11.9c-.52.28-1.09.42-1.66.42-.31 0-.61-.04-.91-.12L28 26.12zM28 21.88L9.6 3.48c.85-.24 1.76-.14 2.56.29l22.05 11.9L28 21.88zM45.79 24c0 1.29-.71 2.47-1.84 3.08l-6.98 3.77L30.12 24l6.85-6.85 6.98 3.77C45.08 21.53 45.79 22.71 45.79 24z" />
                                                     </svg>
                                                     <span>For Android</span>
                                                 </a>
-                                                <a href="https://apps.apple.com/in/app/inovact-social/id6742887820" target="_blank" rel="noopener noreferrer" className="inline-flex items-center px-4 py-2 bg-gray-700/70 hover:bg-gray-600/80 text-blue-300 hover:text-blue-200 rounded-md transition-colors shadow-sm hover:shadow">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" viewBox="0 0 24 24" fill="currentColor">
+                                                <a href="https://apps.apple.com/in/app/inovact-social/id6742887820" target="_blank" rel="noopener noreferrer" className="inline-flex items-center px-3 py-1 bg-gray-700/70 hover:bg-gray-600/80 text-blue-300 hover:text-blue-200 rounded-md transition-colors shadow-sm hover:shadow">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1" viewBox="0 0 24 24" fill="currentColor">
                                                         <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
                                                     </svg>
                                                     <span>For iOS</span>
                                                 </a>
                                             </div>
 
-                                            <div className="flex items-center mb-3 ml-0 mt-4 text-left">
-                                                <div className="bg-blue-500/20 p-1.5 rounded-full mr-2">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-blue-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                            <div className="flex items-center mb-2 ml-0 mt-2 text-left">
+                                                <div className="bg-blue-500/20 p-1 rounded-full mr-1">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3 text-blue-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                                                         <polyline points="9 11 12 14 22 4"></polyline>
                                                         <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
                                                     </svg>
                                                 </div>
-                                                <p className="text-gray-200 font-medium text-left">Step-by-Step Guide:</p>
+                                                <p className="text-gray-200 font-medium text-left text-sm">Step-by-Step Guide:</p>
                                             </div>
 
                                             <div className="ml-0 space-y-3 text-left">
