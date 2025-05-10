@@ -137,7 +137,7 @@ async function sendConfirmationEmail(teamLeaderEmail: string, teamLeaderName: st
     service: 'gmail',
     auth: {
       user: process.env.EMAIL_NAME,
-     pass:  process.env.EMAIL_PASWORD
+      pass: process.env.EMAIL_PASSWORD
     }
   });
 
