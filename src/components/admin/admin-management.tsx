@@ -83,8 +83,8 @@ export default function AdminManagement() {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
-          // Use Basic Auth with the current admin credentials from session storage
-          'Authorization': `Basic ${btoa(`${sessionStorage.getItem('inohax_admin_username') || 'Sarang'}:Inohax!2.0`)}`
+          // Use token-based auth
+          'x-auth-token': localStorage.getItem('inohax_admin_token') || ''
         }
       });
 
@@ -176,7 +176,7 @@ export default function AdminManagement() {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Basic ${btoa(`${sessionStorage.getItem('inohax_admin_username') || 'Sarang'}:Inohax!2.0`)}`
+          'x-auth-token': localStorage.getItem('inohax_admin_token') || ''
         },
         body: JSON.stringify({
           username: formData.username,
@@ -200,7 +200,7 @@ export default function AdminManagement() {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
-            'Authorization': `Basic ${btoa(`${sessionStorage.getItem('inohax_admin_username') || 'Sarang'}:Inohax!2.0`)}`
+            'x-auth-token': localStorage.getItem('inohax_admin_token') || ''
           }
         }).then(res => res.json());
 
@@ -262,7 +262,7 @@ export default function AdminManagement() {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Basic ${btoa(`${sessionStorage.getItem('inohax_admin_username') || 'Sarang'}:Inohax!2.0`)}`
+          'x-auth-token': localStorage.getItem('inohax_admin_token') || ''
         },
         body: JSON.stringify({
           id: adminId,
@@ -324,7 +324,7 @@ export default function AdminManagement() {
           method: 'DELETE',
           headers: {
             'Content-Type': 'application/json',
-            'Authorization': `Basic ${btoa(`${sessionStorage.getItem('inohax_admin_username') || 'Sarang'}:Inohax!2.0`)}`
+            'x-auth-token': localStorage.getItem('inohax_admin_token') || ''
           }
         })
 

@@ -17,16 +17,17 @@ export default function AdminDashboard() {
   const [adminName, setAdminName] = useState('')
 
   useEffect(() => {
-    // Get admin name from session storage
-    const storedAdminName = sessionStorage.getItem('inohax_admin_username')
+    // Get admin name from local storage
+    const storedAdminName = localStorage.getItem('inohax_admin_username')
     if (storedAdminName) {
       setAdminName(storedAdminName)
     }
   }, [])
 
   const handleLogout = () => {
-    sessionStorage.removeItem('inohax_admin_auth')
-    sessionStorage.removeItem('inohax_admin_username')
+    localStorage.removeItem('inohax_admin_auth')
+    localStorage.removeItem('inohax_admin_username')
+    localStorage.removeItem('inohax_admin_token')
     window.location.reload()
   }
 

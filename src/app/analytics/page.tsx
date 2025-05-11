@@ -24,9 +24,9 @@ export default function AnalyticsPage() {
   })
   const router = useRouter()
 
-  // Check if user is already authenticated (from session storage)
+  // Check if user is already authenticated (from local storage)
   useEffect(() => {
-    const authStatus = sessionStorage.getItem('inohax_admin_auth')
+    const authStatus = localStorage.getItem('inohax_admin_auth')
     if (authStatus === 'true') {
       setIsAuthenticated(true)
     }
@@ -57,8 +57,17 @@ export default function AnalyticsPage() {
       if (response.ok) {
         // Authentication successful
         setIsAuthenticated(true)
-        sessionStorage.setItem('inohax_admin_auth', 'true')
-        sessionStorage.setItem('inohax_admin_username', formData.username)
+
+        // Generate a simple token: username:timestamp:hash
+        const timestamp = Date.now().toString();
+        const username = formData.username;
+        // In a real app, you'd use a proper hash function with a secret key
+        const hash = btoa(`${username}:${timestamp}`);
+        const token = `${username}:${timestamp}:${hash}`;
+
+        localStorage.setItem('inohax_admin_auth', 'true')
+        localStorage.setItem('inohax_admin_token', token)
+        localStorage.setItem('inohax_admin_username', formData.username)
         toast.success('Login successful!')
       } else {
         // Fallback to hardcoded credentials for initial admin
@@ -67,8 +76,16 @@ export default function AnalyticsPage() {
           (formData.username === '01' && formData.password === 'Inohax!2.0')
         ) {
           setIsAuthenticated(true)
-          sessionStorage.setItem('inohax_admin_auth', 'true')
-          sessionStorage.setItem('inohax_admin_username', 'Sarang')
+
+          // Generate a simple token for hardcoded admin
+          const timestamp = Date.now().toString();
+          const username = 'Sarang';
+          const hash = btoa(`${username}:${timestamp}`);
+          const token = `${username}:${timestamp}:${hash}`;
+
+          localStorage.setItem('inohax_admin_auth', 'true')
+          localStorage.setItem('inohax_admin_token', token)
+          localStorage.setItem('inohax_admin_username', 'Sarang')
           toast.success('Login successful!')
         } else {
           toast.error('Invalid credentials')
@@ -83,8 +100,16 @@ export default function AnalyticsPage() {
         (formData.username === '01' && formData.password === 'Inohax!2.0')
       ) {
         setIsAuthenticated(true)
-        sessionStorage.setItem('inohax_admin_auth', 'true')
-        sessionStorage.setItem('inohax_admin_username', 'Sarang')
+
+        // Generate a simple token for hardcoded admin
+        const timestamp = Date.now().toString();
+        const username = 'Sarang';
+        const hash = btoa(`${username}:${timestamp}`);
+        const token = `${username}:${timestamp}:${hash}`;
+
+        localStorage.setItem('inohax_admin_auth', 'true')
+        localStorage.setItem('inohax_admin_token', token)
+        localStorage.setItem('inohax_admin_username', 'Sarang')
         toast.success('Login successful!')
       } else {
         toast.error('Invalid credentials')

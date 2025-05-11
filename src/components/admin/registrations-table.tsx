@@ -56,8 +56,8 @@ export default function RegistrationsTable() {
         const response = await fetch('/api/admin/registrations', {
           headers: {
             'Content-Type': 'application/json',
-            // Use Basic Auth with the current admin credentials from session storage
-            'Authorization': `Basic ${btoa(`${sessionStorage.getItem('inohax_admin_username') || 'Sarang'}:Inohax!2.0`)}`
+            // Use token-based auth
+            'x-auth-token': localStorage.getItem('inohax_admin_token') || ''
           }
         })
 
@@ -146,7 +146,7 @@ export default function RegistrationsTable() {
           method: 'DELETE',
           headers: {
             'Content-Type': 'application/json',
-            'Authorization': `Basic ${btoa(`${sessionStorage.getItem('inohax_admin_username') || 'Sarang'}:Inohax!2.0`)}`
+            'x-auth-token': localStorage.getItem('inohax_admin_token') || ''
           }
         })
 
