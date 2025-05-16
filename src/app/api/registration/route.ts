@@ -58,7 +58,7 @@ export async function POST(req: Request) {
               error: 'Invalid Inovact Social link. Please provide a link with an ID parameter (e.g., ?id=...)'
             }),
             { status: 400 }
-          );
+          );a
         }
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       } catch (_error) {
@@ -118,7 +118,7 @@ export async function POST(req: Request) {
 
     // Send confirmation email to the team leader
     try {
-      await sendConfirmationEmail(body.teamLeaderEmail, body.teamLeaderName, body.teamName, body.inovactSocialLink);
+      await sendConfirmationEmail(body.teamLeaderEmail, body.teamLeaderName, body.teamName);
     } catch (error) {
       console.error("⚠️ Failed to send confirmation email:", error instanceof Error ? error.message : 'Unknown error');
       // Continue even if email sending fails, but log the error
@@ -146,7 +146,7 @@ export async function POST(req: Request) {
   }
 }
 
-async function sendConfirmationEmail(teamLeaderEmail: string, teamLeaderName: string, teamName: string, inovactSocialLink?: string) {
+async function sendConfirmationEmail(teamLeaderEmail: string, teamLeaderName: string, teamName: string) {
   console.log('Starting email sending process...');
 
   // Check if email credentials are available
@@ -172,38 +172,39 @@ async function sendConfirmationEmail(teamLeaderEmail: string, teamLeaderName: st
   const mailOptions = {
     from: `"Inohax Team" <${process.env.EMAIL_NAME}>`, // Proper format with name and email
     to: teamLeaderEmail,
-    subject: `Inohax 2.0 Registration Confirmation for Team "${teamName}"`,
-    html: `Dear ${teamLeaderName},<br><br>
+    subject: `Thank You for Registering for Inohax 2.0 – Submit Your Idea by May 20th!`,
+    html: `Hi ${teamLeaderName},<br><br>
 
-  Thank you for submitting your application for <b>Inohax 2.0</b>! We're excited to review your team's project and appreciate the effort you've put into this stage.<br><br>
+  Thank you for registering for <b>Inohax 2.0</b> – we're thrilled to have you onboard for this exciting journey of innovation and collaboration! 🚀<br><br>
 
-  <b>What's Next?</b><br>
-  Our team will carefully evaluate all submissions, and we will notify you of your selection status before the end of 21st May.<br><br>
+  <b>Next Step:</b><br><br>
 
-  If you have any questions or need assistance in the meantime, feel free to reach out to us at inohax2.0@gmail.com
-<br> <br>
-  Do checkout <a href="https://inovact.in/"> Inovact </a> - A Social Network For Students & Entreprenuers Making Collaborations Simple & Faster On Projects and Ideas Powered by Proof Of Work.
-<br>  <br>
+  Submit your hackathon idea using the link below by May 20th, 2025:<br><br>
 
-  Thank you once again for your interest in <b>Inohax 2.0</b>, and best of luck in the selection process!<br><br>
-<br> <br>
-  Warm regards,<br>
+  👉 <a href="https://forms.gle/gLg4dXnxATbAA6Na8">https://forms.gle/gLg4dXnxATbAA6Na8</a><br><br>
+
+  Your idea submission is essential to move forward in the hackathon process, so don't miss the deadline!<br><br>
+
+  If you have any questions or need help, feel free to reply to this email or reach out to us directly.<br><br>
+
+  Best regards,<br>
   Team Inohax`,
     // Add text version for better deliverability
-    text: `Dear ${teamLeaderName},
+    text: `Hi ${teamLeaderName},
 
-Thank you for submitting your application for Inohax 2.0! We're excited to review your team's project and appreciate the effort you've put into this stage.
+Thank you for registering for Inohax 2.0 – we're thrilled to have you onboard for this exciting journey of innovation and collaboration! 🚀
 
-What's Next?
-Our team will carefully evaluate all submissions, and we will notify you of your selection status before the end of 21st May.
+Next Step:
 
-If you have any questions or need assistance in the meantime, feel free to reach out to us at inohax2.0@gmail.com
+Submit your hackathon idea using the link below by May 20th, 2025:
 
-Do checkout Inovact (https://inovact.in/) - A Social Network For Students & Entreprenuers Making Collaborations Simple & Faster On Projects and Ideas Powered by Proof Of Work.
+https://forms.gle/gLg4dXnxATbAA6Na8
 
-Thank you once again for your interest in Inohax 2.0, and best of luck in the selection process!
+Your idea submission is essential to move forward in the hackathon process, so don't miss the deadline!
 
-Warm regards,
+If you have any questions or need help, feel free to reply to this email or reach out to us directly.
+
+Best regards,
 Team Inohax`
   };
 
@@ -222,7 +223,6 @@ Team Inohax`
         <p><strong>Team Name:</strong> ${teamName}</p>
         <p><strong>Team Leader:</strong> ${teamLeaderName}</p>
         <p><strong>Email:</strong> ${teamLeaderEmail}</p>
-        <p><strong>Inovact Social Link:</strong> ${inovactSocialLink || 'Not provided'}</p>
         <p>A confirmation email has been sent to the team leader.</p>
       `
     };
