@@ -58,7 +58,7 @@ export async function POST(req: Request) {
               error: 'Invalid Inovact Social link. Please provide a link with an ID parameter (e.g., ?id=...)'
             }),
             { status: 400 }
-          );a
+          );
         }
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       } catch (_error) {
