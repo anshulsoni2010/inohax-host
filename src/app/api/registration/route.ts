@@ -4,7 +4,7 @@ import nodemailer from 'nodemailer';
 import mongoose from 'mongoose';
 
 export async function POST(req: Request) {
-    const registrationEndDate = new Date('2025-05-20T23:59:00');
+  const registrationEndDate = new Date('2025-05-20T21:59:00');
   if (new Date() > registrationEndDate) {
     return new Response(
       JSON.stringify({
