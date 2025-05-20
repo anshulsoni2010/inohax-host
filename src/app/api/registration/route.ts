@@ -9,9 +9,14 @@ export async function POST(req: Request) {
     return new Response(
       JSON.stringify({
         success: false,
-        error: 'Registration period has ended'
+        error: 'Registrations for Inohax 2.0 are now closed. Thank you for your interest!'
       }),
-      { status: 403 }
+      { 
+        status: 403,
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }
     );
   }
 

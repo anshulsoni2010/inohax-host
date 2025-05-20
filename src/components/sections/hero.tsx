@@ -50,27 +50,16 @@ export default function Hero() {
                             </svg></span>                        </div>
                         <div className="flex justify-center items-center">
 
-                            {/* {isRegistrationClosed ? (
-                                <button
-                                    onClick={() => setShowPopup(true)}
-                                    className="text-sm sm:text-base text-red-400 group font-geist mx-auto px-3 sm:px-4 py-4 bg-gradient-to-tr from-red-300/5 via-red-400/5 to-transparent border-[2px] border-red-400/15 rounded-full flex items-center justify-center w-fit"
-                                >
-                                    Registrations Closed
-                                    <div className="flex overflow-hidden relative justify-center items-center ml-2 w-4 sm:w-5 h-4 sm:h-5">
-                                        <X className="w-4 sm:w-5 h-4 sm:h-5 text-red-400" />
-                                    </div>
-                                </button>
-                            ) : ( */}
-                                <Link href="/registration" target="_blank">
-                                    <h1 className="text-sm sm:text-base text-gray-400 group font-geist mx-auto px-3 sm:px-4 py-4 bg-gradient-to-tr from-zinc-300/5 via-gray-400/5 to-transparent border-[2px] border-[#7877c64d]/15 rounded-full flex items-center justify-center w-fit">
-                                        Register Now
-                                        <div className="flex overflow-hidden relative justify-center items-center ml-2 w-4 sm:w-5 h-4 sm:h-5">
-                                            <ArrowUpRight className="absolute transition-all duration-500 group-hover:translate-x-4 group-hover:-translate-y-5" />
-                                            <ArrowUpRight className="absolute transition-all duration-500 -translate-x-4 -translate-y-5 group-hover:translate-x-0 group-hover:translate-y-0" />
-                                        </div>
-                                    </h1>
-                                </Link>
-                            {/* )} */}
+                            <button
+                                onClick={() => setShowPopup(true)}
+                                className="text-sm sm:text-base text-gray-400 group font-geist mx-auto px-3 sm:px-4 py-4 bg-gradient-to-tr from-zinc-300/5 via-gray-400/5 to-transparent border-[2px] border-[#7877c64d]/15 rounded-full flex items-center justify-center w-fit"
+                            >
+                                Register Now
+                                <div className="flex overflow-hidden relative justify-center items-center ml-2 w-4 sm:w-5 h-4 sm:h-5">
+                                    <ArrowUpRight className="absolute transition-all duration-500 group-hover:translate-x-4 group-hover:-translate-y-5" />
+                                    <ArrowUpRight className="absolute transition-all duration-500 -translate-x-4 -translate-y-5 group-hover:translate-x-0 group-hover:translate-y-0" />
+                                </div>
+                            </button>
                         </div>
                     </div>
                     <div className="mt-10">
@@ -99,7 +88,7 @@ export default function Hero() {
                                 </span>
                             </h1>
                             <p className="text-lg sm:text-xl text-white/90 mt-6">
-                                Thank you for your interest in Inohax 2.0! Registration for this event has closed as of May 21st, 2025 at 11:59 PM.
+                                Thank you for your interest in Inohax 2.0! Registration for this event has closed as of May 20th, 2025 at 11:59 PM.
                             </p>
                             <p className="text-base sm:text-lg text-white/85 mt-4 mb-8">
                                 Stay tuned for future events by following us on our social media channels.
