@@ -64,8 +64,7 @@ export default function Component() {
     );
 
     const [loading, setLoading] = useState(false);
-    const registrationEndDate = new Date('2025-05-21T23:59:00');
-    const isRegistrationClosed = new Date() > registrationEndDate;
+    const isRegistrationClosed = true; // Force registration to be closed
 
     const onSubmit = async (data: FormData) => {
         // Form is already validated by react-hook-form
@@ -119,7 +118,10 @@ export default function Component() {
                 const errorData = await response.json();
 
                 // Special handling for database connection errors
-                if (errorData.error && errorData.error.includes("Database connection is not available")) {
+                if (errorData.error === 'REGISTRATIONS_STOPPED') {
+                // Show the registrations stopped message
+                toast.error('Registrations have been stopped. Thank you for your interest!');
+            } else if (errorData.error && errorData.error.includes("Database connection is not available")) {
                     // Try again automatically - this will use the already established connection
                     console.log("Database connection error detected, retrying submission...");
 
@@ -194,7 +196,7 @@ export default function Component() {
                             </span>
                         </h1>
                         <p className="text-lg sm:text-xl text-white/90 mt-6">
-                            Thank you for your interest in Inohax 2.0! Registration for this event has closed as of May 21st, 2025 at 11:59 PM.
+                            Thank you for your interest in Inohax 2.0! Registration for this event has closed as of May 20th, 2025 at 11:59 PM.
                         </p>
                         <p className="text-base sm:text-lg text-white/85 mt-4 mb-8">
                             Stay tuned for future events by following us on our social media channels.
