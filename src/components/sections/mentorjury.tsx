@@ -4,69 +4,67 @@ import { useState } from "react"
 import Image from "next/image"
 import { Linkedin } from "lucide-react"
 import { motion } from "framer-motion"
-import jury1 from "../../app/assets/jury1.jpg";
-import jury2 from "../../app/assets/jury2.jpeg";
-import jury3 from "../../app/assets/jury3.png";
-import jury4 from "../../app/assets/jury4.png";
-import jury5 from "../../app/assets/jury5.png";
-import ment1 from "../../app/assets/ment1.png";
-import ment2 from "../../app/assets/ment2.png";
-import ment3 from "../../app/assets/ment3.jpg";
+import shreyasAradhya from "../../app/assets/images/Shreyas Aradhya.jpeg";
+import karthikBS from "../../app/assets/images/Karthik.jpeg";
+import shreyasPadmakiran from "../../app/assets/images/Shreyas Padmakiran.jpeg";
+import sudeepKamat from "../../app/assets/images/Sudeep.jpeg";
+import darshanImage from "../../app/assets/images/Darshan.jpeg";
+import girishImage from "../../app/assets/images/Girish.jpeg";
+import sarangImage from "../../app/assets/images/Sarang.jpeg";
 export default function MentorJurySection() {
     const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
 
     const mentors = [
         {
-            name: "Sarang Pani",
+            name: "Shreyas Aradhya",
+            designation: "Founder, Hack Culture",
+            image: shreyasAradhya,
+            linkedin: "https://in.linkedin.com/in/shreyas-aradhya-24b736192"
+        },
+        {
+            name: "Karthik B S",
+            designation: "Co-Founder, Unriddle Technologies",
+            image: karthikBS,
+            linkedin: "https://in.linkedin.com/in/karthikbs27"
+        },
+        {
+            name: "T S Sarang",
             designation: "Founder, Inovact",
-            image: jury5,
-            linkedin: "https://www.linkedin.com/in/sarang-pani-14ab1919b/"
+            image: sarangImage,
+            linkedin: "https://in.linkedin.com/in/sarang-pani-14ab1919b"
         },
         {
-            name: "Chandrakanth",
-            designation: "Head of Programs & Partnerships, SJCE STEP",
-            image: jury1,
-            linkedin: "https://www.linkedin.com/in/chandrakanth-ck"
+            name: "Shreyas Padmakiran",
+            designation: "Developer Relations Engineer, =nil; Foundation",
+            image: shreyasPadmakiran,
+            linkedin: "https://www.linkedin.com/in/shreyas-padmakiran"
         },
         {
-            name: "Yuvraj Aaditya Arya",
-            designation: "Founder, Webkites",
-            image: jury2,
-            linkedin: "https://www.linkedin.com/in/aadityayuvraj"
-        },
-        {
-            name: "Ayush Pandey",
-            designation: "Founder, Skillvalley",
-            image: jury3,
-            linkedin: "https://www.linkedin.com/in/ayushpm21"
-        },
-        {
-            name: "Akshay Ramesh",
-            designation: "Founder, Doctrue",
-            image: jury4,
-            linkedin: "https://www.linkedin.com/in/akshayrameshh/"
-        },
-
+            name: "Sudeep Kamat",
+            designation: "Smart Contracts & Devrel, Inco",
+            image: sudeepKamat,
+            linkedin: "https://in.linkedin.com/in/sudeep-kamat"
+        }
     ]
 
     const juryMembers = [
         {
-            name: "Tarun Bajaj",
-            designation: "Founder, Upciti",
-            image: ment1,
-            linkedin: "https://www.linkedin.com/in/tarun--bajaj/"
+            name: "Darshan",
+            designation: "Serial Entrepreneur",
+            image: darshanImage,
+            linkedin: "https://www.linkedin.com/in/darshansk/"
         },
         {
-            name: "Chandan",
-            designation: "Software Engineer - Commvault",
-            image: ment2,
-            linkedin: "https://www.linkedin.com/in/chandan-s-gowda/"
+            name: "Girish",
+            designation: "Machine Learning Engineer, PVL",
+            image: girishImage,
+            linkedin: "https://in.linkedin.com/in/girish-g-n-70a444188"
         },
         {
-            name: "Vaishakh",
-            designation: "Founder, Frelo",
-            image: ment3,
-            linkedin: "https://www.linkedin.com/in/vaishakhsajeevan/"
+            name: "Sarang",
+            designation: "Founder, Inovact",
+            image: sarangImage,
+            linkedin: "https://in.linkedin.com/in/sarang-pani-14ab1919b"
         },
     ]
 
